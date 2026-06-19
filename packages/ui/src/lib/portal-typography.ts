@@ -12,5 +12,8 @@ export const portalUiText13Reading = "text-13-reading";
 /** @deprecated 使用 portalUiText13Compact */
 export const portalUiText13 = portalUiText13Compact;
 
+/** 表单字段、标签、输入正文 — regular */
+export const portalUiFieldWeight = "font-normal";
+
 /** 主按钮字重 */
 export const portalUiButtonWeight = "font-medium";

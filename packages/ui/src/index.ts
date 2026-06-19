@@ -27,9 +27,53 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./components/dropdown-menu";
+export { PortalFilterSelect, type PortalFilterSelectProps } from "./components/portal-filter-select";
+export { PortalAntConfigProvider, type PortalAntConfigProviderProps } from "./antd/portal-ant-config-provider";
+export { PortalAntSelect, type PortalAntSelectProps } from "./antd/portal-ant-select";
+export { PortalAntCascader, type PortalAntCascaderProps } from "./antd/portal-ant-cascader";
+export {
+  portalAntdFilterTheme,
+  portalAntdFormTheme,
+  resolvePortalAntdTheme,
+  type PortalAntVariant,
+} from "./antd/portalAntdTheme";
+export { PortalRadioCard, type PortalRadioCardProps } from "./components/portal-radio-card";
+export { PortalCheckboxCard, type PortalCheckboxCardProps } from "./components/portal-checkbox-card";
+export {
+  PortalSelectionFieldset,
+  portalSelectionHintClass,
+  portalSelectionLegendClass,
+  type PortalSelectionFieldsetProps,
+} from "./components/portal-selection-fieldset";
+export {
+  PortalTable,
+  PortalTableBody,
+  PortalTableCell,
+  PortalTableEmptyCell,
+  PortalTableHead,
+  PortalTableHeadCell,
+  PortalTableRoot,
+  PortalTableRow,
+  PortalTableSortHeader,
+} from "./components/portal-table";
+export {
+  buildStickyActionTdClass,
+  buildStickyActionThClass,
+  portalTableListCellTextClass,
+  portalTableStickyActionTdClass,
+  portalTableStickyActionThClass,
+  portalTableTdFirstClass,
+  portalTableTdMidClass,
+  portalTableThFirstClass,
+  portalTableThMidClass,
+  STICKY_ACTION_TD_SHADOW,
+  STICKY_ACTION_TH_SHADOW,
+} from "./lib/portal-table-styles";
+export { useStickyActionColumn } from "./hooks/use-sticky-action-column";
 export { cn } from "./lib/utils";
 export {
   portalUiButtonWeight,
+  portalUiFieldWeight,
   portalUiText13,
   portalUiText13Compact,
   portalUiText13Reading,

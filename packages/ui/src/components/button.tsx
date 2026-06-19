@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-primary text-white hover:opacity-90 disabled:bg-brand-disabled disabled:text-white disabled:opacity-100",
         outline:
-          "border border-gray-border-strong bg-background text-gray-text-2 hover:border-brand",
+          "border border-gray-border-strong bg-background text-gray-text-2 hover:border-gray-border-emphasis",
         ghost: "text-gray-text-4 hover:bg-gray-fill-normal",
         destructive: "bg-destructive text-destructive-foreground hover:opacity-90",
         link: "text-brand underline-offset-4 hover:underline",

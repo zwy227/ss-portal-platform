@@ -216,6 +216,29 @@ ss-portal-platform/
 
 ---
 
+### 1.6 `@ss/portal-ui` — 从 clientDray 抽取的组件对照表
+
+> **样式契约**：Ant Select/Cascader 视觉由 [`packages/tokens/portal-ant-filter.css`](../packages/tokens/portal-ant-filter.css) 覆盖，与 `portal-filter-input` / `portal-filter-select` 边线、文字一致。筛选区不再混用 Radix Combobox。
+
+| 源仓路径（clientDray） | `@ss/portal-ui` 导出 | 说明 |
+|------------------------|----------------------|------|
+| `demand/quoteOrderFilterAntdTheme.ts` | `portalAntdFilterTheme` / `portalAntdFormTheme` | Ant ConfigProvider token |
+| `demand/quoteOrderStatusMultiSelect.css` 等三份 antd CSS | `packages/tokens/portal-ant-filter.css` | 合并为 `.portal-ant-select--filter/form`、`.portal-ant-cascader--filter` |
+| `demand/QuoteOrderStatusMultiSelect.tsx` | `PortalAntSelect`（`mode="multiple"`） | 状态多选筛选 |
+| `demand/QuoteOrderLocationCascader.tsx` | `PortalAntCascader` | 国家/城市级联 |
+| `DrayageQuoteContainerLengthSelect.tsx` | `PortalAntSelect`（`portalVariant="form"` + `showSearch`） | 表单可搜索单选 |
+| 内联 `FilterSelect`（原生 select） | `PortalFilterSelect` | 薄封装 `portal-filter-select` |
+| `demand/drayageQuoteOrderDetailForm.tsx` → `DetailServiceRadioOption` | `PortalRadioCard` | 单选卡片 |
+| 同上 → `DetailServiceCheckboxOption` | `PortalCheckboxCard` | 多选卡片 |
+| `stickyTableActionColumn.ts` | `useStickyActionColumn` + `buildStickyActionThClass/TdClass` | 粘性操作列 |
+| `demand/DrayageQuoteOrderTable.tsx`（结构部分） | `PortalTable*` 组合原语 | 业务列 cell 仍留 App 仓 |
+
+**shell-demo 验收**：`/ui` 页 — 筛选并排、卡片选择、Table mock。
+
+**Phase 2 迁移时**：删除源仓内 `quoteOrderStatusMultiSelect.css`、`quoteOrderLocationCascader.css`、`drayageQuoteContainerLengthSelect.css`，改 import `@ss/portal-ui` + `@ss/portal-tokens`。
+
+---
+
 ## Phase 2 — 拖柜业务 App（可选）
 
 > **何时做**：platform 包已发布或本地 link 稳定；需要从源仓剥离 drayage、或要独立部署时再启动。

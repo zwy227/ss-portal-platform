@@ -17,6 +17,9 @@ import {
   Label,
 } from "@ss/portal-ui";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
+import { UiAntFilterExamples } from "../style-guide/UiAntFilterExamples";
+import { UiSelectionCardExamples } from "../style-guide/UiSelectionCardExamples";
+import { UiTableExamples } from "../style-guide/UiTableExamples";
 import { UiFocusStyleExamples } from "../style-guide/FocusStyleExamples";
 
 function CompareRow({ portal, ui }: { portal: ReactNode; ui: ReactNode }) {
@@ -85,7 +88,7 @@ export function UiComponentsPage() {
                 <Label htmlFor="ui-search">关键词</Label>
                 <div className="relative">
                   <Search
-                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-text-7"
+                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 portal-filter-icon"
                     strokeWidth={1.75}
                     aria-hidden
                   />
@@ -143,6 +146,18 @@ export function UiComponentsPage() {
           </div>
         </StyleGuideSection>
 
+        <StyleGuideSection title="筛选器 · Ant Select / Cascader">
+          <UiAntFilterExamples />
+        </StyleGuideSection>
+
+        <StyleGuideSection title="卡片选择 · Radio / Checkbox">
+          <UiSelectionCardExamples />
+        </StyleGuideSection>
+
+        <StyleGuideSection title="Table 原语">
+          <UiTableExamples />
+        </StyleGuideSection>
+
         <StyleGuideSection title="接入方式">
           <div className="portal-list-card flex flex-col gap-2 p-4">
             <p className="text-14 text-gray-text-4">
@@ -150,7 +165,14 @@ export function UiComponentsPage() {
               <code className="text-13">@ss/portal-ui</code>，Tailwind 扫描需包含{" "}
               <code className="text-13">packages/ui/src</code>。
             </p>
-            <pre className="overflow-x-auto rounded-md bg-page-bg p-3 text-13 text-gray-text-3">{`import { Button, Input, Dialog } from "@ss/portal-ui";`}</pre>
+            <pre className="overflow-x-auto rounded-md bg-page-bg p-3 text-13 text-gray-text-3">{`import {
+  Button,
+  PortalAntSelect,
+  PortalAntCascader,
+  PortalCheckboxCard,
+  PortalRadioCard,
+  PortalTable,
+} from "@ss/portal-ui";`}</pre>
           </div>
         </StyleGuideSection>
       </StyleGuidePage>

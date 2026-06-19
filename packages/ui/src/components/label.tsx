@@ -1,7 +1,7 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
 import * as React from "react";
 import { cn } from "../lib/utils";
-import { portalUiButtonWeight, portalUiText14 } from "../lib/portal-typography";
+import { portalUiFieldWeight, portalUiText14 } from "../lib/portal-typography";
 
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
@@ -9,7 +9,7 @@ const Label = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={cn(`${portalUiText14} ${portalUiButtonWeight} text-gray-text-3`, className)}
+    className={cn(`${portalUiText14} ${portalUiFieldWeight} text-gray-text-3`, className)}
     {...props}
   />
 ));

@@ -16,8 +16,8 @@ function FocusTokenNote() {
         ring-slate-100）。
       </p>
       <p>
-        Brand：筛选 input 自身 <code className="text-13">:focus</code> +{" "}
-        <code className="text-13">--focus-ring-brand</code>。
+        独立 input / 筛选框：自身 <code className="text-13">:focus</code> +{" "}
+        <code className="text-13">--focus-ring-normal</code>（与字段壳一致）。
       </p>
     </div>
   );
@@ -71,7 +71,7 @@ export function PortalFocusStyleExamples() {
         }
         right={
           <>
-            <FocusLabel title="Brand · 列表筛选" token="portal-filter-input :focus" />
+            <FocusLabel title="列表筛选" token="portal-filter-input :focus" />
             <div className="relative max-w-sm">
               <Search
                 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 portal-filter-icon"
@@ -130,10 +130,10 @@ export function UiFocusStyleExamples() {
         }
         right={
           <>
-            <FocusLabel title="Brand · 列表筛选（默认）" token="focusStyle 默认 brand" />
+            <FocusLabel title="列表筛选（默认 field）" token='focusStyle 默认 field' />
             <div className="relative max-w-sm">
               <Search
-                className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-text-7"
+                className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 portal-filter-icon"
                 strokeWidth={1.75}
                 aria-hidden
               />

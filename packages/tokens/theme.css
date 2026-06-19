@@ -543,12 +543,12 @@ html {
   }
 
   .portal-filter-input:hover {
-    border-color: var(--brand);
+    border-color: var(--gray-border-emphasis);
   }
 
   .portal-filter-input:focus {
-    border-color: var(--brand);
-    box-shadow: var(--focus-ring-brand);
+    border-color: var(--focus-border-normal);
+    box-shadow: var(--focus-ring-normal);
   }
 
   /* ── 表单字段壳（normal focus · focus-within，对齐 PlaceSearchField） ── */
@@ -587,12 +587,12 @@ html {
   }
 
   .portal-filter-select:hover {
-    border-color: var(--brand);
+    border-color: var(--gray-border-emphasis);
   }
 
   .portal-filter-select:focus {
-    border-color: var(--brand);
-    box-shadow: var(--focus-ring-brand);
+    border-color: var(--focus-border-normal);
+    box-shadow: var(--focus-ring-normal);
   }
 
   .portal-filter-select--with-icon {
@@ -604,6 +604,7 @@ html {
   }
 
   .portal-filter-icon {
+    @apply z-10;
     color: var(--gray-text-7);
   }
 

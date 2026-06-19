@@ -1,0 +1,220 @@
+/**
+ * Ant Design 6 筛选/表单 Select & Cascader — 对齐 portal-filter-input / portal-filter-select。
+ * 边框在 .ant-select 根节点；placeholder 为 .ant-select-placeholder。
+ */
+
+/* ── 筛选变体（h-9 / 36px） ── */
+.portal-ant-select--filter.ant-select {
+  min-width: 140px;
+  min-height: 36px;
+  border-radius: var(--radius-input) !important;
+  border-color: var(--gray-border-strong) !important;
+  background: var(--background) !important;
+  box-shadow: none !important;
+  color: var(--gray-text-2);
+  font-size: 14px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.portal-ant-select--filter.ant-select:not(.ant-select-disabled):hover {
+  border-color: var(--gray-border-emphasis) !important;
+}
+
+.portal-ant-select--filter.ant-select-focused:not(.ant-select-disabled) {
+  border-color: var(--focus-border-normal) !important;
+  box-shadow: var(--focus-ring-normal) !important;
+}
+
+.portal-ant-select--filter .ant-select-placeholder {
+  color: var(--gray-text-7) !important;
+  font-size: 14px;
+}
+
+.portal-ant-select--filter .ant-select-content-value,
+.portal-ant-select--filter .ant-select-input {
+  color: var(--gray-text-2) !important;
+  font-size: 14px;
+}
+
+.portal-ant-select--filter .ant-select-selection-item {
+  color: var(--gray-text-2);
+  border-radius: 4px;
+}
+
+.portal-ant-select--filter .ant-select-suffix {
+  color: var(--gray-text-7);
+}
+
+/* ── 表单变体（h-12 / 48px） ── */
+.portal-ant-select--form.ant-select {
+  width: 100%;
+  min-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border-radius: var(--radius-input) !important;
+  border-color: var(--gray-border-strong) !important;
+  background: var(--background) !important;
+  box-shadow: none !important;
+  color: var(--gray-text-2);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.portal-ant-select--form.ant-select:not(.ant-select-disabled):hover {
+  border-color: var(--gray-border-emphasis) !important;
+}
+
+.portal-ant-select--form.ant-select-focused:not(.ant-select-disabled) {
+  border-color: var(--focus-border-normal) !important;
+  box-shadow: var(--focus-ring-normal) !important;
+}
+
+.portal-ant-select--form .ant-select-placeholder {
+  color: var(--gray-text-7) !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.portal-ant-select--form .ant-select-content-value,
+.portal-ant-select--form .ant-select-input {
+  color: var(--gray-text-2) !important;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.portal-ant-select--form .ant-select-content {
+  align-items: center;
+  min-height: 0;
+}
+
+.portal-ant-select--form .ant-select-suffix {
+  color: var(--gray-text-7);
+}
+
+.portal-ant-select--form.ant-select-disabled {
+  border-color: transparent !important;
+  background: var(--page-bg) !important;
+}
+
+.portal-ant-select--form.ant-select-disabled .ant-select-content-value {
+  color: var(--gray-text-2) !important;
+}
+
+/* ── Cascader 筛选变体（触发器同为 .ant-select） ── */
+.portal-ant-cascader--filter.ant-select {
+  min-width: 168px;
+  min-height: 36px;
+  height: 36px;
+  border-radius: var(--radius-input) !important;
+  border-color: var(--gray-border-strong) !important;
+  background: var(--background) !important;
+  box-shadow: none !important;
+  color: var(--gray-text-2);
+  font-size: 14px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.portal-ant-cascader--filter.ant-select:not(.ant-select-disabled):hover {
+  border-color: var(--gray-border-emphasis) !important;
+}
+
+.portal-ant-cascader--filter.ant-select-focused:not(.ant-select-disabled) {
+  border-color: var(--focus-border-normal) !important;
+  box-shadow: var(--focus-ring-normal) !important;
+}
+
+.portal-ant-cascader--filter .ant-select-placeholder {
+  color: var(--gray-text-7) !important;
+  font-size: 14px;
+}
+
+.portal-ant-cascader--filter .ant-select-content-value,
+.portal-ant-cascader--filter .ant-select-input {
+  color: var(--gray-text-2) !important;
+  font-size: 14px;
+}
+
+.portal-ant-cascader--filter .ant-select-suffix {
+  color: var(--gray-text-7);
+}
+
+/* ── 共享下拉：Select ── */
+.portal-ant-select-dropdown .ant-select-item {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 2px 4px;
+}
+
+.portal-ant-select-dropdown
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled):not(
+    .ant-select-item-option-selected
+  ) {
+  background: var(--gray-fill-normal) !important;
+}
+
+.portal-ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  font-weight: 600;
+  background: transparent !important;
+}
+
+.portal-ant-select-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled)
+  .ant-select-item-option-state {
+  color: var(--brand) !important;
+}
+
+.portal-ant-select-dropdown
+  .ant-select-item-option-selected.ant-select-item-option-active:not(
+    .ant-select-item-option-disabled
+  ) {
+  background: var(--gray-fill-normal) !important;
+}
+
+.portal-ant-select-dropdown--form .ant-select-item {
+  padding: 10px 12px;
+}
+
+/* ── 共享下拉：Cascader ── */
+.portal-ant-cascader-dropdown .ant-cascader-menu {
+  min-width: 140px;
+  height: auto;
+  max-height: 256px;
+}
+
+.portal-ant-cascader-dropdown .ant-cascader-menu-item {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 2px 4px;
+}
+
+.portal-ant-cascader-dropdown
+  .ant-cascader-menu-item:not(.ant-cascader-menu-item-disabled):not(
+    .ant-cascader-menu-item-active
+  ):hover {
+  background: var(--gray-fill-normal) !important;
+}
+
+.portal-ant-cascader-dropdown .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
+  font-weight: 600;
+  color: var(--gray-text-2) !important;
+  background: color-mix(in srgb, var(--brand) 12%, white) !important;
+}
+
+.portal-ant-cascader-dropdown
+  .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
+  background: color-mix(in srgb, var(--brand) 16%, white) !important;
+}
+
+.portal-ant-cascader-dropdown .ant-cascader-menu-item-expand-icon {
+  color: var(--gray-text-7);
+}
