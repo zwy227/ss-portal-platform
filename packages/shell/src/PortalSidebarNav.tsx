@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState, type ComponentType, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { NavLink, useLocation } from "react-router";
-import { ChevronDown, ChevronLeft, FileText, Home } from "lucide-react";
+import { ChevronDown, FileText, Home, type LucideIcon } from "lucide-react";
 import type { PortalNavNode, ResolveActiveChildId } from "./nav-types";
 
 export const PORTAL_SIDEBAR_EXPANDED_WIDTH = 220;
@@ -74,7 +74,7 @@ function PortalNavGroup({
   onToggle: () => void;
   onRequestExpand?: () => void;
   activeChildId?: string | null;
-  icon: ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
+  icon: LucideIcon;
 }) {
   const children = node.children ?? [];
   const headerClass = "portal-nav-row portal-nav-row--primary";
@@ -130,7 +130,7 @@ function PortalNavTopItem({
 }: {
   node: PortalNavNode;
   collapsed: boolean;
-  icon: ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
+  icon: LucideIcon;
 }) {
   const baseRow = "portal-nav-row portal-nav-row--primary";
   const active = "portal-nav-row--active";
@@ -171,14 +171,12 @@ export interface PortalSidebarNavProps {
   collapsed: boolean;
   homePath: string;
   brandTitle: string;
-  backLinkTo?: string;
-  backLinkLabel?: string;
   /** 收起态下点到带子菜单的一级项时，请求外层展开侧栏 */
   onRequestExpand?: () => void;
   /** 按 groupId 解析二级菜单高亮；业务侧注入（如 drayage 详情回指规则） */
   resolveActiveChildId?: ResolveActiveChildId;
   /** 一级菜单 id → Lucide 图标 */
-  iconById?: Record<string, ComponentType<{ className?: string; size?: number; strokeWidth?: number }>>;
+  iconById?: Record<string, LucideIcon>;
   defaultOpenIds?: string[];
   headerSlot?: ReactNode;
 }
@@ -188,8 +186,6 @@ export function PortalSidebarNav({
   collapsed,
   homePath,
   brandTitle,
-  backLinkTo = "/",
-  backLinkLabel = "返回",
   onRequestExpand,
   resolveActiveChildId = defaultResolveActiveChildId,
   iconById = {},
@@ -236,34 +232,22 @@ export function PortalSidebarNav({
         aria-label="Portal 导航"
       >
         <div
-          className={`flex h-14 shrink-0 items-center border-b border-white/20 ${collapsed ? "justify-center gap-1 px-2" : "gap-2 px-3"}`}
+          className={`portal-sidebar-header ${collapsed ? "portal-sidebar-header--collapsed" : ""}`}
         >
           {headerSlot ?? (
-            <>
-              <NavLink
-                to={backLinkTo}
-                end
-                className={`flex shrink-0 items-center rounded-md text-white/90 outline-offset-2 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70 ${collapsed ? "p-2" : "gap-0.5 px-2 py-1.5 text-13 font-medium"}`}
-                aria-label={backLinkLabel}
-                title={backLinkLabel}
-              >
-                <ChevronLeft className="size-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
-                {!collapsed ? <span>{backLinkLabel}</span> : null}
-              </NavLink>
-              <NavLink
-                to={homePath}
-                end
-                className={`min-w-0 truncate rounded-md text-white outline-offset-2 transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70 ${collapsed ? "p-2" : "flex-1 px-1 py-1.5 text-15 font-semibold tracking-[-0.02em]"}`}
-                aria-label={brandTitle}
-                title={brandTitle}
-              >
-                {collapsed ? (
-                  <Home className="size-[18px] shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
-                ) : (
-                  brandTitle
-                )}
-              </NavLink>
-            </>
+            <NavLink
+              to={homePath}
+              end
+              className={`portal-sidebar-brand ${collapsed ? "portal-sidebar-brand--collapsed" : "portal-sidebar-brand--expanded"}`}
+              aria-label={brandTitle}
+              title={brandTitle}
+            >
+              {collapsed ? (
+                <Home className="size-[18px] shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
+              ) : (
+                brandTitle
+              )}
+            </NavLink>
           )}
         </div>
 

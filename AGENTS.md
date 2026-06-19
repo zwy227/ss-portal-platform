@@ -2,7 +2,15 @@
 
 ## 读文档顺序
 
-1. [`docs/design-system.md`](design-system.md)（待从 SSLTLDemo style-guide 整理）
+## 设计系统画廊（shell-demo）
+
+本地 `pnpm dev` 后访问：
+
+- `/tokens` — 色板，对照 `theme.css` 变量
+- `/typography` — 字号阶梯
+- `/components` — `portal-*` 组合类
+
+定稿 token 后再写 `docs/design-system.md`。
 2. [`docs/frameworks/app-shell.md`](frameworks/app-shell.md)
 3. [`docs/frameworks/list-page.md`](frameworks/list-page.md)
 4. [`docs/frameworks/detail-page.md`](frameworks/detail-page.md)
@@ -20,3 +28,4 @@
 |----|------|
 | `@ss/portal-tokens` | CSS 变量 + `portal-*` 类 |
 | `@ss/portal-shell` | AppShell、侧栏、顶栏、详情返回链接 |
+| `@ss/portal-ui` | shadcn 命名基础组件（Button、Input、Dialog…） |

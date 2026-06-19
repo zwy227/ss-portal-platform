@@ -18,6 +18,17 @@ pnpm install
 pnpm dev          # 启动 shell-demo → http://localhost:5174
 ```
 
+### 设计系统画廊路由
+
+| 路径 | 内容 |
+|------|------|
+| `/` | 列表页框架 demo |
+| `/tokens` | 色板（brand、gray、semantic） |
+| `/typography` | 字号 text-11 … text-32 |
+| `/components` | portal-* 组合类预览 |
+
+与 SSLTLDemo (`localhost:5173`) 拖柜页并排打开，可视觉对比 token。
+
 ## 消费方接入
 
 ```json

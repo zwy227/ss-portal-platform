@@ -34,6 +34,7 @@ AppShell
 
 ## 侧栏 class
 
+- 品牌标题：`portal-sidebar-brand`（展开 `portal-sidebar-brand--expanded` · 收起 `portal-sidebar-brand--collapsed`）
 - 一级：`portal-nav-row portal-nav-row--primary`
 - 二级：`portal-nav-row portal-nav-row--sub`
 - 激活：`portal-nav-row--active`
