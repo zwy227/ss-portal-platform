@@ -5,6 +5,10 @@ export type TokenSwatch = {
   cssVar: string;
   tailwind?: string;
   usage?: string;
+  /** Badge 区：用 portal-badge 组件预览，而非单色块 */
+  preview?: "badge";
+  badgeVariant?: "neutral" | "success" | "warning" | "info";
+  badgeLabel?: string;
 };
 
 export const BRAND_TOKENS: TokenSwatch[] = [
@@ -63,13 +67,55 @@ export const PAGE_BG_TOKENS: TokenSwatch[] = [
   { name: "page-bg", cssVar: "--page-bg", tailwind: "bg-page-bg", usage: "主内容背景" },
 ];
 
-export const SEMANTIC_TOKENS: TokenSwatch[] = [
-  { name: "semantic-success-default", cssVar: "--semantic-success-default", usage: "成功 Badge（锚定 brand）" },
-  { name: "semantic-info-default", cssVar: "--semantic-info-default", usage: "信息 Badge" },
-  { name: "semantic-warning-default", cssVar: "--semantic-warning-default", usage: "警告 Badge" },
-  { name: "semantic-error-default", cssVar: "--semantic-error-default", usage: "错误 Badge" },
-  { name: "accent-orange", cssVar: "--accent-orange", usage: "取消菜单项文字" },
-  { name: "portal-text-link", cssVar: "--portal-text-link", usage: "文档链接 hover" },
+/** Badge 四档：灰 · 成功 · 告警 · 蓝（画廊统一用 portal-badge 预览） */
+export const BADGE_TOKENS: TokenSwatch[] = [
+  {
+    name: "portal-badge--neutral",
+    cssVar: "--semantic-neutral-text",
+    tailwind: "portal-badge portal-badge--neutral",
+    badgeLabel: "已取消",
+    preview: "badge",
+    badgeVariant: "neutral",
+    usage: "底 semantic-neutral-light（gray-fill-normal）· 字 semantic-neutral-text（gray-text-5）",
+  },
+  {
+    name: "portal-badge--success",
+    cssVar: "--semantic-success-text",
+    tailwind: "portal-badge portal-badge--success",
+    badgeLabel: "已下单",
+    preview: "badge",
+    badgeVariant: "success",
+    usage: "底 semantic-success-light · 字 semantic-success-text（brand-dark）",
+  },
+  {
+    name: "portal-badge--warning",
+    cssVar: "--semantic-warning-text",
+    tailwind: "portal-badge portal-badge--warning",
+    badgeLabel: "人工报价中",
+    preview: "badge",
+    badgeVariant: "warning",
+    usage: "底 semantic-warning-bg · 字 semantic-warning-text",
+  },
+  {
+    name: "portal-badge--info",
+    cssVar: "--semantic-info-text",
+    tailwind: "portal-badge portal-badge--info",
+    badgeLabel: "待下单",
+    preview: "badge",
+    badgeVariant: "info",
+    usage: "底 semantic-info-bg · 字 semantic-info-text",
+  },
+];
+
+/** 非 Badge 强调色 */
+export const ACCENT_TOKENS: TokenSwatch[] = [
+  {
+    name: "semantic-warning-text",
+    cssVar: "--semantic-warning-text",
+    tailwind: "text-semantic-warning-text",
+    usage: "告警橙文字 · Badge / 取消菜单（accent-orange 为兼容别名）",
+  },
+  { name: "portal-text-link", cssVar: "--portal-text-link", tailwind: "text-portal-text-link", usage: "文档链接 hover（→ semantic-info-text）" },
 ];
 
 export const TYPOGRAPHY_SAMPLES = [
@@ -219,6 +265,14 @@ export const RADIUS_ALIAS_TOKENS: RadiusToken[] = [
     suitableFor: "复选框",
   },
   {
+    name: "radius-badge",
+    cssVar: "--radius-badge",
+    tailwind: "rounded-badge",
+    pointsTo: "radius-xs",
+    usage: "2px",
+    suitableFor: "状态 Badge（portal-badge）",
+  },
+  {
     name: "radius-input",
     cssVar: "--radius-input",
     tailwind: "rounded-input",
@@ -348,6 +402,7 @@ export const OVERLAY_RADIUS_MAP = [
 ] as const;
 
 export const PORTAL_RADIUS_USAGE = [
+  { component: "portal-badge", tailwind: "rounded-badge", cssVar: "--radius-badge" },
   { component: "Button xs / icon-xs", tailwind: "rounded-sm", cssVar: "--radius-sm" },
   { component: "Button sm / icon-sm、分页页码 / size select", tailwind: "rounded", cssVar: "--radius" },
   { component: "Button default / icon · portal-brand-btn", tailwind: "rounded-btn", cssVar: "--radius-button" },

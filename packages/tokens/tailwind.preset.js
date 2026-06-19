@@ -65,6 +65,7 @@ export default {
         '3xl': 'var(--radius-3xl)',
         full: 'var(--radius-full)',
         checkbox: 'var(--radius-checkbox)',
+        badge: 'var(--radius-badge)',
         input: 'var(--radius-input)',
         card: 'var(--radius-card)',
         'button-xs': 'var(--radius-button-xs)',

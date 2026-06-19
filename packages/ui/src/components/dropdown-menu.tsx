@@ -75,7 +75,8 @@ const DropdownMenuItem = React.forwardRef<
     className={cn(
       `relative flex cursor-pointer select-none items-center rounded-md px-3 py-2 ${portalUiText14} font-normal outline-none transition-colors focus:bg-gray-fill-normal data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
       variant === "default" && "text-gray-text-2",
-      variant === "destructive" && "text-accent-orange focus:bg-accent-orange-bg focus:text-accent-orange",
+      variant === "destructive" &&
+        "text-semantic-warning-text focus:bg-semantic-warning-bg focus:text-semantic-warning-text",
       inset && "pl-8",
       className,
     )}

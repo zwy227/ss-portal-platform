@@ -7,7 +7,11 @@ function readCssVar(name: string): string {
 }
 
 function swatchStyle(token: TokenSwatch): CSSProperties {
-  if (token.name.startsWith("gray-text") || token.name === "portal-text-link" || token.name === "accent-orange") {
+  if (
+    token.name.startsWith("gray-text") ||
+    token.name === "portal-text-link" ||
+    token.name === "semantic-warning-text"
+  ) {
     return {
       color: `var(${token.cssVar})`,
       background: "var(--background)",
@@ -46,11 +50,30 @@ export function TokenSwatchCard({ token }: { token: TokenSwatch }) {
   const isTextSwatch =
     token.name.startsWith("gray-text") ||
     token.name === "portal-text-link" ||
-    token.name === "accent-orange";
+    token.name === "semantic-warning-text";
+
+  if (token.preview === "badge" && token.badgeVariant) {
+    return (
+      <div className="portal-list-card flex flex-col gap-2 p-3">
+        <div className="flex h-14 w-full items-center justify-center rounded-md border border-gray-border-normal bg-background">
+          <span className={`portal-badge portal-badge--${token.badgeVariant}`}>
+            {token.badgeLabel ?? "示例"}
+          </span>
+        </div>
+        <div>
+          <p className="text-14 font-medium text-gray-text-2">{token.name}</p>
+          <p className="font-mono text-12 text-gray-text-5">{token.cssVar}</p>
+          {resolved ? <p className="font-mono text-12 text-gray-text-7">{resolved}</p> : null}
+          {token.tailwind ? <p className="text-12 text-gray-text-4">{token.tailwind}</p> : null}
+          {token.usage ? <p className="text-12 text-gray-text-5">{token.usage}</p> : null}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="portal-list-card flex flex-col gap-2 p-3">
-      <div className={`h-14 w-full rounded-md border border-gray-border-normal ${isTextSwatch ? "" : ""}`} style={swatchStyle(token)}>
+      <div className="h-14 w-full rounded-md border border-gray-border-normal" style={swatchStyle(token)}>
         {isTextSwatch ? <span className="text-16 font-medium">Aa 正文</span> : null}
       </div>
       <div>

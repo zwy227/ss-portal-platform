@@ -1,11 +1,12 @@
 import {
+  ACCENT_TOKENS,
+  BADGE_TOKENS,
   BRAND_TOKENS,
   FOCUS_TOKENS,
   GRAY_BORDER_TOKENS,
   GRAY_FILL_TOKENS,
   GRAY_TEXT_TOKENS,
   PAGE_BG_TOKENS,
-  SEMANTIC_TOKENS,
 } from "../style-guide/tokenCatalog";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
 import { TokenGrid } from "../style-guide/TokenSwatchCard";
@@ -41,8 +42,16 @@ export function TokensPage() {
           <TokenGrid tokens={PAGE_BG_TOKENS} />
         </StyleGuideSection>
 
-        <StyleGuideSection title="语义色 · 强调色">
-          <TokenGrid tokens={SEMANTIC_TOKENS} />
+        <StyleGuideSection title="Badge 语义色">
+          <p className="mb-3 text-13 text-gray-text-5">
+            四档：灰 · 成功 · 告警 · 蓝。色卡统一展示 <code className="text-13">portal-badge</code>{" "}
+            成品；组件详情见 <code className="text-13">/components</code>。
+          </p>
+          <TokenGrid tokens={BADGE_TOKENS} />
+        </StyleGuideSection>
+
+        <StyleGuideSection title="强调色（非 Badge）">
+          <TokenGrid tokens={ACCENT_TOKENS} />
         </StyleGuideSection>
 
         <StyleGuideSection title="侧栏导航（on brand）">

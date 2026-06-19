@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { PortalListFilterResetButton } from "@ss/portal-shell";
+import { BadgeStyleExamples } from "../style-guide/BadgeStyleExamples";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
 import { PortalFocusStyleExamples } from "../style-guide/FocusStyleExamples";
 
@@ -12,6 +13,10 @@ export function ComponentsPage() {
       >
         <StyleGuideSection title="Focus 样式">
           <PortalFocusStyleExamples />
+        </StyleGuideSection>
+
+        <StyleGuideSection title="Badge 状态标签">
+          <BadgeStyleExamples />
         </StyleGuideSection>
 
         <StyleGuideSection title="Tab 栏">

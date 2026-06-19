@@ -79,6 +79,7 @@
   /* 语义别名（组件请优先用标准阶梯 rounded-xs … rounded-3xl） */
   --radius-input: var(--radius-md);
   --radius-checkbox: var(--radius-xs);
+  --radius-badge: var(--radius-xs);
   --radius-nav: var(--radius-md);
   --radius-card: var(--radius-lg);
   --radius-button-xs: var(--radius-sm);
@@ -141,10 +142,6 @@
   --sidebar-nav-active: rgba(255, 255, 255, 0.22);
   --sidebar-nav-sub-active: rgba(255, 255, 255, 0.16);
 
-  /* 强调色 — accent-orange 为权威值 */
-  --accent-orange: #fa8c16;
-  --accent-orange-bg: #fff7e6;
-
   /* Focus ring — brand：列表筛选（input 自身 focus）；normal：表单字段壳（focus-within） */
   --focus-border-normal: var(--gray-border-black);
   --focus-ring-normal: 0 0 0 4px var(--gray-fill-normal);
@@ -160,18 +157,22 @@
   --semantic-info-light: #e8f3ff;
   --semantic-info-default: #1677ff;
   --semantic-info-text: #4096ff;
-  --semantic-warning-bg: var(--accent-orange-bg);
+  /* 告警橙 — 权威值；accent-orange / accent-orange-bg 为兼容别名 */
+  --semantic-warning-default: #fa8c16;
+  --semantic-warning-text: var(--semantic-warning-default);
+  --semantic-warning-bg: #fff7e6;
   --semantic-warning-light: #ffe7ba;
-  --semantic-warning-default: var(--accent-orange);
-  --semantic-warning-text: #d46b08;
+  --accent-orange: var(--semantic-warning-text);
+  --accent-orange-bg: var(--semantic-warning-bg);
   --semantic-error-bg: #fff0f0;
   --semantic-error-light: #ffd9d9;
   --semantic-error-default: #e7000b;
   --semantic-error-text: #c4000a;
-  --semantic-neutral-bg: #f7f8fa;
-  --semantic-neutral-light: #f2f3f5;
-  --semantic-neutral-default: var(--gray-text-7);
-  --semantic-neutral-text: var(--gray-text-7);
+  /* 中性灰 Badge — 底色 alias gray-fill，文字 gray-text-5（比 placeholder 档更深） */
+  --semantic-neutral-bg: var(--gray-fill-light);
+  --semantic-neutral-light: var(--gray-fill-normal);
+  --semantic-neutral-default: var(--gray-text-5);
+  --semantic-neutral-text: var(--gray-text-5);
 
   /* Portal 专用别名 */
   --portal-text-link: var(--semantic-info-text);
@@ -251,10 +252,11 @@
   /* 品牌 / 语义浅底 — 暗色（混 --card，success/warning 等 alias 自动跟随） */
   --brand-xlight: color-mix(in srgb, var(--brand) 14%, var(--card));
   --brand-light: color-mix(in srgb, var(--brand) 22%, var(--card));
-  --accent-orange-bg: color-mix(in srgb, var(--accent-orange) 14%, var(--card));
+  --semantic-warning-bg: color-mix(in srgb, var(--semantic-warning-default) 14%, var(--card));
+  --semantic-warning-light: color-mix(in srgb, var(--semantic-warning-default) 22%, var(--card));
+  --accent-orange-bg: var(--semantic-warning-bg);
   --semantic-info-bg: color-mix(in srgb, var(--semantic-info-default) 14%, var(--card));
   --semantic-info-light: color-mix(in srgb, var(--semantic-info-default) 22%, var(--card));
-  --semantic-warning-light: color-mix(in srgb, var(--accent-orange) 22%, var(--card));
   --semantic-error-bg: color-mix(in srgb, var(--semantic-error-default) 14%, var(--card));
   --semantic-error-light: color-mix(in srgb, var(--semantic-error-default) 22%, var(--card));
   --semantic-neutral-bg: var(--gray-fill-normal);
@@ -297,6 +299,7 @@
   --radius-3xl: var(--radius-3xl);
   --radius-full: 9999px;
   --radius-card: var(--radius-card);
+  --radius-badge: var(--radius-badge);
   --radius-input: var(--radius-input);
   --radius-nav: var(--radius-nav);
   --radius-btn: var(--radius-button);
@@ -629,6 +632,32 @@ html {
     background: var(--brand-disabled);
   }
 
+  /* ── Badge（状态标签 · soft 四档） ── */
+  .portal-badge {
+    @apply inline-flex w-fit max-w-full items-center gap-1 rounded-badge px-2 py-0.5 text-12 font-medium;
+    line-height: var(--leading-16);
+  }
+
+  .portal-badge--neutral {
+    background: var(--semantic-neutral-light);
+    color: var(--semantic-neutral-text);
+  }
+
+  .portal-badge--success {
+    background: var(--semantic-success-light);
+    color: var(--semantic-success-text);
+  }
+
+  .portal-badge--warning {
+    background: var(--semantic-warning-bg);
+    color: var(--semantic-warning-text);
+  }
+
+  .portal-badge--info {
+    background: var(--semantic-info-bg);
+    color: var(--semantic-info-text);
+  }
+
   /* ── Dropdown ── */
   .portal-dropdown-menu {
     @apply z-50 min-w-[140px] rounded-card border border-solid bg-popover p-1 shadow-lg outline-none;
@@ -650,12 +679,12 @@ html {
 
   .portal-dropdown-item--cancel {
     @apply text-14;
-    color: var(--accent-orange);
+    color: var(--semantic-warning-text);
   }
 
   .portal-dropdown-item--cancel[data-highlighted] {
-    background: var(--accent-orange-bg);
-    color: var(--accent-orange);
+    background: var(--semantic-warning-bg);
+    color: var(--semantic-warning-text);
   }
 
   /* ── 分页 ── */
