@@ -4,7 +4,7 @@ export const PORTAL_PRIMARY_BTN_DISABLED_CLASS =
 
 /** Dialog footer primary (14px medium) */
 export const PORTAL_PRIMARY_DIALOG_BTN_CLASS = [
-  "rounded-lg border-0 bg-brand px-5 py-2 text-14 font-medium text-white",
+  "rounded-btn border-0 bg-brand px-5 py-2 text-14 font-medium text-white",
   "transition-opacity hover:opacity-90",
   "outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2",
   PORTAL_PRIMARY_BTN_DISABLED_CLASS,

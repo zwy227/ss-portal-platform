@@ -5,7 +5,7 @@ import { cn } from "../lib/utils";
 import { portalUiButtonWeight, portalUiText13, portalUiText14 } from "../lib/portal-typography";
 
 const buttonVariants = cva(
-  `inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md ${portalUiText14} ${portalUiButtonWeight} transition-colors focus-visible:outline-none focus-visible:shadow-[var(--focus-ring-brand)] disabled:pointer-events-none`,
+  `inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap ${portalUiText14} ${portalUiButtonWeight} transition-colors focus-visible:outline-none focus-visible:shadow-[var(--focus-ring-brand)] disabled:pointer-events-none`,
   {
     variants: {
       variant: {
@@ -18,10 +18,10 @@ const buttonVariants = cva(
         link: "text-brand underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4",
-        sm: `h-8 px-3 ${portalUiText13}`,
-        lg: "h-10 px-6",
-        icon: "size-9",
+        default: "h-9 rounded-btn px-4",
+        sm: `h-8 rounded-button-sm px-3 ${portalUiText13}`,
+        lg: "h-10 rounded-button-lg px-6",
+        icon: "size-9 rounded-btn",
       },
     },
     defaultVariants: {

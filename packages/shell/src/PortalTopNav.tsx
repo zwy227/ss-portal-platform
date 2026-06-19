@@ -43,7 +43,7 @@ export function PortalTopNav({
 
         <Link
           to={logoHref}
-          className="inline-flex max-w-[min(200px,40vw)] shrink-0 rounded-lg outline-none ring-offset-2 ring-offset-white transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-gray-400/80"
+          className="inline-flex max-w-[min(200px,40vw)] shrink-0 rounded-nav outline-none transition-opacity hover:opacity-90 focus-visible:shadow-[var(--focus-ring-brand)]"
           aria-label="返回首页"
         >
           {logoSrc ? (
@@ -84,12 +84,12 @@ export function PortalTopNav({
 
           <button
             type="button"
-            className="ml-1 flex items-center gap-2 rounded-lg px-1 py-1 transition-colors hover:bg-gray-fill-normal"
+            className="ml-1 flex items-center gap-2 rounded-nav px-1 py-1 transition-colors hover:bg-gray-fill-normal"
           >
             {avatarSrc ? (
               <img src={avatarSrc} alt="用户头像" className="size-8 rounded-full object-cover" />
             ) : (
-              <span className="flex size-8 items-center justify-center rounded-full bg-gray-fill-normal text-13 font-medium text-gray-text-4">
+              <span className="flex size-8 items-center justify-center rounded-full bg-gray-fill-normal text-13-compact font-medium text-gray-text-4">
                 {userName.slice(0, 1)}
               </span>
             )}

@@ -17,6 +17,7 @@ import {
   Label,
 } from "@ss/portal-ui";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
+import { UiFocusStyleExamples } from "../style-guide/FocusStyleExamples";
 
 function CompareRow({ portal, ui }: { portal: ReactNode; ui: ReactNode }) {
   return (
@@ -40,6 +41,10 @@ export function UiComponentsPage() {
         title="Portal UI"
         description="@ss/portal-ui：Radix Primitives + shadcn 命名，样式来自 @ss/portal-tokens。新业务优先 import 本包组件；portal-* 组合类逐步对照迁移。"
       >
+        <StyleGuideSection title="Focus 样式 · Input focusStyle">
+          <UiFocusStyleExamples />
+        </StyleGuideSection>
+
         <StyleGuideSection title="Button · portal-brand-btn">
           <CompareRow
             portal={

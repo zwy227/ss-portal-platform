@@ -8,11 +8,26 @@ export type TokenSwatch = {
 };
 
 export const BRAND_TOKENS: TokenSwatch[] = [
-  { name: "brand", cssVar: "--brand", tailwind: "bg-brand", usage: "CTA、侧栏、focus" },
+  { name: "brand", cssVar: "--brand", tailwind: "bg-brand", usage: "CTA、侧栏、brand focus 边框" },
   { name: "brand-dark", cssVar: "--brand-dark", tailwind: "bg-brand-dark", usage: "hover 深色" },
   { name: "brand-disabled", cssVar: "--brand-disabled", tailwind: "bg-brand-disabled", usage: "禁用主按钮" },
   { name: "brand-light", cssVar: "--brand-light", tailwind: "bg-brand-light", usage: "标签浅底" },
   { name: "brand-xlight", cssVar: "--brand-xlight", tailwind: "bg-brand-xlight", usage: "极浅品牌底" },
+];
+
+export const FOCUS_TOKENS: TokenSwatch[] = [
+  {
+    name: "focus-ring-normal",
+    cssVar: "--focus-ring-normal",
+    tailwind: "shadow-focus-normal",
+    usage: "字段壳 focus-within 外圈 4px（→ gray-fill-normal / slate-100）；边框见 gray-border-black",
+  },
+  {
+    name: "focus-ring-brand",
+    cssVar: "--focus-ring-brand",
+    tailwind: "shadow-focus-brand",
+    usage: "筛选 input :focus 外圈 · portal-filter-input",
+  },
 ];
 
 export const GRAY_TEXT_TOKENS: TokenSwatch[] = [
@@ -25,6 +40,12 @@ export const GRAY_TEXT_TOKENS: TokenSwatch[] = [
 ];
 
 export const GRAY_BORDER_TOKENS: TokenSwatch[] = [
+  {
+    name: "gray-border-black",
+    cssVar: "--gray-border-black",
+    tailwind: "border-gray-border-black",
+    usage: "字段壳 focus-within（slate-900 / gray-text-1）",
+  },
   { name: "gray-border-strong", cssVar: "--gray-border-strong", tailwind: "border-gray-border-strong", usage: "输入框" },
   { name: "gray-border-normal", cssVar: "--gray-border-normal", tailwind: "border-gray-border-normal", usage: "卡片、表头" },
   { name: "gray-border-light", cssVar: "--gray-border-light", tailwind: "border-gray-border-light", usage: "行分割" },
@@ -43,7 +64,7 @@ export const PAGE_BG_TOKENS: TokenSwatch[] = [
 ];
 
 export const SEMANTIC_TOKENS: TokenSwatch[] = [
-  { name: "semantic-success-default", cssVar: "--semantic-success-default", usage: "成功 Badge" },
+  { name: "semantic-success-default", cssVar: "--semantic-success-default", usage: "成功 Badge（锚定 brand）" },
   { name: "semantic-info-default", cssVar: "--semantic-info-default", usage: "信息 Badge" },
   { name: "semantic-warning-default", cssVar: "--semantic-warning-default", usage: "警告 Badge" },
   { name: "semantic-error-default", cssVar: "--semantic-error-default", usage: "错误 Badge" },
@@ -208,7 +229,7 @@ export const RADIUS_ALIAS_TOKENS: RadiusToken[] = [
   {
     name: "radius-card",
     cssVar: "--radius-card",
-    tailwind: "rounded-section",
+    tailwind: "rounded-card",
     pointsTo: "radius-lg",
     usage: "10px",
     suitableFor: "列表白卡、页内卡片（portal-list-card）",
@@ -329,10 +350,9 @@ export const OVERLAY_RADIUS_MAP = [
 export const PORTAL_RADIUS_USAGE = [
   { component: "Button xs / icon-xs", tailwind: "rounded-sm", cssVar: "--radius-sm" },
   { component: "Button sm / icon-sm、分页页码 / size select", tailwind: "rounded", cssVar: "--radius" },
-  { component: "Button default / icon · portal-brand-btn", tailwind: "rounded-md", cssVar: "--radius-md" },
-  { component: "portal-filter-input / select、portal-nav-row、portal-topnav-icon-btn", tailwind: "rounded-md", cssVar: "--radius-md" },
-  { component: "Button lg / icon-lg · portal-list-card", tailwind: "rounded-lg", cssVar: "--radius-lg" },
-  { component: "portal-dropdown-menu", tailwind: "rounded-lg", cssVar: "--radius-lg" },
+  { component: "Button default / icon · portal-brand-btn", tailwind: "rounded-btn", cssVar: "--radius-button" },
+  { component: "portal-filter-input / select、portal-nav-row、portal-topnav-icon-btn", tailwind: "rounded-input / rounded-nav", cssVar: "--radius-md" },
+  { component: "Button lg / icon-lg · portal-list-card · portal-dropdown-menu", tailwind: "rounded-card", cssVar: "--radius-card" },
   { component: "portal-dropdown-item", tailwind: "rounded-md", cssVar: "--radius-md" },
-  { component: "Dialog / 抽屉（radius-modal）", tailwind: "rounded-xl", cssVar: "--radius-xl" },
+  { component: "Dialog / 抽屉（radius-modal）", tailwind: "rounded-modal", cssVar: "--radius-modal" },
 ] as const;

@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { PortalListFilterResetButton } from "@ss/portal-shell";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
+import { PortalFocusStyleExamples } from "../style-guide/FocusStyleExamples";
 
 export function ComponentsPage() {
   return (
@@ -9,6 +10,10 @@ export function ComponentsPage() {
         title="Components"
         description="portal-* 组合类预览。改 token 后刷新本页即可视觉验证。"
       >
+        <StyleGuideSection title="Focus 样式">
+          <PortalFocusStyleExamples />
+        </StyleGuideSection>
+
         <StyleGuideSection title="Tab 栏">
           <div className="portal-tab-bar">
             <button type="button" className="portal-tab-item portal-tab-item--active">

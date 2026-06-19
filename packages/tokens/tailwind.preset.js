@@ -1,3 +1,7 @@
+/**
+ * Tailwind theme 扩展 — 与 theme.css `@theme inline` 对齐，供 IDE 提示与非 v4 消费方。
+ * 运行时 Tailwind v4 以 theme.css 内 `@theme inline` 为准。
+ */
 /** @type {import('tailwindcss').Config} */
 export default {
   theme: {
@@ -8,6 +12,7 @@ export default {
         'brand-disabled': 'var(--brand-disabled)',
         'brand-light': 'var(--brand-light)',
         'brand-xlight': 'var(--brand-xlight)',
+        'gray-border-black': 'var(--gray-border-black)',
         'gray-border-strong': 'var(--gray-border-strong)',
         'gray-border-normal': 'var(--gray-border-normal)',
         'gray-border-light': 'var(--gray-border-light)',
@@ -24,12 +29,30 @@ export default {
         'gray-fill-normal': 'var(--gray-fill-normal)',
         'gray-fill-light': 'var(--gray-fill-light)',
         'page-bg': 'var(--page-bg)',
-        'page-bg-list': 'var(--page-bg-list)',
-        'page-bg-shell': 'var(--page-bg-shell)',
-        'page-bg-quote': 'var(--page-bg-quote)',
         'accent-orange': 'var(--accent-orange)',
         'accent-orange-bg': 'var(--accent-orange-bg)',
         'danger-dot': 'var(--danger-dot)',
+        'portal-text-link': 'var(--portal-text-link)',
+        'semantic-success-bg': 'var(--semantic-success-bg)',
+        'semantic-success-light': 'var(--semantic-success-light)',
+        'semantic-success-default': 'var(--semantic-success-default)',
+        'semantic-success-text': 'var(--semantic-success-text)',
+        'semantic-info-bg': 'var(--semantic-info-bg)',
+        'semantic-info-light': 'var(--semantic-info-light)',
+        'semantic-info-default': 'var(--semantic-info-default)',
+        'semantic-info-text': 'var(--semantic-info-text)',
+        'semantic-warning-bg': 'var(--semantic-warning-bg)',
+        'semantic-warning-light': 'var(--semantic-warning-light)',
+        'semantic-warning-default': 'var(--semantic-warning-default)',
+        'semantic-warning-text': 'var(--semantic-warning-text)',
+        'semantic-error-bg': 'var(--semantic-error-bg)',
+        'semantic-error-light': 'var(--semantic-error-light)',
+        'semantic-error-default': 'var(--semantic-error-default)',
+        'semantic-error-text': 'var(--semantic-error-text)',
+        'semantic-neutral-bg': 'var(--semantic-neutral-bg)',
+        'semantic-neutral-light': 'var(--semantic-neutral-light)',
+        'semantic-neutral-default': 'var(--semantic-neutral-default)',
+        'semantic-neutral-text': 'var(--semantic-neutral-text)',
       },
       borderRadius: {
         DEFAULT: 'var(--radius)',
@@ -43,7 +66,7 @@ export default {
         full: 'var(--radius-full)',
         checkbox: 'var(--radius-checkbox)',
         input: 'var(--radius-input)',
-        section: 'var(--radius-card)',
+        card: 'var(--radius-card)',
         'button-xs': 'var(--radius-button-xs)',
         'button-sm': 'var(--radius-button-sm)',
         btn: 'var(--radius-button)',
@@ -81,6 +104,7 @@ export default {
         32: ['var(--text-32)', { lineHeight: 'var(--leading-40)' }],
       },
       boxShadow: {
+        'focus-normal': 'var(--focus-ring-normal)',
         'focus-brand': 'var(--focus-ring-brand)',
       },
     },

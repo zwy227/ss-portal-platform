@@ -2,15 +2,7 @@
 
 :root {
   --font-size: 16px;
-  /* Typography sizes */
-  --text-7xl: 72px; /* h1 - main page titles, hero sections */
-  --text-5xl: 48px; /* h2 - major section headings */
-  --text-3xl: 30px; /* h3 - sub-section headings, card titles */
-  --text-2xl: 24px; /* h4 - smaller headings, sub-component titles */
-  --text-base: 14px; /* p - default body text */
-  --text-sm: 14px; /* label - form labels, emphasis text */
-  --text-xs: 12px; /* small - badges, tags, metadata */
-  
+
   /* Font weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -51,7 +43,7 @@
   /* The default color for text or elements that appear on top of accent colored elements. */
   --accent-foreground: var(--gray-text-2);
   /* The color used for background in destructive actions, such as delete buttons or error messages. */
-  --destructive: #e7000b;
+  --destructive: var(--semantic-error-default);
   /* The default color for text or elements that appear on top of destructive colored elements. */
   --destructive-foreground: rgba(248, 250, 252, 1.00);
   /* The default border color for elements such as inputs, buttons, and other containers. */
@@ -64,7 +56,7 @@
   --ring: var(--brand);
   /* Shadow for small elevations, such as cards or modals. */
   --elevation-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  /* Chart colors — 非 Drayage 业务色板范围，图表页预留 */
+  /* Chart colors — shadcn 图表预留，非 Portal 业务色板 */
   --chart-1: rgba(231, 110, 80, 1.00);
   /* The color for another chart element, such as a bar or line in a chart. */
   --chart-2: rgba(42, 157, 144, 1.00);
@@ -80,7 +72,6 @@
   --radius: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
-  --radius-section: var(--radius-lg);
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-3xl: 24px;
@@ -122,7 +113,8 @@
   --brand-xlight: #f4fbf3;
 
   /* SS Portal 中性灰阶（客户门户 / 全局 UI 权威值） */
-  /* Border 4 档（深→浅）：strong 输入 · normal 卡片 · light 行线 · exlight 子表 */
+  /* Border（深→浅）：black 字段壳 focus-within（slate-900）· strong 输入 · normal 卡片 · light 行线 · exlight 子表 */
+  --gray-border-black: var(--gray-text-1);
   --gray-border-strong: #cbd5e1;
   --gray-border-normal: #e2e8f0;
   --gray-border-light: #f1f5f9;
@@ -141,42 +133,36 @@
   --gray-fill-strong: #e2e8f0;
   --gray-fill-normal: #f1f5f9;
   --gray-fill-light: #f8fafc;
-  /* 页面背景 */
+  /* 页面画布（介于 gray-fill-light 与 gray-fill-normal 之间；勿与 fill 混用） */
   --page-bg: #f5f6fa;
-  --page-bg-list: var(--page-bg);
-  --page-bg-shell: var(--page-bg);
-  --page-bg-quote: var(--page-bg);
 
   /* 侧栏导航 */
   --sidebar-nav-hover: rgba(255, 255, 255, 0.12);
   --sidebar-nav-active: rgba(255, 255, 255, 0.22);
   --sidebar-nav-sub-active: rgba(255, 255, 255, 0.16);
 
-  /* 强调色 */
+  /* 强调色 — accent-orange 为权威值 */
   --accent-orange: #fa8c16;
   --accent-orange-bg: #fff7e6;
-  --accent-orange-bg-alt: var(--accent-orange-bg);
-  --accent-orange-gradient-end: var(--accent-orange);
-  --danger-dot: #e7000b;
 
-  /* Focus ring */
+  /* Focus ring — brand：列表筛选（input 自身 focus）；normal：表单字段壳（focus-within） */
+  --focus-border-normal: var(--gray-border-black);
+  --focus-ring-normal: 0 0 0 4px var(--gray-fill-normal);
   --focus-ring-brand: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);
 
-  /* 文本链接（Portal — 文件单证等，Info 蓝 hover） */
-  --portal-text-link: #4096ff;
-
   /* 语义色 — 对齐 drayage-color-palettes.html Semantic 区 */
-  --semantic-success-bg: #f4fbf3;
-  --semantic-success-light: #e8f5e7;
-  --semantic-success-default: #52c41a;
-  --semantic-success-text: #389e0d;
+  --semantic-success-bg: var(--brand-xlight);
+  --semantic-success-light: var(--brand-light);
+  /* 成功态实心/文字锚定 StraightShip brand，与 CTA 同色 */
+  --semantic-success-default: var(--brand);
+  --semantic-success-text: var(--brand-dark);
   --semantic-info-bg: #f0f8ff;
   --semantic-info-light: #e8f3ff;
   --semantic-info-default: #1677ff;
   --semantic-info-text: #4096ff;
-  --semantic-warning-bg: #fff7e6;
+  --semantic-warning-bg: var(--accent-orange-bg);
   --semantic-warning-light: #ffe7ba;
-  --semantic-warning-default: #fa8c16;
+  --semantic-warning-default: var(--accent-orange);
   --semantic-warning-text: #d46b08;
   --semantic-error-bg: #fff0f0;
   --semantic-error-light: #ffd9d9;
@@ -186,6 +172,10 @@
   --semantic-neutral-light: #f2f3f5;
   --semantic-neutral-default: var(--gray-text-7);
   --semantic-neutral-text: var(--gray-text-7);
+
+  /* Portal 专用别名 */
+  --portal-text-link: var(--semantic-info-text);
+  --danger-dot: var(--semantic-error-default);
 
   /* 扩展字号 */
   --text-11: 11px;
@@ -207,9 +197,6 @@
   --leading-28: 28px;
   --leading-32: 32px;
   --leading-40: 40px;
-
-  /* UI neutral gray (Radix `grayColor="slate"` + Tailwind border 对齐) */
-  --neutral-gray: var(--gray-border-normal);
 }
 
 .dark {
@@ -228,11 +215,11 @@
   --muted-foreground: var(--gray-text-7);
   --accent: rgba(51, 65, 85, 1.00);
   --accent-foreground: rgba(248, 250, 252, 1.00);
-  --destructive: #e7000b;
+  --destructive: var(--semantic-error-default);
   --destructive-foreground: rgba(248, 250, 252, 1.00);
   --border: var(--gray-border-normal);
   --input: var(--gray-border-strong);
-  --input-background: rgba(30, 41, 59, 1.00);
+  --input-background: var(--card);
   --ring: var(--brand);
   --elevation-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
   --sidebar: rgba(30, 41, 59, 1.00);
@@ -243,6 +230,35 @@
   --sidebar-accent-foreground: rgba(248, 250, 252, 1.00);
   --sidebar-border: var(--gray-border-normal);
   --sidebar-ring: var(--brand);
+
+  /* Portal 灰阶 — 暗色（slate 反相，与 --background / --card 同系） */
+  --gray-border-strong: #475569;
+  --gray-border-normal: #334155;
+  --gray-border-light: #1e293b;
+  --gray-border-exlight: #0f172a;
+  --gray-text-1: #f8fafc;
+  --gray-text-2: #f1f5f9;
+  --gray-text-3: #e2e8f0;
+  --gray-text-4: #cbd5e1;
+  --gray-text-5: #94a3b8;
+  --gray-text-7: #64748b;
+  --gray-fill-disabled: #64748b;
+  --gray-fill-strong: #334155;
+  --gray-fill-normal: #1e293b;
+  --gray-fill-light: #0f172a;
+  --page-bg: #0f172a;
+
+  /* 品牌 / 语义浅底 — 暗色（混 --card，success/warning 等 alias 自动跟随） */
+  --brand-xlight: color-mix(in srgb, var(--brand) 14%, var(--card));
+  --brand-light: color-mix(in srgb, var(--brand) 22%, var(--card));
+  --accent-orange-bg: color-mix(in srgb, var(--accent-orange) 14%, var(--card));
+  --semantic-info-bg: color-mix(in srgb, var(--semantic-info-default) 14%, var(--card));
+  --semantic-info-light: color-mix(in srgb, var(--semantic-info-default) 22%, var(--card));
+  --semantic-warning-light: color-mix(in srgb, var(--accent-orange) 22%, var(--card));
+  --semantic-error-bg: color-mix(in srgb, var(--semantic-error-default) 14%, var(--card));
+  --semantic-error-light: color-mix(in srgb, var(--semantic-error-default) 22%, var(--card));
+  --semantic-neutral-bg: var(--gray-fill-normal);
+  --semantic-neutral-light: var(--gray-fill-strong);
 }
 
 @theme inline {
@@ -280,6 +296,13 @@
   --radius-2xl: var(--radius-2xl);
   --radius-3xl: var(--radius-3xl);
   --radius-full: 9999px;
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
+  --radius-nav: var(--radius-nav);
+  --radius-btn: var(--radius-button);
+  --radius-button-sm: var(--radius-button-sm);
+  --radius-button-lg: var(--radius-button-lg);
+  --radius-modal: var(--radius-modal);
   --shadow-sm: var(--elevation-sm);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -296,8 +319,8 @@
   --color-brand-disabled: var(--brand-disabled);
   --color-brand-light: var(--brand-light);
   --color-brand-xlight: var(--brand-xlight);
-  --color-neutral-gray: var(--neutral-gray);
 
+  --color-gray-border-black: var(--gray-border-black);
   --color-gray-border-strong: var(--gray-border-strong);
   --color-gray-border-normal: var(--gray-border-normal);
   --color-gray-border-light: var(--gray-border-light);
@@ -314,9 +337,6 @@
   --color-gray-fill-normal: var(--gray-fill-normal);
   --color-gray-fill-light: var(--gray-fill-light);
   --color-page-bg: var(--page-bg);
-  --color-page-bg-list: var(--page-bg-list);
-  --color-page-bg-shell: var(--page-bg-shell);
-  --color-page-bg-quote: var(--page-bg-quote);
   --color-accent-orange: var(--accent-orange);
   --color-accent-orange-bg: var(--accent-orange-bg);
   --color-danger-dot: var(--danger-dot);
@@ -386,62 +406,63 @@
 }
 
 /**
- * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ * Base typography — SS Portal 字号阶梯（--text-11 … --text-32）。
+ * 不作用于已有 Tailwind text-* class 的祖先下的元素。
  */
 @layer base {
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
     h1 {
-      font-size: var(--text-7xl);
+      font-size: var(--text-32);
       font-weight: var(--font-weight-normal);
-      line-height: 1.2;
+      line-height: var(--leading-40);
     }
 
     h2 {
-      font-size: var(--text-5xl);
+      font-size: var(--text-22);
       font-weight: var(--font-weight-normal);
-      line-height: 1.3;
+      line-height: var(--leading-28);
     }
 
     h3 {
-      font-size: var(--text-3xl);
+      font-size: var(--text-18);
       font-weight: var(--font-weight-normal);
-      line-height: 1.4;
+      line-height: var(--leading-28);
     }
 
     h4 {
-      font-size: var(--text-2xl);
+      font-size: var(--text-16);
       font-weight: var(--font-weight-normal);
-      line-height: 1.5;
+      line-height: var(--leading-24);
     }
 
     p {
-      font-size: var(--text-base);
+      font-size: var(--text-14);
       font-weight: var(--font-weight-normal);
-      line-height: 1.5;
+      line-height: var(--leading-20);
     }
 
     label {
-      font-size: var(--text-sm);
+      font-size: var(--text-14);
       font-weight: var(--font-weight-medium);
-      line-height: 1.5;
+      line-height: var(--leading-20);
     }
 
     button {
-      font-size: var(--text-base);
+      font-size: var(--text-14);
       font-weight: var(--font-weight-medium);
-      line-height: 1.5;
+      line-height: var(--leading-20);
     }
 
     input {
-      font-size: var(--text-base);
+      font-size: var(--text-14);
       font-weight: var(--font-weight-normal);
-      line-height: 1.5;
+      line-height: var(--leading-20);
     }
 
     small {
-      font-size: var(--text-xs);
+      font-size: var(--text-12);
       font-weight: var(--font-weight-semibold);
-      line-height: 1.4;
+      line-height: var(--leading-16);
     }
   }
 }
@@ -503,13 +524,13 @@ html {
 
   /* ── 列表白卡 ── */
   .portal-list-card {
-    @apply rounded-lg bg-white p-4;
+    @apply rounded-card bg-card p-4;
     box-shadow: var(--elevation-sm);
   }
 
   /* ── 筛选器 ── */
   .portal-filter-input {
-    @apply h-9 w-full rounded-md border bg-background pl-9 pr-3 text-14 outline-none transition;
+    @apply h-9 w-full rounded-input border bg-background pl-9 pr-3 text-14 outline-none transition;
     border-color: var(--gray-border-strong);
     color: var(--gray-text-2);
   }
@@ -527,8 +548,37 @@ html {
     box-shadow: var(--focus-ring-brand);
   }
 
+  /* ── 表单字段壳（normal focus · focus-within，对齐 PlaceSearchField） ── */
+  .portal-field-shell {
+    @apply relative rounded-input border bg-background transition;
+    border-color: var(--gray-border-strong);
+  }
+
+  .portal-field-shell:hover {
+    border-color: var(--gray-border-emphasis);
+  }
+
+  .portal-field-shell:focus-within {
+    border-color: var(--focus-border-normal);
+    box-shadow: var(--focus-ring-normal);
+  }
+
+  /** 已选中等静态展示态：不响应 focus-within（业务侧按条件挂载） */
+  .portal-field-shell--static:focus-within {
+    border-color: var(--gray-border-strong);
+    box-shadow: none;
+  }
+
+  .portal-field-shell--error {
+    border-color: var(--semantic-error-default);
+  }
+
+  .portal-field-shell-input {
+    @apply h-full w-full border-0 bg-transparent text-14 font-medium text-gray-text-2 outline-none placeholder:font-medium placeholder:text-gray-text-7;
+  }
+
   .portal-filter-select {
-    @apply h-9 w-full cursor-pointer appearance-none rounded-md border bg-white pr-8 text-14 outline-none transition;
+    @apply h-9 w-full cursor-pointer appearance-none rounded-input border bg-background pr-8 text-14 outline-none transition;
     border-color: var(--gray-border-strong);
     color: var(--gray-text-2);
   }
@@ -571,7 +621,7 @@ html {
   }
 
   .portal-brand-btn {
-    @apply inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md px-4 text-14 font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:text-white disabled:opacity-100 disabled:pointer-events-none;
+    @apply inline-flex h-9 shrink-0 items-center gap-1.5 rounded-btn px-4 text-14 font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:text-white disabled:opacity-100 disabled:pointer-events-none;
     background: var(--brand);
   }
 
@@ -581,7 +631,7 @@ html {
 
   /* ── Dropdown ── */
   .portal-dropdown-menu {
-    @apply z-50 min-w-[140px] rounded-lg border border-solid bg-white p-1 shadow-lg outline-none;
+    @apply z-50 min-w-[140px] rounded-card border border-solid bg-popover p-1 shadow-lg outline-none;
     border-color: var(--gray-border-normal);
   }
 
@@ -604,7 +654,7 @@ html {
   }
 
   .portal-dropdown-item--cancel[data-highlighted] {
-    background: var(--accent-orange-bg-alt);
+    background: var(--accent-orange-bg);
     color: var(--accent-orange);
   }
 
@@ -633,7 +683,7 @@ html {
   }
 
   .portal-pagination-size-select {
-    @apply h-8 cursor-pointer appearance-none rounded border bg-white pl-2 pr-7 text-14 outline-none;
+    @apply h-8 cursor-pointer appearance-none rounded border bg-background pl-2 pr-7 text-14 outline-none;
     border-color: var(--gray-border-strong);
   }
 
@@ -642,7 +692,7 @@ html {
   }
 
   .portal-pagination-nav-btn {
-    @apply flex size-8 items-center justify-center rounded border bg-white transition disabled:cursor-not-allowed disabled:opacity-40;
+    @apply flex size-8 items-center justify-center rounded border bg-background transition disabled:cursor-not-allowed disabled:opacity-40;
     border-color: var(--gray-border-normal);
     color: var(--gray-text-4);
   }
@@ -652,7 +702,7 @@ html {
   }
 
   .portal-pagination-page {
-    @apply flex size-8 items-center justify-center rounded border bg-white text-14 font-medium transition;
+    @apply flex size-8 items-center justify-center rounded border bg-background text-14 font-medium transition;
     border-color: var(--gray-border-normal);
     color: var(--gray-text-4);
   }
@@ -669,7 +719,7 @@ html {
 
   /* ── 侧栏导航 ── */
   .portal-nav-row {
-    @apply flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left tracking-[-0.15px] text-white transition-colors;
+    @apply flex w-full items-center gap-3 rounded-nav px-3 py-2.5 text-left tracking-[-0.15px] text-white transition-colors;
   }
 
   .portal-nav-row--primary {
@@ -711,7 +761,7 @@ html {
   }
 
   .portal-sidebar-brand {
-    @apply min-w-0 truncate rounded-md text-15 font-semibold text-white outline-offset-2 transition-colors;
+    @apply min-w-0 truncate rounded-nav text-15 font-semibold text-white outline-offset-2 transition-colors;
     letter-spacing: -0.02em;
   }
 
@@ -734,12 +784,12 @@ html {
 
   /* ── 顶栏 ── */
   .portal-topnav {
-    @apply flex h-14 shrink-0 items-center justify-between border-b bg-white px-5;
+    @apply flex h-14 shrink-0 items-center justify-between border-b bg-background px-5;
     border-bottom-color: var(--gray-border-normal);
   }
 
   .portal-topnav-icon-btn {
-    @apply flex size-9 items-center justify-center rounded-md transition-colors hover:bg-gray-fill-normal;
+    @apply flex size-9 items-center justify-center rounded-nav transition-colors hover:bg-gray-fill-normal;
     color: var(--gray-text-4);
   }
 
@@ -751,12 +801,12 @@ html {
   }
 
   .portal-topnav-user-name {
-    @apply text-xs font-medium;
+    @apply text-12 font-medium;
     color: var(--gray-text-2);
   }
 
   .portal-topnav-user-role {
-    @apply text-xs;
+    @apply text-12;
     color: var(--gray-text-7);
   }
 
@@ -767,7 +817,7 @@ html {
 
   /* ── 文本链接 ── */
   .portal-document-link {
-    @apply min-w-0 truncate border-0 bg-transparent p-0 text-left text-13 font-medium text-gray-text-2 no-underline transition-colors;
+    @apply min-w-0 truncate border-0 bg-transparent p-0 text-left text-13-reading font-medium text-gray-text-2 no-underline transition-colors;
     cursor: pointer;
   }
 
@@ -779,7 +829,7 @@ html {
   }
 
   .portal-document-action-link {
-    @apply border-0 bg-transparent p-0 text-[13px] font-medium text-gray-text-2 no-underline transition-colors;
+    @apply border-0 bg-transparent p-0 text-13-reading font-medium text-gray-text-2 no-underline transition-colors;
     cursor: pointer;
   }
 

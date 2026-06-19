@@ -6,14 +6,14 @@
  *（Badge / Button / Card 等，见 SSDrayage / HomePage）与门户视觉一致。
  *
  * Slate 12 阶 ← SS Portal 中性灰阶
- * Green 12 阶 ← --brand 族 + semantic-success
+ * Green 12 阶 ← --brand 族（success 语义 alias 同系）
  * Amber / Red ← semantic-warning / semantic-error（Badge soft 变体）
  */
 
 .radix-themes {
   /* ── Green · StraightShip 品牌绿 ── */
   --green-1: var(--brand-xlight);
-  --green-2: var(--semantic-success-bg);
+  --green-2: var(--brand-light);
   --green-3: var(--brand-light);
   --green-4: var(--semantic-success-light);
   --green-5: color-mix(in srgb, var(--brand-light) 55%, var(--brand));
@@ -38,17 +38,17 @@
   --green-a11: color-mix(in srgb, var(--brand-dark) 90%, transparent);
   --green-a12: color-mix(in srgb, var(--semantic-success-text) 92%, transparent);
 
-  /* ── Slate · SS Portal 中性灰阶（Radix grayColor="slate" → --gray-* 别名） ── */
+  /* ── Slate · SS Portal 中性灰阶（Radix 1→12 单调加深） ── */
   --slate-1: var(--background);
   --slate-2: var(--gray-fill-light);
   --slate-3: var(--page-bg);
   --slate-4: var(--gray-fill-normal);
-  --slate-5: var(--gray-border-exlight);
-  --slate-6: var(--gray-border-light);
-  --slate-7: var(--gray-border-normal);
-  --slate-8: var(--gray-text-5);
-  --slate-9: var(--gray-text-4);
-  --slate-10: var(--gray-text-3);
+  --slate-5: var(--gray-border-light);
+  --slate-6: var(--gray-border-normal);
+  --slate-7: var(--gray-border-strong);
+  --slate-8: var(--gray-text-7);
+  --slate-9: var(--gray-text-5);
+  --slate-10: var(--gray-text-4);
   --slate-11: var(--gray-text-2);
   --slate-12: var(--gray-text-1);
 

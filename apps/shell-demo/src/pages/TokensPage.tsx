@@ -1,5 +1,6 @@
 import {
   BRAND_TOKENS,
+  FOCUS_TOKENS,
   GRAY_BORDER_TOKENS,
   GRAY_FILL_TOKENS,
   GRAY_TEXT_TOKENS,
@@ -18,6 +19,10 @@ export function TokensPage() {
       >
         <StyleGuideSection title="品牌色 Brand">
           <TokenGrid tokens={BRAND_TOKENS} />
+        </StyleGuideSection>
+
+        <StyleGuideSection title="Focus Ring">
+          <TokenGrid tokens={FOCUS_TOKENS} />
         </StyleGuideSection>
 
         <StyleGuideSection title="文字灰阶 Gray Text">

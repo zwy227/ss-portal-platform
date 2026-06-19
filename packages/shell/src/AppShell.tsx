@@ -21,7 +21,7 @@ export function AppShell({ children, className, sidebar, topNav }: AppShellProps
 
   return (
     <div
-      className={["flex h-screen w-full overflow-hidden bg-page-bg-shell", className].filter(Boolean).join(" ")}
+      className={["flex h-screen w-full overflow-hidden bg-page-bg", className].filter(Boolean).join(" ")}
       style={{
         ["--portal-sidebar-width" as string]: `${sidebarWidthPx}px`,
       }}

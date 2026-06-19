@@ -24,6 +24,15 @@ function swatchStyle(token: TokenSwatch): CSSProperties {
       background: "var(--background)",
     };
   }
+  if (token.name.startsWith("focus-ring")) {
+    return {
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: token.name.includes("brand") ? "var(--brand)" : "var(--gray-border-black)",
+      background: "var(--background)",
+      boxShadow: `var(${token.cssVar})`,
+    };
+  }
   return { background: `var(${token.cssVar})` };
 }
 
