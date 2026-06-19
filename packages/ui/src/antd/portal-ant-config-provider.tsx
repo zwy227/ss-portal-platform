@@ -1,4 +1,3 @@
-import CheckOutlined from "@ant-design/icons/CheckOutlined";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import type { ReactNode } from "react";
@@ -15,11 +14,7 @@ export function PortalAntConfigProvider({
   variant = "filter",
 }: PortalAntConfigProviderProps) {
   return (
-    <ConfigProvider
-      locale={zhCN}
-      theme={resolvePortalAntdTheme(variant)}
-      select={{ menuItemSelectedIcon: <CheckOutlined /> }}
-    >
+    <ConfigProvider locale={zhCN} theme={resolvePortalAntdTheme(variant)}>
       {children}
     </ConfigProvider>
   );
