@@ -30,7 +30,7 @@ export const FOCUS_TOKENS: TokenSwatch[] = [
     name: "focus-ring-brand",
     cssVar: "--focus-ring-brand",
     tailwind: "shadow-focus-brand",
-    usage: "筛选 input :focus 外圈 · portal-filter-input",
+    usage: "可交互控件 focus-visible：Button、Dialog 关闭、顶栏 Logo",
   },
 ];
 
@@ -67,7 +67,7 @@ export const PAGE_BG_TOKENS: TokenSwatch[] = [
   { name: "page-bg", cssVar: "--page-bg", tailwind: "bg-page-bg", usage: "主内容背景" },
 ];
 
-/** Badge 四档：灰 · 成功 · 告警 · 蓝（画廊统一用 portal-badge 预览） */
+/** Badge 四档：灰 · 成功 · 待办(warning) · 普通(info) */
 export const BADGE_TOKENS: TokenSwatch[] = [
   {
     name: "portal-badge--neutral",
@@ -91,19 +91,19 @@ export const BADGE_TOKENS: TokenSwatch[] = [
     name: "portal-badge--warning",
     cssVar: "--semantic-warning-text",
     tailwind: "portal-badge portal-badge--warning",
-    badgeLabel: "人工报价中",
+    badgeLabel: "待下单",
     preview: "badge",
     badgeVariant: "warning",
-    usage: "底 semantic-warning-bg · 字 semantic-warning-text",
+    usage: "存在用户待办时用（如需下单）；底 semantic-warning-bg · 字 semantic-warning-text",
   },
   {
     name: "portal-badge--info",
     cssVar: "--semantic-info-text",
     tailwind: "portal-badge portal-badge--info",
-    badgeLabel: "待下单",
+    badgeLabel: "人工报价中",
     preview: "badge",
     badgeVariant: "info",
-    usage: "底 semantic-info-bg · 字 semantic-info-text",
+    usage: "普通进行中、无待办时用；底 semantic-info-bg · 字 semantic-info-text",
   },
 ];
 
@@ -113,7 +113,7 @@ export const ACCENT_TOKENS: TokenSwatch[] = [
     name: "semantic-warning-text",
     cssVar: "--semantic-warning-text",
     tailwind: "text-semantic-warning-text",
-    usage: "告警橙文字 · Badge / 取消菜单（accent-orange 为兼容别名）",
+    usage: "待办橙文字 · portal-badge--warning / 取消菜单（accent-orange 为兼容别名）",
   },
   { name: "portal-text-link", cssVar: "--portal-text-link", tailwind: "text-portal-text-link", usage: "文档链接 hover（→ semantic-info-text）" },
 ];

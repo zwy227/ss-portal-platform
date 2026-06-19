@@ -44,7 +44,7 @@ export function TokensPage() {
 
         <StyleGuideSection title="Badge 语义色">
           <p className="mb-3 text-13 text-gray-text-5">
-            四档：灰 · 成功 · 告警 · 蓝。色卡统一展示 <code className="text-13">portal-badge</code>{" "}
+            四档：灰 · 成功 · 待办(橙) · 普通(蓝)。色卡统一展示 <code className="text-13">portal-badge</code>{" "}
             成品；组件详情见 <code className="text-13">/components</code>。
           </p>
           <TokenGrid tokens={BADGE_TOKENS} />

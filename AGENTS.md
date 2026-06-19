@@ -10,7 +10,7 @@
 - `/typography` — 字号阶梯
 - `/components` — `portal-*` 组合类
 
-定稿 token 后再写 `docs/design-system.md`。
+定稿 token 后维护 `docs/design-system.md`（与 `theme.css`、shell-demo 画廊同步）。
 2. [`docs/frameworks/app-shell.md`](frameworks/app-shell.md)
 3. [`docs/frameworks/list-page.md`](frameworks/list-page.md)
 4. [`docs/frameworks/detail-page.md`](frameworks/detail-page.md)

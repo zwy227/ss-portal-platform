@@ -142,7 +142,7 @@
   --sidebar-nav-active: rgba(255, 255, 255, 0.22);
   --sidebar-nav-sub-active: rgba(255, 255, 255, 0.16);
 
-  /* Focus ring — brand：列表筛选（input 自身 focus）；normal：表单字段壳（focus-within） */
+  /* Focus ring — normal：字段壳 focus-within、筛选 input/select :focus；brand：Button / 顶栏 Logo 等 focus-visible */
   --focus-border-normal: var(--gray-border-black);
   --focus-ring-normal: 0 0 0 4px var(--gray-fill-normal);
   --focus-ring-brand: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);

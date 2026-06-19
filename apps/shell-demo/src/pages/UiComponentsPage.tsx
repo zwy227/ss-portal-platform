@@ -155,6 +155,9 @@ export function UiComponentsPage() {
         </StyleGuideSection>
 
         <StyleGuideSection title="Table 原语">
+          <p className="mb-3 text-13 text-gray-text-5">
+            「订单状态 / 待办」列对齐 SSLTLDemo 订单管理列表：有待办 → warning Badge + 橙色待办链接；无待办 → info Badge。
+          </p>
           <UiTableExamples />
         </StyleGuideSection>
 

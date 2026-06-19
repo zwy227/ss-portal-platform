@@ -18,64 +18,67 @@ import {
   portalTableStickyActionThClass,
   useStickyActionColumn,
 } from "@ss/portal-ui";
+import { OrderListStatusTodoCell, type OrderListStatusBadgeTone } from "./OrderListStatusTodoCell";
 
 type DemoOrderRow = {
   id: string;
   orderNo: string;
   subLabel: string;
-  status: string;
-  statusTone: "neutral" | "info";
+  statusLabel: string;
+  badgeTone?: OrderListStatusBadgeTone;
+  todoText?: string | null;
   routePickup: string;
   routeDelivery: string;
   orderTime: string;
 };
 
+/** 对齐 SSLTLDemo 订单管理列表 — 各 Badge 档位 + 待办列 */
 const DEMO_ROWS: DemoOrderRow[] = [
   {
     id: "1",
-    orderNo: "ORD-2025009-001",
-    subLabel: "加拿大港口拖柜",
-    status: "待提交订单",
-    statusTone: "info",
-    routePickup: "Port of Montreal - Termont Termin…",
-    routeDelivery: "Ottawa",
-    orderTime: "2026.05.27 15:44",
+    orderNo: "ORD-20260901-016",
+    subLabel: "美国港口拖柜",
+    statusLabel: "平台确认中",
+    badgeTone: "info",
+    todoText: "待上传DO文件",
+    routePickup: "Port of Los Angeles - APM Terminals",
+    routeDelivery: "Los Angeles, CA",
+    orderTime: "2026.09.01 10:22",
   },
   {
     id: "2",
-    orderNo: "ORD-2025008-014",
-    subLabel: "加拿大港口拖柜",
-    status: "已报价",
-    statusTone: "neutral",
-    routePickup: "Port of Vancouver - DP World",
-    routeDelivery: "Calgary",
-    orderTime: "2026.05.26 09:12",
+    orderNo: "ORD-20260901-015",
+    subLabel: "美国港口拖柜",
+    statusLabel: "平台确认中",
+    badgeTone: "info",
+    todoText: null,
+    routePickup: "Port of Long Beach - LBCT",
+    routeDelivery: "Ontario, CA",
+    orderTime: "2026.09.01 09:05",
   },
   {
     id: "3",
-    orderNo: "ORD-2025007-003",
-    subLabel: "加拿大港口拖柜",
-    status: "已失效",
-    statusTone: "neutral",
-    routePickup: "",
-    routeDelivery: "",
-    orderTime: "2026.05.20 18:30",
+    orderNo: "ORD-20260828-004",
+    subLabel: "美国港口拖柜",
+    statusLabel: "已取消",
+    badgeTone: "neutral",
+    todoText: null,
+    routePickup: "Port of Oakland - SSA Marine",
+    routeDelivery: "Sacramento, CA",
+    orderTime: "2026.08.28 16:40",
+  },
+  {
+    id: "4",
+    orderNo: "ORD-20260820-011",
+    subLabel: "美国港口拖柜",
+    statusLabel: "已完成",
+    badgeTone: "success",
+    todoText: null,
+    routePickup: "Port of Seattle - Terminal 18",
+    routeDelivery: "Tacoma, WA",
+    orderTime: "2026.08.20 14:18",
   },
 ];
-
-function StatusBadge({ label, tone }: { label: string; tone: "neutral" | "info" }) {
-  return (
-    <span
-      className={
-        tone === "info"
-          ? "portal-badge portal-badge--info"
-          : "portal-badge portal-badge--neutral"
-      }
-    >
-      {label}
-    </span>
-  );
-}
 
 export function UiTableExamples() {
   const { scrollRef, hasHorizontalOverflow } = useStickyActionColumn([DEMO_ROWS.length]);
@@ -115,26 +118,26 @@ export function UiTableExamples() {
                 </div>
               </PortalTableCell>
               <PortalTableCell>
-                <StatusBadge label={row.status} tone={row.statusTone} />
+                <OrderListStatusTodoCell
+                  statusLabel={row.statusLabel}
+                  badgeTone={row.badgeTone}
+                  todoText={row.todoText}
+                />
               </PortalTableCell>
               <PortalTableCell>
                 <PortalTableEmptyCell />
               </PortalTableCell>
               <PortalTableCell className={portalTableListCellTextClass}>
-                {row.routePickup ? (
-                  <div className="flex min-w-0 flex-col gap-0.5">
-                    <p className="flex min-w-0 items-center gap-1 text-12 leading-4">
-                      <span className="w-4 shrink-0 text-gray-text-7">提</span>
-                      <span className="min-w-0 truncate text-gray-text-2">{row.routePickup}</span>
-                    </p>
-                    <p className="flex min-w-0 items-center gap-1 text-12 leading-4">
-                      <span className="w-4 shrink-0 text-gray-text-7">派</span>
-                      <span className="min-w-0 truncate text-gray-text-2">{row.routeDelivery}</span>
-                    </p>
-                  </div>
-                ) : (
-                  <PortalTableEmptyCell />
-                )}
+                <div className="flex min-w-0 flex-col gap-0.5">
+                  <p className="flex min-w-0 items-center gap-1 text-12 leading-4">
+                    <span className="w-4 shrink-0 text-gray-text-7">提</span>
+                    <span className="min-w-0 truncate text-gray-text-2">{row.routePickup}</span>
+                  </p>
+                  <p className="flex min-w-0 items-center gap-1 text-12 leading-4">
+                    <span className="w-4 shrink-0 text-gray-text-7">派</span>
+                    <span className="min-w-0 truncate text-gray-text-2">{row.routeDelivery}</span>
+                  </p>
+                </div>
               </PortalTableCell>
               <PortalTableCell className={portalTableListCellTextClass}>{row.orderTime}</PortalTableCell>
               <PortalTableCell className={stickyTdClass} withDivider={false}>

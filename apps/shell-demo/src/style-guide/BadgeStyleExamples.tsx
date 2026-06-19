@@ -23,14 +23,14 @@ const BADGE_VARIANTS: {
   },
   {
     variant: "warning",
-    label: "告警",
+    label: "待办",
     className: "portal-badge portal-badge--warning",
     bgToken: "semantic-warning-bg",
     textToken: "semantic-warning-text",
   },
   {
     variant: "info",
-    label: "蓝色",
+    label: "普通",
     className: "portal-badge portal-badge--info",
     bgToken: "semantic-info-bg",
     textToken: "semantic-info-text",
@@ -39,8 +39,8 @@ const BADGE_VARIANTS: {
 
 /** 拖柜报价单列表常见状态 — 对齐 SSLTLDemo DrayageQuoteOrderStatusBadge */
 const STATUS_BADGE_EXAMPLES: { label: string; variant: BadgeVariant }[] = [
-  { label: "人工报价中", variant: "warning" },
-  { label: "待下单", variant: "info" },
+  { label: "人工报价中", variant: "info" },
+  { label: "待下单", variant: "warning" },
   { label: "已下单", variant: "success" },
   { label: "已取消", variant: "neutral" },
   { label: "已失效", variant: "neutral" },
@@ -88,7 +88,9 @@ export function BadgeStyleExamples() {
       </div>
 
       <div>
-        <p className="mb-3 text-13 text-gray-text-5">业务状态示例（报价单列表，无图标）</p>
+        <p className="mb-3 text-13 text-gray-text-5">
+          业务状态示例（报价单列表）：有待办 → warning（橙）；普通进行中 → info（蓝）
+        </p>
         <div className="portal-list-card max-w-xs divide-y divide-gray-border-light p-0">
           {STATUS_BADGE_EXAMPLES.map((item) => (
             <div key={item.label} className="flex items-center px-4 py-3">

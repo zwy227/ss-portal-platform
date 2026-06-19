@@ -5,7 +5,7 @@ alwaysApply: true
 
 # SS Portal 设计 Token 门禁
 
-权威来源：[`packages/tokens/theme.css`](../../packages/tokens/theme.css)、[`docs/design-system.md`](../../docs/design-system.md)（整理中）。
+权威来源：[`packages/tokens/theme.css`](../../packages/tokens/theme.css)、[`docs/design-system.md`](../../docs/design-system.md)。
 
 ## 禁止擅自新增（须先征得用户确认）
 
