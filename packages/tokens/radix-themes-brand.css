@@ -1,0 +1,158 @@
+/**
+ * Radix Themes 品牌对齐（`App.tsx`: accentColor="green", grayColor="slate"）
+ *
+ * 所有色值引用 theme.css 已有 token，不新增独立 hex 表。
+ * SS Portal UI 仍优先 `portal-*` + `--gray-*`；本文件供 Radix Themes 成品组件
+ *（Badge / Button / Card 等，见 SSDrayage / HomePage）与门户视觉一致。
+ *
+ * Slate 12 阶 ← SS Portal 中性灰阶
+ * Green 12 阶 ← --brand 族 + semantic-success
+ * Amber / Red ← semantic-warning / semantic-error（Badge soft 变体）
+ */
+
+.radix-themes {
+  /* ── Green · StraightShip 品牌绿 ── */
+  --green-1: var(--brand-xlight);
+  --green-2: var(--semantic-success-bg);
+  --green-3: var(--brand-light);
+  --green-4: var(--semantic-success-light);
+  --green-5: color-mix(in srgb, var(--brand-light) 55%, var(--brand));
+  --green-6: color-mix(in srgb, var(--brand-light) 30%, var(--brand));
+  --green-7: color-mix(in srgb, var(--brand-light) 10%, var(--brand));
+  --green-8: color-mix(in srgb, var(--brand) 70%, var(--brand-dark));
+  --green-9: var(--brand);
+  --green-10: var(--brand-dark);
+  --green-11: var(--brand-dark);
+  --green-12: var(--semantic-success-text);
+
+  --green-a1: color-mix(in srgb, var(--brand) 4%, transparent);
+  --green-a2: color-mix(in srgb, var(--brand) 8%, transparent);
+  --green-a3: color-mix(in srgb, var(--brand) 14%, transparent);
+  --green-a4: color-mix(in srgb, var(--brand) 20%, transparent);
+  --green-a5: color-mix(in srgb, var(--brand) 28%, transparent);
+  --green-a6: color-mix(in srgb, var(--brand) 36%, transparent);
+  --green-a7: color-mix(in srgb, var(--brand) 48%, transparent);
+  --green-a8: color-mix(in srgb, var(--brand) 62%, transparent);
+  --green-a9: color-mix(in srgb, var(--brand) 78%, transparent);
+  --green-a10: color-mix(in srgb, var(--brand-dark) 84%, transparent);
+  --green-a11: color-mix(in srgb, var(--brand-dark) 90%, transparent);
+  --green-a12: color-mix(in srgb, var(--semantic-success-text) 92%, transparent);
+
+  /* ── Slate · SS Portal 中性灰阶（Radix grayColor="slate" → --gray-* 别名） ── */
+  --slate-1: var(--background);
+  --slate-2: var(--gray-fill-light);
+  --slate-3: var(--page-bg);
+  --slate-4: var(--gray-fill-normal);
+  --slate-5: var(--gray-border-exlight);
+  --slate-6: var(--gray-border-light);
+  --slate-7: var(--gray-border-normal);
+  --slate-8: var(--gray-text-5);
+  --slate-9: var(--gray-text-4);
+  --slate-10: var(--gray-text-3);
+  --slate-11: var(--gray-text-2);
+  --slate-12: var(--gray-text-1);
+
+  --slate-a1: color-mix(in srgb, var(--gray-text-2) 3%, transparent);
+  --slate-a2: color-mix(in srgb, var(--gray-text-2) 6%, transparent);
+  --slate-a3: color-mix(in srgb, var(--gray-text-2) 9%, transparent);
+  --slate-a4: color-mix(in srgb, var(--gray-text-2) 12%, transparent);
+  --slate-a5: color-mix(in srgb, var(--gray-text-2) 16%, transparent);
+  --slate-a6: color-mix(in srgb, var(--gray-text-2) 22%, transparent);
+  --slate-a7: color-mix(in srgb, var(--gray-text-2) 30%, transparent);
+  --slate-a8: color-mix(in srgb, var(--gray-text-2) 40%, transparent);
+  --slate-a9: color-mix(in srgb, var(--gray-text-2) 52%, transparent);
+  --slate-a10: color-mix(in srgb, var(--gray-text-2) 60%, transparent);
+  --slate-a11: color-mix(in srgb, var(--gray-text-2) 74%, transparent);
+  --slate-a12: color-mix(in srgb, var(--gray-text-2) 88%, transparent);
+
+  /* ── Amber · semantic-warning（Badge color="amber"） ── */
+  --amber-1: var(--semantic-warning-bg);
+  --amber-2: var(--semantic-warning-bg);
+  --amber-3: var(--semantic-warning-light);
+  --amber-4: color-mix(in srgb, var(--semantic-warning-light) 70%, var(--semantic-warning-default));
+  --amber-5: color-mix(in srgb, var(--semantic-warning-light) 40%, var(--semantic-warning-default));
+  --amber-6: color-mix(in srgb, var(--semantic-warning-light) 15%, var(--semantic-warning-default));
+  --amber-7: color-mix(in srgb, var(--semantic-warning-default) 80%, var(--semantic-warning-text));
+  --amber-8: color-mix(in srgb, var(--semantic-warning-default) 55%, var(--semantic-warning-text));
+  --amber-9: var(--semantic-warning-default);
+  --amber-10: var(--semantic-warning-text);
+  --amber-11: var(--semantic-warning-text);
+  --amber-12: var(--semantic-warning-text);
+
+  --amber-a1: color-mix(in srgb, var(--semantic-warning-default) 4%, transparent);
+  --amber-a2: color-mix(in srgb, var(--semantic-warning-default) 8%, transparent);
+  --amber-a3: color-mix(in srgb, var(--semantic-warning-default) 14%, transparent);
+  --amber-a4: color-mix(in srgb, var(--semantic-warning-default) 20%, transparent);
+  --amber-a5: color-mix(in srgb, var(--semantic-warning-default) 28%, transparent);
+  --amber-a6: color-mix(in srgb, var(--semantic-warning-default) 36%, transparent);
+  --amber-a7: color-mix(in srgb, var(--semantic-warning-default) 48%, transparent);
+  --amber-a8: color-mix(in srgb, var(--semantic-warning-default) 62%, transparent);
+  --amber-a9: color-mix(in srgb, var(--semantic-warning-default) 78%, transparent);
+  --amber-a10: color-mix(in srgb, var(--semantic-warning-text) 84%, transparent);
+  --amber-a11: color-mix(in srgb, var(--semantic-warning-text) 90%, transparent);
+  --amber-a12: color-mix(in srgb, var(--semantic-warning-text) 92%, transparent);
+
+  /* ── Red · semantic-error（Badge color="red"） ── */
+  --red-1: var(--semantic-error-bg);
+  --red-2: var(--semantic-error-bg);
+  --red-3: var(--semantic-error-light);
+  --red-4: color-mix(in srgb, var(--semantic-error-light) 70%, var(--semantic-error-default));
+  --red-5: color-mix(in srgb, var(--semantic-error-light) 40%, var(--semantic-error-default));
+  --red-6: color-mix(in srgb, var(--semantic-error-light) 15%, var(--semantic-error-default));
+  --red-7: color-mix(in srgb, var(--semantic-error-default) 80%, var(--semantic-error-text));
+  --red-8: color-mix(in srgb, var(--semantic-error-default) 55%, var(--semantic-error-text));
+  --red-9: var(--semantic-error-default);
+  --red-10: var(--semantic-error-text);
+  --red-11: var(--semantic-error-text);
+  --red-12: var(--semantic-error-text);
+
+  --red-a1: color-mix(in srgb, var(--semantic-error-default) 4%, transparent);
+  --red-a2: color-mix(in srgb, var(--semantic-error-default) 8%, transparent);
+  --red-a3: color-mix(in srgb, var(--semantic-error-default) 14%, transparent);
+  --red-a4: color-mix(in srgb, var(--semantic-error-default) 20%, transparent);
+  --red-a5: color-mix(in srgb, var(--semantic-error-default) 28%, transparent);
+  --red-a6: color-mix(in srgb, var(--semantic-error-default) 36%, transparent);
+  --red-a7: color-mix(in srgb, var(--semantic-error-default) 48%, transparent);
+  --red-a8: color-mix(in srgb, var(--semantic-error-default) 62%, transparent);
+  --red-a9: color-mix(in srgb, var(--semantic-error-default) 78%, transparent);
+  --red-a10: color-mix(in srgb, var(--semantic-error-text) 84%, transparent);
+  --red-a11: color-mix(in srgb, var(--semantic-error-text) 90%, transparent);
+  --red-a12: color-mix(in srgb, var(--semantic-error-text) 92%, transparent);
+}
+
+.dark .radix-themes,
+.radix-themes.dark {
+  /* 客户门户以亮色为主；暗色下仍锚定 brand，灰阶沿用 shadcn dark 预留值 */
+  --green-9: var(--brand);
+  --green-10: var(--brand-dark);
+  --green-11: var(--brand-light);
+  --green-12: var(--brand-xlight);
+  --green-a9: var(--brand);
+  --green-a10: var(--brand-dark);
+
+  --slate-1: var(--background);
+  --slate-2: var(--card);
+  --slate-3: var(--muted);
+  --slate-4: var(--accent);
+  --slate-5: var(--secondary);
+  --slate-6: var(--border);
+  --slate-7: var(--border);
+  --slate-8: var(--muted-foreground);
+  --slate-9: var(--muted-foreground);
+  --slate-10: var(--muted-foreground);
+  --slate-11: var(--foreground);
+  --slate-12: var(--foreground);
+
+  --slate-a1: color-mix(in srgb, var(--foreground) 5%, transparent);
+  --slate-a2: color-mix(in srgb, var(--foreground) 8%, transparent);
+  --slate-a3: color-mix(in srgb, var(--foreground) 12%, transparent);
+  --slate-a4: color-mix(in srgb, var(--foreground) 16%, transparent);
+  --slate-a5: color-mix(in srgb, var(--foreground) 22%, transparent);
+  --slate-a6: color-mix(in srgb, var(--foreground) 28%, transparent);
+  --slate-a7: color-mix(in srgb, var(--foreground) 36%, transparent);
+  --slate-a8: color-mix(in srgb, var(--foreground) 46%, transparent);
+  --slate-a9: color-mix(in srgb, var(--foreground) 55%, transparent);
+  --slate-a10: color-mix(in srgb, var(--foreground) 65%, transparent);
+  --slate-a11: color-mix(in srgb, var(--foreground) 78%, transparent);
+  --slate-a12: color-mix(in srgb, var(--foreground) 92%, transparent);
+}

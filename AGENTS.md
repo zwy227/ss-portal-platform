@@ -1,0 +1,22 @@
+# SS Portal Platform — Agent 指南
+
+## 读文档顺序
+
+1. [`docs/design-system.md`](design-system.md)（待从 SSLTLDemo style-guide 整理）
+2. [`docs/frameworks/app-shell.md`](frameworks/app-shell.md)
+3. [`docs/frameworks/list-page.md`](frameworks/list-page.md)
+4. [`docs/frameworks/detail-page.md`](frameworks/detail-page.md)
+5. [`docs/migration-checklist.md`](migration-checklist.md)
+
+## 改 UI 约束
+
+- 只用 `portal-*` 组合类与 `gray-text-*` / `text-11`…`text-32` token
+- 禁止新增 hex、`text-sm`、`text-slate-*`（见 `.cursor/rules/ss-portal-design-tokens.mdc`）
+- 壳层在 `@ss/portal-shell`；业务 Nav 配置由各 App 注入
+
+## 包职责
+
+| 包 | 职责 |
+|----|------|
+| `@ss/portal-tokens` | CSS 变量 + `portal-*` 类 |
+| `@ss/portal-shell` | AppShell、侧栏、顶栏、详情返回链接 |

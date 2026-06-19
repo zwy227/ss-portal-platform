@@ -1,0 +1,15 @@
+{
+  "name": "@ss/portal-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.css",
+    "./globals.css": "./globals.css",
+    "./tailwind.preset": "./tailwind.preset.js"
+  },
+  "files": [
+    "*.css",
+    "tailwind.preset.js"
+  ]
+}

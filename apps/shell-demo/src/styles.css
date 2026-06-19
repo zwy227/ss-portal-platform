@@ -1,0 +1,5 @@
+@import "tailwindcss" source(none);
+@config "../tailwind.config.js";
+@source "./**/*.{js,ts,jsx,tsx}";
+@source "../../../packages/shell/src/**/*.{js,ts,jsx,tsx}";
+@import "@ss/portal-tokens/globals.css";

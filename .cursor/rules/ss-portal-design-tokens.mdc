@@ -1,0 +1,66 @@
+---
+description: SS Portal 禁止新增 hex 与任意文字样式；出现前须与用户确认
+alwaysApply: true
+---
+
+# SS Portal 设计 Token 门禁
+
+权威来源：[`packages/tokens/theme.css`](../../packages/tokens/theme.css)、[`docs/design-system.md`](../../docs/design-system.md)（整理中）。
+
+## 禁止擅自新增（须先征得用户确认）
+
+在 `src/**` 的组件、样式常量、TSX className 中，**不得**新增或替换为下列写法，除非用户在本轮对话中明确同意：
+
+### 颜色
+
+- 任意 hex / rgb / rgba 字面量：`text-[#…]`、`bg-[#…]`、`border-[#…]`、`ring-[#…]`、`from-[#…]` 等
+- `style={{ color: '#…' }}` / `style={{ background: '#…' }}`
+- 外部色板：`text-slate-*`、`bg-slate-*`、`text-emerald-*`、`text-gray-500`（Tailwind 默认灰阶）等替代 `gray-text-*`
+
+### 文字字号
+
+- 任意像素字号：`text-[12px]`、`text-[13.5px]` 等
+- Tailwind 默认字号类：`text-xs`、`text-sm`、`text-base`、`text-lg`、`text-xl`、`text-2xl` 等（应使用 `text-11` … `text-32`）
+- 在 `theme.css` / `tailwind.config.js` 外新增字号 token
+
+## 应使用的写法
+
+**颜色**：`text-gray-text-1` … `text-gray-text-7`、`text-brand`、`text-accent-orange`、`text-semantic-*`、`bg-page-bg`、`border-gray-border-strong|normal|light|exlight` 等。
+
+**字号**：`text-11`、`text-12`、`text-13`、`text-14`、`text-15`、`text-16`、`text-18`、`text-22`、`text-32`。
+
+**字重**：`font-normal` / `font-medium` / `font-semibold`（对齐 `--font-weight-*`）。
+
+## 发现需要新 hex 或新样式时的流程
+
+1. **停止写入**，不要先实现再解释。
+2. **向用户确认**，说明：
+   - 用途与出现位置
+   - 拟用 hex / 像素值
+   - 是否可映射到已有 token；若不能，是否建议在 `theme.css` 新增 token
+3. **仅在用户明确回复同意后**再改代码；若用户要求新增 token，须同时更新 `theme.css` 与 `tailwind.config.js`。
+
+## 豁免（仍需优先 token）
+
+- 编辑 `src/styles/theme.css`、`src/styles/radix-themes-brand.css`、`tailwind.config.js` 以**定义** token 时可用 hex
+- 设计系统文档 / `SS Portal Design System/**` 下的对照 HTML
+- 用户在本轮已书面批准的 B3 遗留色（如 `#1A6BB5`、`#00B42A`、`#616161`）— **不得扩散到新文件**
+
+## 改码前自检
+
+```bash
+# 改动后应无新增违规（B3 遗留除外）
+rg 'text-\[#|text-\[[0-9]+px\]|text-slate-|text-emerald-|bg-\[#|border-\[#' src/app --glob '*.{tsx,ts}'
+```
+
+若 grep 命中且非用户已批准项，回退为 token 或询问用户。
+
+## 示例
+
+```tsx
+// ❌ 禁止（未经确认）
+<span className="text-[14px] text-[#4E5969]">标签</span>
+
+// ✅ 正确
+<span className="text-14 text-gray-text-4">标签</span>
+```
