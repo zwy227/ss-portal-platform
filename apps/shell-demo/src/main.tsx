@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Theme } from "@radix-ui/themes";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import { DemoListPage } from "./DemoListPage";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import { ComponentsPage } from "./pages/ComponentsPage";
 import { RadiusPage } from "./pages/RadiusPage";
 import { TokensPage } from "./pages/TokensPage";
@@ -11,13 +10,12 @@ import { UiComponentsPage } from "./pages/UiComponentsPage";
 import "./styles.css";
 
 const router = createBrowserRouter([
-  { path: "/", Component: DemoListPage },
+  { path: "/", element: <Navigate to="/tokens" replace /> },
   { path: "/tokens", Component: TokensPage },
   { path: "/radius", Component: RadiusPage },
   { path: "/typography", Component: TypographyPage },
   { path: "/components", Component: ComponentsPage },
   { path: "/ui", Component: UiComponentsPage },
-  { path: "/drayage/*", Component: DemoListPage },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

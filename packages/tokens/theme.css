@@ -134,6 +134,8 @@
   --gray-fill-strong: #e2e8f0;
   --gray-fill-normal: #f1f5f9;
   --gray-fill-light: #f8fafc;
+  /** 详情表单浅灰面板（路线卡、只读确认块等，半透明叠白底） */
+  --gray-fill-panel: color-mix(in srgb, var(--gray-fill-light) 45%, transparent);
   /* 页面画布（介于 gray-fill-light 与 gray-fill-normal 之间；勿与 fill 混用） */
   --page-bg: #f5f6fa;
 
@@ -247,6 +249,7 @@
   --gray-fill-strong: #334155;
   --gray-fill-normal: #1e293b;
   --gray-fill-light: #0f172a;
+  --gray-fill-panel: color-mix(in srgb, var(--gray-fill-normal) 45%, transparent);
   --page-bg: #0f172a;
 
   /* 品牌 / 语义浅底 — 暗色（混 --card，success/warning 等 alias 自动跟随） */
@@ -339,6 +342,7 @@
   --color-gray-fill-strong: var(--gray-fill-strong);
   --color-gray-fill-normal: var(--gray-fill-normal);
   --color-gray-fill-light: var(--gray-fill-light);
+  --color-gray-fill-panel: var(--gray-fill-panel);
   --color-page-bg: var(--page-bg);
   --color-accent-orange: var(--accent-orange);
   --color-accent-orange-bg: var(--accent-orange-bg);
@@ -868,5 +872,76 @@ html {
     text-decoration: underline;
     text-underline-offset: 2px;
     text-decoration-color: var(--portal-text-link);
+  }
+
+  /* ── 客户端详情表单 Section（完善需求 / 确认页） ── */
+  .portal-detail-card {
+    @apply rounded-card bg-card px-5 py-5 sm:px-6;
+    box-shadow: var(--elevation-sm);
+  }
+
+  .portal-detail-section-title-wrap {
+    @apply mb-3;
+  }
+
+  .portal-detail-section-title {
+    @apply min-w-0 text-16 font-semibold leading-snug tracking-[-0.01em] text-gray-text-1;
+  }
+
+  .portal-detail-section-body {
+    @apply flex flex-col space-y-6;
+  }
+
+  /** 同卡多 Section：非首个 Section 前分割线与留白 */
+  .portal-detail-section-stack > section:not(:first-child)::before {
+    @apply my-6 block h-px w-full content-[''];
+    background: var(--gray-border-light);
+  }
+
+  .portal-detail-panel-surface {
+    @apply rounded-card border border-solid border-gray-border-normal bg-gray-fill-panel px-5 py-4;
+    border-width: 0.5px;
+  }
+
+  .portal-detail-form-label {
+    @apply mb-1.5 block text-13 font-medium text-gray-text-4;
+  }
+
+  .portal-detail-form-legend {
+    @apply mb-2.5 block text-14 font-medium text-gray-text-4;
+  }
+
+  .portal-detail-form-hint {
+    @apply text-13 font-normal leading-relaxed text-gray-text-5;
+  }
+
+  .portal-detail-subsection-heading {
+    @apply flex items-center gap-2.5 text-16 font-semibold tracking-[-0.03em] text-gray-text-1;
+  }
+
+  .portal-detail-form-input {
+    @apply h-[42px] w-full rounded-lg border border-solid border-gray-border-strong bg-background px-3 text-14 text-gray-text-2 outline-none transition;
+  }
+
+  .portal-detail-form-input:hover {
+    border-color: var(--gray-border-emphasis);
+  }
+
+  .portal-detail-form-input:focus {
+    border-color: color-mix(in srgb, var(--brand) 50%, var(--gray-border-strong));
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+
+  .portal-detail-form-textarea {
+    @apply min-h-[88px] w-full resize-y rounded-lg border border-solid border-gray-border-strong bg-background px-3 py-2.5 text-14 leading-relaxed text-gray-text-2 outline-none transition;
+  }
+
+  .portal-detail-form-textarea:hover {
+    border-color: var(--gray-border-emphasis);
+  }
+
+  .portal-detail-form-textarea:focus {
+    border-color: color-mix(in srgb, var(--brand) 50%, var(--gray-border-strong));
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 12%, transparent);
   }
 }

@@ -28,6 +28,7 @@ export default {
         'gray-fill-strong': 'var(--gray-fill-strong)',
         'gray-fill-normal': 'var(--gray-fill-normal)',
         'gray-fill-light': 'var(--gray-fill-light)',
+        'gray-fill-panel': 'var(--gray-fill-panel)',
         'page-bg': 'var(--page-bg)',
         'accent-orange': 'var(--accent-orange)',
         'accent-orange-bg': 'var(--accent-orange-bg)',

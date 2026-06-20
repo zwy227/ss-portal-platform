@@ -18,6 +18,7 @@ import {
 } from "@ss/portal-ui";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
 import { UiAntFilterExamples } from "../style-guide/UiAntFilterExamples";
+import { UiDetailSectionExamples } from "../style-guide/UiDetailSectionExamples";
 import { UiSelectionCardExamples } from "../style-guide/UiSelectionCardExamples";
 import { UiTableExamples } from "../style-guide/UiTableExamples";
 import { UiFocusStyleExamples } from "../style-guide/FocusStyleExamples";
@@ -154,6 +155,14 @@ export function UiComponentsPage() {
           <UiSelectionCardExamples />
         </StyleGuideSection>
 
+        <StyleGuideSection title="详情表单 Section（客户端）">
+          <p className="mb-3 text-13 text-gray-text-5">
+            对齐 SSLTLDemo 询价详情「完善需求」页：白卡 + SectionTitle（16px）+ 表单项；同卡多 Section 用
+            PortalDetailSectionStack。
+          </p>
+          <UiDetailSectionExamples />
+        </StyleGuideSection>
+
         <StyleGuideSection title="Table 原语">
           <p className="mb-3 text-13 text-gray-text-5">
             「订单状态 / 待办」列对齐 SSLTLDemo 订单管理列表：有待办 → warning Badge + 橙色待办链接；无待办 → info Badge。
@@ -173,6 +182,7 @@ export function UiComponentsPage() {
   PortalAntSelect,
   PortalAntCascader,
   PortalCheckboxCard,
+  PortalDetailSection,
   PortalRadioCard,
   PortalTable,
 } from "@ss/portal-ui";`}</pre>

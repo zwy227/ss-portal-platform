@@ -124,6 +124,15 @@ export function ComponentsPage() {
             <p className="text-14 text-gray-text-4">白底 + shadow-sm + rounded-lg · 列表/筛选容器</p>
           </div>
         </StyleGuideSection>
+
+        <StyleGuideSection title="详情白卡 portal-detail-card">
+          <div className="portal-detail-card max-w-md">
+            <h3 className="portal-detail-section-title mb-3">路线信息</h3>
+            <div className="portal-detail-panel-surface">
+              <p className="text-13 text-gray-text-4">浅灰面板表面 · 路线卡 / 只读块</p>
+            </div>
+          </div>
+        </StyleGuideSection>
       </StyleGuidePage>
     </StyleGuideShell>
   );

@@ -7,7 +7,7 @@ export function StyleGuideShell({ children }: { children: ReactNode }) {
     <AppShell
       sidebar={{
         nav: DEMO_NAV,
-        homePath: "/",
+        homePath: "/tokens",
         brandTitle: "SS Design System",
         defaultOpenIds: STYLE_GUIDE_DEFAULT_OPEN,
         iconById: DEMO_ICONS,

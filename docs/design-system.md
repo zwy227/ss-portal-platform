@@ -67,6 +67,7 @@
 | `--gray-fill-strong` | `bg-gray-fill-strong` | icon hover |
 | `--gray-fill-normal` | `bg-gray-fill-normal` | pill、菜单高亮、focus 外圈底色 |
 | `--gray-fill-light` | `bg-gray-fill-light` | 行 hover |
+| `--gray-fill-panel` | `bg-gray-fill-panel` | 详情路线卡、只读确认块浅底 |
 
 ### 2.5 页面背景
 
@@ -224,6 +225,25 @@
 
 **Ant Design 筛选**（`packages/tokens/portal-ant-filter.css`）：`portal-ant-select--filter`、`portal-ant-select--form`、`portal-ant-cascader--filter` 及对应 dropdown 类；由 `@ss/portal-ui` 的 `PortalAntSelect` / `PortalAntCascader` 挂载。
 
+### 5.3.1 客户端详情表单 Section
+
+对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。完整示例见 shell-demo `/ui` →「详情表单 Section」。
+
+| Class / 组件 | 用途 |
+|--------------|------|
+| `portal-detail-card` / `PortalDetailCard` | 详情白卡（shadow + padding） |
+| `portal-detail-section-title` / `PortalDetailSectionTitle` | Section 主标题：`text-16 font-semibold`，无底部分割线 |
+| `portal-detail-section-body` | Section 内容区 `space-y-6` |
+| `portal-detail-section-stack` / `PortalDetailSectionStack` | 同卡多 Section 分割线 |
+| `PortalDetailSection` | `<section>` + Title + Body 组合 |
+| `portal-detail-panel-surface` / `PortalDetailPanelSurface` | 路线卡 / 只读块浅灰表面 |
+| `portal-detail-form-label` / `PortalDetailFormLabel` | 字段 label（13px · gray-text-4） |
+| `portal-detail-form-legend` | Fieldset legend（`PortalSelectionFieldset` 共用） |
+| `portal-detail-form-input` / `portal-detail-form-textarea` | 详情页可编辑输入框 |
+| `portal-detail-subsection-heading` / `PortalDetailSubsectionHeading` | 模块内带图标小标题 |
+
+表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§5.8）。
+
 ### 5.4 Badge
 
 四档 soft 标签。**info / warning 分工**：有待办 → `--warning`；普通态 → `--info`（见 §2.6）。
@@ -295,6 +315,7 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 | `Button` / `Input` / `Dialog` / `DropdownMenu` | Radix + shadcn 命名；focus-visible 用 `--focus-ring-brand` |
 | `PortalAntSelect` / `PortalAntCascader` | 挂载 `portal-ant-*` 类（见 §5.3） |
 | `PortalRadioCard` / `PortalCheckboxCard` / `PortalSelectionFieldset` | 单选/多选卡片 |
+| `PortalDetailSection` / `PortalDetailCard` / `PortalDetailSectionStack` 等 | 客户端详情表单 Section 壳层 |
 | `portalTable*` 样式常量 | 表格 th/td、sticky 操作列（`portal-table-styles.ts`） |
 
 ---
