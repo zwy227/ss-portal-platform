@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router";
 
 export const PORTAL_DETAIL_BACK_LINK_CLASS =
-  "flex size-8 shrink-0 items-center justify-center rounded-nav border border-gray-border-normal bg-background text-gray-text-4 transition hover:bg-gray-fill-normal";
+  "flex size-7 shrink-0 items-center justify-center rounded-nav border border-gray-border-normal bg-background text-gray-text-4 transition hover:bg-gray-fill-normal";
 
 const TOOLTIP_CONTENT_CLASS =
   "z-50 max-w-[240px] rounded-md border border-gray-border-normal bg-popover px-2.5 py-1.5 text-13-compact font-medium text-gray-text-2 shadow-md";
