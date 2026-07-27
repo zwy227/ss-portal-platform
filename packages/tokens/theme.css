@@ -161,7 +161,7 @@
   --semantic-info-text: #4096ff;
   /* 告警橙 — 权威值；accent-orange / accent-orange-bg 为兼容别名 */
   --semantic-warning-default: #fa8c16;
-  --semantic-warning-text: var(--semantic-warning-default);
+  --semantic-warning-text: #d46b08;
   --semantic-warning-bg: #fff7e6;
   --semantic-warning-light: #ffe7ba;
   --accent-orange: var(--semantic-warning-text);
@@ -731,24 +731,34 @@ html {
   }
 
   .portal-pagination-nav-btn {
-    @apply flex size-8 items-center justify-center rounded border bg-background transition disabled:cursor-not-allowed disabled:opacity-40;
-    border-color: var(--gray-border-normal);
+    @apply flex size-8 items-center justify-center rounded border border-transparent bg-transparent transition disabled:cursor-not-allowed disabled:opacity-40;
     color: var(--gray-text-4);
   }
 
   .portal-pagination-nav-btn:hover:not(:disabled) {
-    border-color: var(--brand);
+    background: var(--gray-fill-light);
+    color: var(--gray-text-2);
   }
 
   .portal-pagination-page {
-    @apply flex size-8 items-center justify-center rounded border bg-background text-14 font-medium transition;
-    border-color: var(--gray-border-normal);
+    @apply flex size-8 items-center justify-center rounded border border-transparent bg-transparent text-14 font-medium transition;
     color: var(--gray-text-4);
   }
 
+  .portal-pagination-page:hover:not(:disabled) {
+    background: var(--gray-fill-light);
+    color: var(--gray-text-2);
+  }
+
   .portal-pagination-page--active {
-    @apply border-0 text-white;
-    background: var(--brand);
+    @apply bg-background;
+    border-color: var(--gray-border-strong);
+    color: var(--gray-text-1);
+  }
+
+  .portal-pagination-page--active:hover:not(:disabled) {
+    background: var(--background);
+    color: var(--gray-text-1);
   }
 
   .portal-pagination-ellipsis {
