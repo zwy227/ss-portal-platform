@@ -80,7 +80,7 @@
   --radius-input: var(--radius-md);
   --radius-checkbox: var(--radius-xs);
   --radius-badge: var(--radius-xs);
-  --radius-nav: var(--radius-md);
+  --radius-nav: var(--radius);
   --radius-card: var(--radius-lg);
   --radius-button-xs: var(--radius-sm);
   --radius-button-sm: var(--radius);
@@ -107,7 +107,7 @@
   --sidebar-ring: var(--brand);
 
   /* Brand / product color — StraightShip green */
-  --brand: #69b464;
+  --brand: #73b16e;
   --brand-dark: #4e9449;
   --brand-disabled: #b2d9b0;
   --brand-light: #e8f5e7;
@@ -768,7 +768,7 @@ html {
 
   /* ── 侧栏导航 ── */
   .portal-nav-row {
-    @apply flex w-full items-center gap-3 rounded-nav px-3 py-2.5 text-left tracking-[-0.15px] text-white transition-colors;
+    @apply flex w-full items-center gap-3 rounded-nav px-3 py-2 text-left tracking-[-0.15px] text-white transition-colors;
   }
 
   .portal-nav-row--primary {
@@ -776,7 +776,8 @@ html {
   }
 
   .portal-nav-row--sub {
-    @apply text-14 font-medium text-white/94;
+    /* 行本身与一级菜单等宽，靠 pl-10 让文字保持二级缩进 */
+    @apply pl-10 text-13-reading font-medium text-white/94;
   }
 
   .portal-nav-row--sub.portal-nav-row--active {

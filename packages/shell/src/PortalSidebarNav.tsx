@@ -106,16 +106,15 @@ function PortalNavGroup({
       </button>
 
       {!collapsed && open ? (
-        <div className="flex flex-col gap-0.5 pl-2">
+        <div className="flex flex-col gap-0.5">
           {children.map((c) => (
-            <div key={c.id} className="pl-5">
-              <PortalNavLeafRow
-                label={c.label}
-                to={c.to}
-                collapsed={false}
-                isActive={activeChildId != null ? activeChildId === c.id : undefined}
-              />
-            </div>
+            <PortalNavLeafRow
+              key={c.id}
+              label={c.label}
+              to={c.to}
+              collapsed={false}
+              isActive={activeChildId != null ? activeChildId === c.id : undefined}
+            />
           ))}
         </div>
       ) : null}

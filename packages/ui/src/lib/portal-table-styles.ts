@@ -3,7 +3,8 @@ import { portalUiText13Compact } from "./portal-typography";
 export const STICKY_ACTION_TH_SHADOW = "shadow-[-8px_0_12px_-8px_rgba(0,0,0,0.08)]";
 export const STICKY_ACTION_TD_SHADOW = "shadow-[-8px_0_12px_-8px_rgba(0,0,0,0.06)]";
 
-const thBase = `py-3 text-left ${portalUiText13Compact} font-medium text-gray-text-4 border-b border-gray-border-normal`;
+/** 列表表头 — 12px / medium(500) */
+const thBase = `py-3 text-left text-12 font-medium text-gray-text-4 border-b border-gray-border-normal`;
 const tdRowDividerClass = "border-b border-gray-border-light";
 
 export const portalTableThFirstClass = `${thBase} pl-1 pr-4`;
