@@ -2,7 +2,7 @@
 
 > **权威实现**：[`packages/tokens/theme.css`](../packages/tokens/theme.css)（CSS 变量 + `portal-*` 组合类）  
 > **Tailwind 映射**：[`packages/tokens/tailwind.preset.js`](../packages/tokens/tailwind.preset.js)  
-> **视觉验收**：`apps/shell-demo` 本地 `pnpm dev` 后访问 `/tokens`、`/radius`、`/typography`、`/components`、`/ui`  
+> **视觉验收**：`apps/shell-demo` 本地 `pnpm dev` 后访问 `/tokens`、`/icons`、`/radius`、`/typography`、`/blank`  
 > **画廊元数据**：[`apps/shell-demo/src/style-guide/tokenCatalog.ts`](../apps/shell-demo/src/style-guide/tokenCatalog.ts)（须与 `theme.css` 同步）
 
 本文档是上述代码的**人类可读索引**，不单独发明色值或字号。改 token 的顺序：**`theme.css` → 画廊 → 本文档**。
@@ -17,7 +17,8 @@
 4. **组件包分工**：
    - `@ss/portal-tokens` — CSS 变量与 `portal-*` 类
    - `@ss/portal-shell` — AppShell、侧栏、顶栏、筛选重置按钮
-   - `@ss/portal-ui` — Button、Input、Dialog、表格、Ant 筛选封装等
+   - `@ss/portal-ui` — Button、Input、Dialog、表格等基础组件
+5. **图标统一 Lucide**：全部 UI 图标来自 `lucide-react`，见 §4 与画廊 `/icons`。
 
 ---
 
@@ -69,11 +70,12 @@
 | `--gray-fill-light` | `bg-gray-fill-light` | 行 hover |
 | `--gray-fill-panel` | `bg-gray-fill-panel` | 详情路线卡、只读确认块浅底 |
 
-### 2.5 页面背景
+### 2.5 背景色
 
 | CSS 变量 | Tailwind | 用途 |
 |----------|----------|------|
-| `--page-bg` | `bg-page-bg` | 主内容区画布（介于 fill-light 与 fill-normal 之间，勿与 fill 混用） |
+| `--page-bg` | `bg-page-bg` | 主容器背景色（介于 fill-light 与 fill-normal 之间，勿与 fill 混用） |
+| `--card-bg-glass` | `bg-card-bg-glass` + `backdrop-blur-card` | 页面内导航及辅助卡片背景色（白 `#FFFFFF` 40% 叠在 page-bg 上，blur 2px）；组合类 `portal-card-bg-glass` |
 
 ### 2.6 语义色 Semantic
 
@@ -107,20 +109,20 @@
 
 | Token | 字号 | 行高 | 典型场景 |
 |-------|------|------|----------|
-| `text-11` | 11px | 16px | 副标题 meta |
-| `text-12` | 12px | 16px | 表单说明、Badge |
-| `text-13-compact` | 13px | 16px | 表格、紧凑 UI、Tooltip |
-| `text-13-reading` | 13px | 20px | 多行说明、文档链接 |
-| `text-14` | 14px | 20px | 筛选、分页、下拉、默认正文 |
-| `text-15` | 15px | 20px | 侧栏菜单 |
-| `text-16` | 16px | 24px | 列表 Tab |
-| `text-18` | 18px | 28px | 页面标题（`portal-page-title`） |
+| `text-11` | 11px | 16px | 角标、极紧凑 meta |
+| `text-12` | 12px | 16px | Badge、顶栏用户、集装箱 meta、时间戳 |
+| `text-13-compact` | 13px | 16px | 表格、按钮、文件名、右侧卡标题、Tooltip |
+| `text-13-reading` | 13px | 20px | 详情默认正文：字段、待办、进展、侧栏二级 |
+| `text-14` | 14px | 20px | 里程碑节点、模块标题；筛选 / 分页 / 下拉 |
+| `text-15` | 15px | 20px | 侧栏一级导航 |
+| `text-16` | 16px | 24px | 列表 Tab、详情 Section 标题（`portal-detail-section-title`） |
+| `text-18` | 18px | 28px | 页面标题（`portal-page-title` / `portal-page-detail-title`） |
 | `text-20` | 20px | 28px | 已定义于 token，画廊暂未收录 |
-| `text-22` | 22px | 28px | 详情大标题 |
+| `text-22` | 22px | 28px | 详情页强调大标题 |
 | `text-24` | 24px | 32px | 已定义于 token，画廊暂未收录 |
 | `text-32` | 32px | 40px | Hero 级标题 |
 
-**13px 选用**：单行高密度 → `text-13-compact`；多行可读 → `text-13-reading`。
+**13px 选用**：单行高密度（表格、按钮、卡标题）→ `text-13-compact`；详情字段与可读正文 → `text-13-reading`。
 
 ### 3.2 字重
 
@@ -148,11 +150,27 @@
 
 ---
 
-## 4. 圆角 Radius
+## 4. Icon（Lucide）
+
+**唯一图标源**：[`lucide-react`](https://lucide.dev/icons)。壳层、`@ss/portal-ui`、业务 App 与 shell-demo 画廊（`/icons`）均按此约定。禁止 Font Awesome / Heroicons / Ant Icons / iconfont / 随意内联 SVG / emoji 充当 UI 图标。
+
+| 约定 | 说明 |
+|------|------|
+| 导入 | `import { Search } from "lucide-react"` |
+| 尺寸 | 控件内常用 `size-4`（16px）；侧栏 / 顶栏 / 返回常用 `size-[18px]`；表格辅助可用 `size-3.5` |
+| 描边 | `strokeWidth={1.5}`～`1.75`，与同区域已有图标一致 |
+| 颜色 | 继承父级 `text-*`，或 `text-gray-text-7` / `text-gray-text-4` / `text-brand`；筛选区可用 `portal-filter-icon` |
+| 无障碍 | 装饰性加 `aria-hidden`；仅图标表达含义时给控件写 `aria-label` |
+
+画廊验收：`/icons`。
+
+---
+
+## 5. 圆角 Radius
 
 组件优先使用**标准阶梯**；语义别名指向某一档，便于语义化阅读。
 
-### 4.1 标准阶梯
+### 5.1 标准阶梯
 
 | Token | Tailwind | 像素 | 典型场景 |
 |-------|----------|------|----------|
@@ -166,7 +184,7 @@
 | `radius-3xl` | `rounded-3xl` | 24px | Hero 级大面板 |
 | `radius-full` | `rounded-full` | pill | 头像、圆点、胶囊 |
 
-### 4.2 语义别名
+### 5.2 语义别名
 
 | 别名 | 指向 | 绑定组件 |
 |------|------|----------|
@@ -177,22 +195,22 @@
 | `radius-modal` | `radius-xl` | `@ss/portal-ui` Dialog |
 | `radius-cta` | `radius-lg` | 大号主按钮语义名 |
 
-### 4.3 Button 尺寸 ↔ 圆角
+### 5.3 Button 尺寸 ↔ 圆角
 
-| Button size | Icon size | 圆角 |
-|-------------|-----------|------|
-| xs | icon-xs | `rounded-sm` (4px) |
-| sm | icon-sm | `rounded` (6px) |
-| default | icon | `rounded-md` (8px) |
-| lg | icon-lg | `rounded-lg` (10px) |
+| Button size | 高度 | 字号 | Icon size | 圆角 |
+|-------------|------|------|-----------|------|
+| xs | 24px (`h-6`) | 12px | `icon-xs`（24×24） | `rounded-button-xs` (4px) |
+| sm | 32px (`h-8`) | 13px | `icon-sm`（32×32） | `rounded-button-sm` (6px) |
+| default | 36px (`h-9`) | 14px | `icon`（36×36） | `rounded-md` / `rounded-btn` (8px) |
+| lg | 40px (`h-10`) | 14px | `icon-lg`（40×40） | `rounded-button-lg` (10px) |
 
 ---
 
-## 5. `portal-*` 组合类索引
+## 6. `portal-*` 组合类索引
 
-定义于 `theme.css` `@layer components`。完整交互示例见 shell-demo `/components`。
+定义于 `theme.css` `@layer components`。完整交互示例见 shell-demo `/blank`。
 
-### 5.1 页面壳
+### 6.1 页面壳
 
 | Class | 用途 |
 |-------|------|
@@ -200,15 +218,20 @@
 | `portal-page-main--detail` | 详情页主区（flex 列、overflow hidden） |
 | `portal-page-content` | 内容区内边距 `px-5 py-7` |
 
-### 5.2 列表与 Tab
+### 6.2 列表与 Tab
 
 | Class | 用途 |
 |-------|------|
 | `portal-list-card` | 白卡容器：`rounded-card` + 浅阴影 |
-| `portal-tab-bar` | Tab 栏底边 |
+| `portal-scrollbar` | 细滚动条（6px；thumb `gray-border-strong`，hover `gray-text-7`）；`PortalTableRoot` 默认挂载 |
+| `portal-card-bg-glass` | 半透明卡片底：`--card-bg-glass` + `blur(var(--blur-card))` |
+| `portal-tab-bar` | Tab 栏底边（`flex` + `gap-6`）；窄屏自适应示例用 `!flex-nowrap` |
+| `portal-tab-bar__divider` | 待办与状态 Tab 之间的竖线分隔 |
 | `portal-tab-item` / `portal-tab-item--active` | Tab 项与激活态 |
 
-### 5.3 筛选与表单
+报价记录列表在栏宽不足时，用 `ResizeObserver` 按可用宽度将放不下的末尾状态 Tab 收入「更多」下拉（对齐 SSLTLDemo `QuoteOrderListTabBar`）；交互示例见 shell-demo `/blank/tab`。
+
+### 6.3 筛选与表单
 
 | Class | 用途 |
 |-------|------|
@@ -222,29 +245,46 @@
 | `portal-field-shell--error` | 错误边框 |
 | `portal-field-shell-input` | 壳内无边框 input |
 | `portal-brand-btn` | 品牌主按钮 |
+| `portal-black-btn` | 黑色实心按钮（`--gray-text-1`）；次级强调 CTA |
 
-**Ant Design 筛选**（`packages/tokens/portal-ant-filter.css`）：`portal-ant-select--filter`、`portal-ant-select--form`、`portal-ant-cascader--filter` 及对应 dropdown 类；由 `@ss/portal-ui` 的 `PortalAntSelect` / `PortalAntCascader` 挂载。
+**Ant Design 筛选**（`packages/tokens/portal-ant-filter.css`）：`portal-ant-select--filter`、`portal-ant-select--form`、`portal-ant-cascader--filter`、`portal-ant-picker--filter/form` 及对应 dropdown 类；由 `@ss/portal-ui` 的 `PortalAntSelect` / `PortalAntCascader` / `PortalAntDateRangePicker` 挂载。
 
-### 5.3.1 客户端详情表单 Section
+### 6.3.1 客户端详情表单
 
-对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。完整示例见 shell-demo `/ui` →「详情表单 Section」。
+对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。完整示例与使用说明见 shell-demo `/blank/form`。
 
 | Class / 组件 | 用途 |
 |--------------|------|
 | `portal-detail-card` / `PortalDetailCard` | 详情白卡（shadow + padding） |
 | `portal-detail-section-title` / `PortalDetailSectionTitle` | Section 主标题：`text-16 font-semibold`，无底部分割线 |
 | `portal-detail-section-body` | Section 内容区 `space-y-6` |
-| `portal-detail-section-stack` / `PortalDetailSectionStack` | 同卡多 Section 分割线 |
+| `portal-detail-section-stack` / `PortalDetailSectionStack` | 同卡多 Section 分割线（`border-light`） |
 | `PortalDetailSection` | `<section>` + Title + Body 组合 |
+| `portal-detail-block-title` / `PortalDetailBlockTitle` | 卡内小标题：`text-14 font-semibold`（对齐 Proposal「服务信息」） |
+| `portal-detail-divided-stack` / `PortalDetailDividedStack` | 卡内分块：非首块顶部分割线（`border-strong`） |
+| `portal-detail-card-footer` / `PortalDetailCardFooter` | 白卡底部操作区（顶部分割线 + 右对齐按钮） |
+| `portalDetailInfoFieldsClass` | 履约只读信息字段网格（父级须 `@container`；列宽/列数自适应见 [`detail-page.md` §4](frameworks/detail-page.md)） |
+| `portalDetailInfoFieldItemClass` / `portalDetailGroupHeadingClass` | 字段单项 / 卡内分组小标题（送货信息等） |
 | `portal-detail-panel-surface` / `PortalDetailPanelSurface` | 路线卡 / 只读块浅灰表面 |
 | `portal-detail-form-label` / `PortalDetailFormLabel` | 字段 label（13px · gray-text-4） |
-| `portal-detail-form-legend` | Fieldset legend（`PortalSelectionFieldset` 共用） |
-| `portal-detail-form-input` / `portal-detail-form-textarea` | 详情页可编辑输入框 |
+| `portal-detail-form-legend` | Fieldset legend：`text-13 font-medium text-gray-text-4`（`PortalSelectionFieldset` 共用） |
+| `portal-detail-form-hint` / `PortalDetailFormHint` | 表单提示：置于表单项下方；一行（图标 + 小标题 + 正文）`items-center`；正文 `text-13` · 小标题 `text-12` |
+| `portal-detail-form-hint--warning` | 告警变体：无底色 · `text-semantic-warning-text` · 默认 TriangleAlert |
+| `portal-detail-form-hint--error` | 错误变体：无底色 · `text-semantic-error-text` · 默认 CircleX · `role="alert"` |
+| `portal-detail-form-input` / `portal-detail-form-textarea` | 详情页可编辑输入（42px / min-h 88px；focus = normal ring） |
+| `portal-detail-form-input--error` / `portal-detail-form-textarea--error` | 校验失败边框（亦可用 `aria-invalid="true"`） |
+| `portal-detail-form-value` | 只读单行（无边框 · medium） |
+| `portal-detail-form-readonly` | 只读多行（浅底 + light 边线） |
+| `PortalFormSearchSelect` | 可搜索下拉（客户账号等） |
 | `portal-detail-subsection-heading` / `PortalDetailSubsectionHeading` | 模块内带图标小标题 |
+| `PortalDetailServicePriceLabel` | 服务价签分色（免费 / 加价） |
+| `PortalIncludedServiceItem` | 已包含服务行（✓ 标题 ⓘ 价签，无边框） |
 
-表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§5.8）。
+**Focus**：详情表单 input / textarea / SearchSelect、`portal-field-shell`，以及选择卡（`PortalCheckboxCard` / `PortalRadioCard` 的 `focus-within`，类名 `portalSelectionCardInteractionClass`）一致，使用 `--focus-border-normal` + `--focus-ring-normal`（非品牌 ring）。列表筛选见 §6.3。
 
-### 5.4 Badge
+表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§6.8）。选中态为 `bg-gray-fill-light`（非品牌 tint）；圆角 `rounded`（6px）；价格标签用 `PortalDetailServicePriceLabel`（免费 → `text-brand`，加价 → `text-accent-orange`）。已包含只读项用 `PortalIncludedServiceItem`（✓ + 标题 + ⓘ + 价签，无边框卡片）。紧凑属性多选（危险品等）复用同一 interaction class。演示：shell-demo 组件预览 →「表单组件」。
+
+### 6.4 Badge
 
 四档 soft 标签。**info / warning 分工**：有待办 → `--warning`；普通态 → `--info`（见 §2.6）。
 
@@ -264,9 +304,9 @@ flex items-center gap-2
 └── [可选] 待办链接 · text-semantic-warning-text · TriangleAlert 图标
 ```
 
-参考实现：`apps/shell-demo/src/style-guide/OrderListStatusTodoCell.tsx`、`UiTableExamples.tsx`（`/ui` → Table 原语）。
+参考实现：`apps/shell-demo/src/style-guide/OrderListStatusTodoCell.tsx`、`UiTableExamples.tsx`（组件预览 `/blank/table`）。
 
-### 5.5 Dropdown 与分页
+### 6.5 Dropdown 与分页
 
 | Class | 用途 |
 |-------|------|
@@ -280,7 +320,7 @@ flex items-center gap-2
 | `portal-pagination-page` / `--active` | 页码 |
 | `portal-pagination-ellipsis` | 省略号 |
 
-### 5.6 侧栏与顶栏
+### 6.6 侧栏与顶栏
 
 | Class | 用途 |
 |-------|------|
@@ -297,30 +337,35 @@ flex items-center gap-2
 
 侧栏交互状态依赖 `--sidebar-nav-hover`、`--sidebar-nav-active`、`--sidebar-nav-sub-active`。
 
-### 5.7 链接
+### 6.7 链接
 
 | Class | 用途 |
 |-------|------|
-| `portal-document-link` | 文档名链接（truncate） |
-| `portal-document-action-link` | 操作链接（下载等） |
+| `portal-document-link` | 文档名链接：默认 `text-13` + `text-gray-text-2`、truncate；hover / focus-visible 下划线 + `--portal-text-link` |
+| `portal-document-action-link` | 操作链接（下载等）；hover / focus-visible 同上 |
+
+详情右侧「文件单证」摘要卡（见 shell-demo `/blank/document-link`）：白卡 + 标题 + `portal-document-link` 列表；点击 toast 演示打开文件（非真实下载）。
 
 hover 色为 `--portal-text-link`（→ semantic-info-text）。
 
-### 5.8 `@ss/portal-ui` 补充（非 `theme.css` 组合类）
+### 6.8 `@ss/portal-ui` 补充（非 `theme.css` 组合类）
 
-以下由 `@ss/portal-ui` 导出，样式仍依赖 token，详见 shell-demo `/ui`：
+以下由 `@ss/portal-ui` 导出，样式仍依赖 token，详见 shell-demo 组件预览 `/blank`：
 
 | 导出 | 说明 |
 |------|------|
-| `Button` / `Input` / `Dialog` / `DropdownMenu` | Radix + shadcn 命名；focus-visible 用 `--focus-ring-brand` |
-| `PortalAntSelect` / `PortalAntCascader` | 挂载 `portal-ant-*` 类（见 §5.3） |
-| `PortalRadioCard` / `PortalCheckboxCard` / `PortalSelectionFieldset` | 单选/多选卡片 |
-| `PortalDetailSection` / `PortalDetailCard` / `PortalDetailSectionStack` 等 | 客户端详情表单 Section 壳层 |
+| `Button` / `ButtonGroup` / `Input` / `Dialog` / `DropdownMenu` | Radix + shadcn 命名；Button 含 `default` / `black` / `outline` / `ghost`；`ButtonGroup` 含 Separator / Text；focus-visible 用 `--focus-ring-brand` |
+| `PortalAntSelect` / `PortalAntCascader` | 挂载 `portal-ant-*` 类（见 §6.3） |
+| `PortalRadioCard` / `PortalCheckboxCard` / `PortalSelectionFieldset` | 单选/多选卡片（选中灰底、6px 圆角；可编辑 `focus-within` = normal ring） |
+| `PortalIncludedServiceItem` | 已包含服务行（✓ / 标题 / ⓘ / 价签） |
+| `PortalDetailServicePriceLabel` | 服务价签（免费 brand / 加价 orange，支持混合文案） |
+| `PortalDetailSection` / `PortalDetailCard` / `PortalDetailSectionStack` / `PortalDetailBlockTitle` / `PortalDetailDividedStack` / `PortalDetailCardFooter` 等 | 客户端详情表单 Section 壳层；另导出 `portalDetailInfoFieldsClass` 等履约只读字段网格常量 |
+| `PortalFormSearchSelect` | 详情表单可搜索下拉 |
 | `portalTable*` 样式常量 | 表格 th/td、sticky 操作列（`portal-table-styles.ts`） |
 
 ---
 
-## 6. 页面框架（另见 frameworks）
+## 7. 页面框架（另见 frameworks）
 
 | 场景 | 文档 | 参考实现 |
 |------|------|----------|
@@ -330,7 +375,7 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 
 ---
 
-## 7. 禁止事项与豁免
+## 8. 禁止事项与豁免
 
 与 [`.cursor/rules/ss-portal-design-tokens.mdc`](../.cursor/rules/ss-portal-design-tokens.mdc) 一致。
 
@@ -340,8 +385,9 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 - Tailwind 默认灰阶：`text-slate-*`、`text-gray-500` 等
 - Tailwind 默认字号：`text-xs`、`text-sm`、`text-base`、`text-lg` 等
 - 任意像素字号：`text-[12px]`
+- 非 Lucide 图标源（Font Awesome、Heroicons、Ant Icons、iconfont、随意内联 SVG、emoji 充当 UI 图标）
 
-**应使用**：`gray-text-*`、`text-11`…`text-32`、`portal-*`、`font-normal|medium|semibold`。
+**应使用**：`gray-text-*`、`text-11`…`text-32`、`portal-*`、`font-normal|medium|semibold`、`lucide-react`。
 
 **豁免**：在 `packages/tokens/` 内定义 token 时可用 hex；设计系统画廊与本文档可引用变量名。
 
@@ -349,7 +395,7 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 
 ---
 
-## 8. 正确性校验
+## 9. 正确性校验
 
 改 token 或本文档后建议执行：
 
@@ -363,14 +409,14 @@ rg --only-matching 'cssVar: "--[^"]+"' apps/shell-demo/src/style-guide/tokenCata
   | while read v; do rg -F -q -- "$v" packages/tokens/theme.css || echo "MISSING: $v"; done
 ```
 
-**视觉验收**：`pnpm dev` → 并排查看 `/tokens`、`/radius`、`/typography`、`/components`、`/ui` 与业务页；改 `theme.css` 后刷新应一致。
+**视觉验收**：`pnpm dev` → 并排查看 `/tokens`、`/icons`、`/radius`、`/typography`、`/blank` 与业务页；改 `theme.css` 后刷新应一致。
 
 ---
 
-## 9. 文档状态
+## 10. 文档状态
 
 | 章节 | 状态 |
 |------|------|
-| §2–§5 Token / 组合类 | 已与 `theme.css` + `tokenCatalog.ts` 对齐（2025-06） |
-| §6 页面框架 | 见 `docs/frameworks/`，持续随业务页归纳 |
+| §2–§6 Token / Icon / 组合类 | 已与 `theme.css` + 画廊对齐（含 `/icons` Lucide 约定） |
+| §7 页面框架 | 见 `docs/frameworks/`，持续随业务页归纳 |
 | 源仓 `client-portal.md` 迁入 | 未完成；剩余业务细则按需 portal 化后补充 |

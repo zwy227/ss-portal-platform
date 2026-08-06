@@ -198,23 +198,141 @@
 }
 
 .portal-ant-cascader-dropdown
-  .ant-cascader-menu-item:not(.ant-cascader-menu-item-disabled):not(
-    .ant-cascader-menu-item-active
-  ):hover {
+  .ant-cascader-menu-item:not(.ant-cascader-menu-item-disabled):hover {
   background: var(--gray-fill-normal) !important;
 }
 
 .portal-ant-cascader-dropdown .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
   font-weight: 600;
   color: var(--gray-text-2) !important;
-  background: color-mix(in srgb, var(--brand) 12%, white) !important;
-}
-
-.portal-ant-cascader-dropdown
-  .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
-  background: color-mix(in srgb, var(--brand) 16%, white) !important;
+  background: var(--gray-fill-normal) !important;
 }
 
 .portal-ant-cascader-dropdown .ant-cascader-menu-item-expand-icon {
   color: var(--gray-text-7);
+}
+
+/* ── DatePicker / RangePicker 筛选变体（h-9 / 36px） ── */
+.portal-ant-picker--filter.ant-picker {
+  min-width: 240px;
+  min-height: 36px;
+  height: 36px;
+  padding-inline: 11px;
+  border-radius: var(--radius-input) !important;
+  border-color: var(--gray-border-strong) !important;
+  background: var(--background) !important;
+  box-shadow: none !important;
+  color: var(--gray-text-2);
+  font-size: 14px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.portal-ant-picker--filter.ant-picker:not(.ant-picker-disabled):hover {
+  border-color: var(--gray-border-emphasis) !important;
+}
+
+.portal-ant-picker--filter.ant-picker-focused:not(.ant-picker-disabled) {
+  border-color: var(--focus-border-normal) !important;
+  box-shadow: var(--focus-ring-normal) !important;
+}
+
+.portal-ant-picker--filter .ant-picker-input > input {
+  color: var(--gray-text-2) !important;
+  font-size: 14px;
+}
+
+.portal-ant-picker--filter .ant-picker-input > input::placeholder {
+  color: var(--gray-text-7) !important;
+}
+
+.portal-ant-picker--filter .ant-picker-separator,
+.portal-ant-picker--filter .ant-picker-suffix,
+.portal-ant-picker--filter .ant-picker-clear {
+  color: var(--gray-text-7);
+}
+
+/* ── DatePicker / RangePicker 表单变体（h-12 / 48px） ── */
+.portal-ant-picker--form.ant-picker {
+  width: 100%;
+  min-height: 48px;
+  height: 48px;
+  padding-inline: 11px;
+  border-radius: var(--radius-input) !important;
+  border-color: var(--gray-border-strong) !important;
+  background: var(--background) !important;
+  box-shadow: none !important;
+  color: var(--gray-text-2);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.portal-ant-picker--form.ant-picker:not(.ant-picker-disabled):hover {
+  border-color: var(--gray-border-emphasis) !important;
+}
+
+.portal-ant-picker--form.ant-picker-focused:not(.ant-picker-disabled) {
+  border-color: var(--focus-border-normal) !important;
+  box-shadow: var(--focus-ring-normal) !important;
+}
+
+.portal-ant-picker--form .ant-picker-input > input {
+  color: var(--gray-text-2) !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.portal-ant-picker--form .ant-picker-input > input::placeholder {
+  color: var(--gray-text-7) !important;
+  font-weight: 500;
+}
+
+.portal-ant-picker--form .ant-picker-separator,
+.portal-ant-picker--form .ant-picker-suffix,
+.portal-ant-picker--form .ant-picker-clear {
+  color: var(--gray-text-7);
+}
+
+/* ── 共享下拉：DatePicker ── */
+.portal-ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background: var(--gray-text-1) !important;
+  color: var(--primary-foreground) !important;
+}
+
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-in-range:not(.ant-picker-cell-disabled)::before {
+  background: var(--gray-fill-normal) !important;
+}
+
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell:hover:not(.ant-picker-cell-selected):not(
+    .ant-picker-cell-range-start
+  ):not(.ant-picker-cell-range-end):not(.ant-picker-cell-disabled)
+  .ant-picker-cell-inner {
+  background: var(--gray-fill-normal) !important;
+}
+
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-hover:not(.ant-picker-cell-disabled)::before,
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:not(.ant-picker-cell-disabled)::before,
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-hover-end:not(.ant-picker-cell-disabled)::before {
+  background: var(--gray-fill-strong) !important;
+}
+
+.portal-ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border-color: var(--gray-text-1) !important;
 }

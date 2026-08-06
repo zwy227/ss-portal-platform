@@ -97,6 +97,7 @@ ss-portal-platform/
 | `client-page-detail-title` | `portal-page-detail-title` |
 | `client-page-title-prefix` | `portal-page-title-prefix` |
 | `client-tab-bar` | `portal-tab-bar` |
+| `client-tab-bar__divider` | `portal-tab-bar__divider` |
 | `client-tab-item` | `portal-tab-item` |
 | `client-tab-item--active` | `portal-tab-item--active` |
 | `client-list-card` | `portal-list-card` |
@@ -226,6 +227,7 @@ ss-portal-platform/
 | `demand/quoteOrderStatusMultiSelect.css` 等三份 antd CSS | `packages/tokens/portal-ant-filter.css` | 合并为 `.portal-ant-select--filter/form`、`.portal-ant-cascader--filter` |
 | `demand/QuoteOrderStatusMultiSelect.tsx` | `PortalAntSelect`（`mode="multiple"`） | 状态多选筛选 |
 | `demand/QuoteOrderLocationCascader.tsx` | `PortalAntCascader` | 国家/城市级联 |
+| — | `PortalAntDateRangePicker` | 筛选区日期起止（Ant RangePicker） |
 | `DrayageQuoteContainerLengthSelect.tsx` | `PortalAntSelect`（`portalVariant="form"` + `showSearch`） | 表单可搜索单选 |
 | 内联 `FilterSelect`（原生 select） | `PortalFilterSelect` | 薄封装 `portal-filter-select` |
 | `demand/drayageQuoteOrderDetailForm.tsx` → `DetailServiceRadioOption` | `PortalRadioCard` | 单选卡片 |
@@ -233,7 +235,7 @@ ss-portal-platform/
 | `stickyTableActionColumn.ts` | `useStickyActionColumn` + `buildStickyActionThClass/TdClass` | 粘性操作列 |
 | `demand/DrayageQuoteOrderTable.tsx`（结构部分） | `PortalTable*` 组合原语 | 业务列 cell 仍留 App 仓 |
 
-**shell-demo 验收**：`/ui` 页 — 筛选并排、卡片选择、Table mock。
+**shell-demo 验收**：组件预览 `/blank` — 筛选并排、卡片选择、Table mock。
 
 **Phase 2 迁移时**：删除源仓内 `quoteOrderStatusMultiSelect.css`、`quoteOrderLocationCascader.css`、`drayageQuoteContainerLengthSelect.css`，改 import `@ss/portal-ui` + `@ss/portal-tokens`。
 

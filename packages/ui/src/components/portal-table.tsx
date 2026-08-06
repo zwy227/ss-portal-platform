@@ -14,7 +14,7 @@ export type PortalTableRootProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const PortalTableRoot = React.forwardRef<HTMLDivElement, PortalTableRootProps>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn("overflow-x-auto", className)} {...props} />;
+    return <div ref={ref} className={cn("portal-scrollbar overflow-x-auto", className)} {...props} />;
   },
 );
 
@@ -23,7 +23,7 @@ PortalTableRoot.displayName = "PortalTableRoot";
 export type PortalTableProps = React.TableHTMLAttributes<HTMLTableElement>;
 
 export function PortalTable({ className, ...props }: PortalTableProps) {
-  return <table className={cn("w-full min-w-[960px]", className)} {...props} />;
+  return <table className={cn("w-full min-w-[1080px]", className)} {...props} />;
 }
 
 export type PortalTableHeadProps = React.HTMLAttributes<HTMLTableSectionElement>;

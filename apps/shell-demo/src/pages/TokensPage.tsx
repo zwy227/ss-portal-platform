@@ -1,5 +1,6 @@
 import {
   ACCENT_TOKENS,
+  ALERT_TOKENS,
   BADGE_TOKENS,
   BRAND_TOKENS,
   FOCUS_TOKENS,
@@ -16,14 +17,17 @@ export function TokensPage() {
     <StyleGuideShell>
       <StyleGuidePage
         title="Token 色板"
-        description="与 packages/tokens/theme.css 同步。圆角见侧栏「圆角规范」，可与 SSLTLDemo (5173) 拖柜页并排对比。"
+        description="色值权威源为 packages/tokens/theme.css，经 @theme 映射为 Tailwind 类。文字用 text-gray-text-*，背景用 bg-brand / bg-page-bg / bg-gray-fill-*，边框用 border-gray-border-*；业务 className 只写本页 token，禁止 hex 与 slate-* 等默认色。点击色卡复制 Tailwind 类（无则复制 CSS 变量）。改色改 theme.css，刷新本页验收。"
       >
         <StyleGuideSection title="品牌色 Brand">
           <TokenGrid tokens={BRAND_TOKENS} />
         </StyleGuideSection>
 
-        <StyleGuideSection title="Focus Ring">
-          <TokenGrid tokens={FOCUS_TOKENS} />
+        <StyleGuideSection title="告警色 Warning">
+          <p className="mb-3 text-13 text-gray-text-5">
+            用户待办、需关注态。成品 Badge 见下方「Badge 语义色」；文字色见「强调色」。
+          </p>
+          <TokenGrid tokens={ALERT_TOKENS} />
         </StyleGuideSection>
 
         <StyleGuideSection title="文字灰阶 Gray Text">
@@ -34,18 +38,22 @@ export function TokensPage() {
           <TokenGrid tokens={GRAY_BORDER_TOKENS} />
         </StyleGuideSection>
 
+        <StyleGuideSection title="Focus Ring">
+          <TokenGrid tokens={FOCUS_TOKENS} />
+        </StyleGuideSection>
+
         <StyleGuideSection title="填充 Gray Fill">
           <TokenGrid tokens={GRAY_FILL_TOKENS} />
         </StyleGuideSection>
 
-        <StyleGuideSection title="页面背景">
+        <StyleGuideSection title="背景色">
           <TokenGrid tokens={PAGE_BG_TOKENS} />
         </StyleGuideSection>
 
         <StyleGuideSection title="Badge 语义色">
           <p className="mb-3 text-13 text-gray-text-5">
             四档：灰 · 成功 · 待办(橙) · 普通(蓝)。色卡统一展示 <code className="text-13">portal-badge</code>{" "}
-            成品；组件详情见 <code className="text-13">/components</code>。
+            成品；组件详情见 <code className="text-13">/blank</code>。
           </p>
           <TokenGrid tokens={BADGE_TOKENS} />
         </StyleGuideSection>

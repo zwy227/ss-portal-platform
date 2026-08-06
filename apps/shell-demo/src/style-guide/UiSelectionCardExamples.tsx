@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { PortalCheckboxCard, PortalRadioCard, PortalSelectionFieldset } from "@ss/portal-ui";
+import {
+  PortalCheckboxCard,
+  PortalDetailServicePriceLabel,
+  PortalRadioCard,
+  PortalSelectionFieldset,
+} from "@ss/portal-ui";
 
 export function UiSelectionCardExamples() {
   const [prePull, setPrePull] = useState(false);
@@ -7,6 +12,11 @@ export function UiSelectionCardExamples() {
 
   return (
     <div className="grid max-w-2xl gap-8">
+      <p className="m-0 text-13 leading-relaxed text-gray-text-5">
+        可编辑态：卡片 <code className="text-13">focus-within</code> 使用{" "}
+        <code className="text-13">--focus-ring-normal</code>
+        （与字段壳一致）。完整场景见组件预览 →「表单组件」。
+      </p>
       <PortalSelectionFieldset legend="其他服务">
         <PortalCheckboxCard
           title="货柜预提（Pre-Pull）授权"
@@ -14,9 +24,7 @@ export function UiSelectionCardExamples() {
           checked={prePull}
           onCheckedChange={setPrePull}
           meta={
-            prePull ? (
-              <span className="text-13 font-medium text-accent-orange">按实际发生结算</span>
-            ) : null
+            prePull ? <PortalDetailServicePriceLabel text="按实际发生结算" /> : null
           }
           footer={
             prePull ? (
@@ -35,12 +43,9 @@ export function UiSelectionCardExamples() {
             value="liveUnload"
             title="现场等待卸货 (Live Unload)"
             meta={
-              <>
-                <span className="text-13 font-medium text-semantic-success-text">1小时免费</span>
-                <span className="text-13 font-medium text-accent-orange">
-                  超期 +$80/小时（按实际发生结算）
-                </span>
-              </>
+              deliveryMethod === "liveUnload" ? (
+                <PortalDetailServicePriceLabel text="1小时免费，超期 +$80/小时（按实际发生结算）" />
+              ) : null
             }
             description="司机在目的地等待卸货，完成后直接带走空柜。收货地需具备即时卸货能力（如卸货月台、叉车及装卸工人）。"
             checked={deliveryMethod === "liveUnload"}

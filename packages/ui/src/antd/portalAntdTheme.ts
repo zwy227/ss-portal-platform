@@ -22,6 +22,10 @@ export const portalAntdFilterTheme: ThemeConfig = {
       controlHeight: 36,
       fontSize: 14,
     },
+    DatePicker: {
+      controlHeight: 36,
+      fontSize: 14,
+    },
   },
 };
 
@@ -40,6 +44,10 @@ export const portalAntdFormTheme: ThemeConfig = {
   },
   components: {
     Select: {
+      controlHeight: 48,
+      fontSize: 14,
+    },
+    DatePicker: {
       controlHeight: 48,
       fontSize: 14,
     },

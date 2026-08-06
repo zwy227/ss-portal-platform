@@ -1,7 +1,12 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { useId, type ReactNode } from "react";
 import { cn } from "../lib/utils";
-import { portalSelectionHintClass } from "./portal-selection-fieldset";
+import {
+  portalSelectionCardInteractionClass,
+  portalSelectionCardRadiusClass,
+  portalSelectionCardSelectedClass,
+  portalSelectionHintClass,
+} from "./portal-selection-fieldset";
 
 const portalCheckboxInputClass =
   "mt-0.5 size-4 shrink-0 rounded border-gray-border-strong accent-gray-text-1 disabled:checked:opacity-95";
@@ -56,9 +61,14 @@ export function PortalCheckboxCard({
   return (
     <div
       className={cn(
-        "rounded-input border border-solid border-gray-border-normal px-4 py-5 transition-colors",
-        disabled ? "cursor-default" : !checked && "hover:border-gray-border-emphasis",
-        checked ? "bg-[color-mix(in_srgb,var(--brand)_5%,white)]" : "bg-white",
+        portalSelectionCardRadiusClass,
+        "border border-solid px-4 py-3 transition-colors",
+        checked
+          ? portalSelectionCardSelectedClass
+          : disabled
+            ? "border-gray-border-light bg-gray-fill-light"
+            : "border-gray-border-normal bg-white",
+        disabled ? "cursor-default" : portalSelectionCardInteractionClass,
         className,
       )}
     >
@@ -88,9 +98,11 @@ export function PortalCheckboxCard({
             className={cn("block", disabled ? "cursor-not-allowed" : "cursor-pointer")}
           >
             <span className="flex flex-wrap items-center gap-2">
-              <span className="text-14 font-semibold">
+              <span className="text-14 font-medium">
                 {typeof title === "string" ? (
-                  <span className="text-gray-text-2">{title}</span>
+                  <span className={disabled && !checked ? "text-gray-text-7" : "text-gray-text-2"}>
+                    {title}
+                  </span>
                 ) : (
                   title
                 )}
@@ -104,7 +116,7 @@ export function PortalCheckboxCard({
             </span>
             {description ? (
               typeof description === "string" ? (
-                <p className={cn("mt-1", portalSelectionHintClass)}>{description}</p>
+                <p className={cn("mt-0.5", portalSelectionHintClass)}>{description}</p>
               ) : (
                 description
               )

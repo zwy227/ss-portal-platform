@@ -2,26 +2,42 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Theme } from "@radix-ui/themes";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
-import { ComponentsPage } from "./pages/ComponentsPage";
+import { Toaster } from "sonner";
+import { DemoDetailPage } from "./DemoDetailPage";
+import { DemoListPage } from "./DemoListPage";
+import { BlankPage } from "./pages/BlankPage";
+import { ComponentDetailPage } from "./pages/ComponentDetailPage";
+import { GuidePage } from "./pages/GuidePage";
+import { IconsPage } from "./pages/IconsPage";
 import { RadiusPage } from "./pages/RadiusPage";
 import { TokensPage } from "./pages/TokensPage";
 import { TypographyPage } from "./pages/TypographyPage";
-import { UiComponentsPage } from "./pages/UiComponentsPage";
 import "./styles.css";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/tokens" replace /> },
+  { path: "/", element: <Navigate to="/guide" replace /> },
+  { path: "/guide", Component: GuidePage },
   { path: "/tokens", Component: TokensPage },
+  { path: "/icons", Component: IconsPage },
   { path: "/radius", Component: RadiusPage },
   { path: "/typography", Component: TypographyPage },
-  { path: "/components", Component: ComponentsPage },
-  { path: "/ui", Component: UiComponentsPage },
+  { path: "/blank", Component: BlankPage },
+  { path: "/blank/:componentId", Component: ComponentDetailPage },
+  { path: "/orders", Component: DemoListPage },
+  { path: "/orders/:orderId", Component: DemoDetailPage },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Theme appearance="inherit" accentColor="green" grayColor="slate" hasBackground={false}>
+    <Theme
+      className="h-full min-h-0 overflow-hidden"
+      appearance="inherit"
+      accentColor="green"
+      grayColor="slate"
+      hasBackground={false}
+    >
       <RouterProvider router={router} />
+      <Toaster richColors position="top-center" closeButton />
     </Theme>
   </React.StrictMode>,
 );

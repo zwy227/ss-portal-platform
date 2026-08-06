@@ -22,10 +22,14 @@ pnpm dev          # 启动 shell-demo → http://localhost:5174
 
 | 路径 | 内容 |
 |------|------|
-| `/` | 列表页框架 demo |
+| `/` | 重定向到 `/guide` |
+| `/guide` | 如何使用（接入步骤与规范） |
 | `/tokens` | 色板（brand、gray、semantic） |
+| `/icons` | 图标规范（Lucide） |
+| `/radius` | 圆角规范 |
 | `/typography` | 字号 text-11 … text-32 |
-| `/components` | portal-* 组合类预览 |
+| `/blank` | 组件预览（portal-* / @ss/portal-ui） |
+| `/orders` | 典型列表页框架 |
 
 与 SSLTLDemo (`localhost:5173`) 拖柜页并排打开，可视觉对比 token。
 

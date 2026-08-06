@@ -30,6 +30,7 @@ export default {
         'gray-fill-light': 'var(--gray-fill-light)',
         'gray-fill-panel': 'var(--gray-fill-panel)',
         'page-bg': 'var(--page-bg)',
+        'card-bg-glass': 'var(--card-bg-glass)',
         'accent-orange': 'var(--accent-orange)',
         'accent-orange-bg': 'var(--accent-orange-bg)',
         'danger-dot': 'var(--danger-dot)',
@@ -108,6 +109,9 @@ export default {
       boxShadow: {
         'focus-normal': 'var(--focus-ring-normal)',
         'focus-brand': 'var(--focus-ring-brand)',
+      },
+      backdropBlur: {
+        card: 'var(--blur-card)',
       },
     },
   },

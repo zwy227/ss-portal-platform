@@ -138,6 +138,9 @@
   --gray-fill-panel: color-mix(in srgb, var(--gray-fill-light) 45%, transparent);
   /* 页面画布（介于 gray-fill-light 与 gray-fill-normal 之间；勿与 fill 混用） */
   --page-bg: #f5f6fa;
+  /** 半透明卡片底：白 40% 叠在 page-bg 上，配合 --blur-card */
+  --card-bg-glass: rgba(255, 255, 255, 0.4);
+  --blur-card: 2px;
 
   /* 侧栏导航 */
   --sidebar-nav-hover: rgba(255, 255, 255, 0.12);
@@ -161,7 +164,7 @@
   --semantic-info-text: #4096ff;
   /* 告警橙 — 权威值；accent-orange / accent-orange-bg 为兼容别名 */
   --semantic-warning-default: #fa8c16;
-  --semantic-warning-text: #d46b08;
+  --semantic-warning-text: #f97316;
   --semantic-warning-bg: #fff7e6;
   --semantic-warning-light: #ffe7ba;
   --accent-orange: var(--semantic-warning-text);
@@ -251,6 +254,8 @@
   --gray-fill-light: #0f172a;
   --gray-fill-panel: color-mix(in srgb, var(--gray-fill-normal) 45%, transparent);
   --page-bg: #0f172a;
+  --card-bg-glass: rgba(30, 41, 59, 0.4);
+  --blur-card: 2px;
 
   /* 品牌 / 语义浅底 — 暗色（混 --card，success/warning 等 alias 自动跟随） */
   --brand-xlight: color-mix(in srgb, var(--brand) 14%, var(--card));
@@ -306,6 +311,7 @@
   --radius-input: var(--radius-input);
   --radius-nav: var(--radius-nav);
   --radius-btn: var(--radius-button);
+  --radius-button-xs: var(--radius-button-xs);
   --radius-button-sm: var(--radius-button-sm);
   --radius-button-lg: var(--radius-button-lg);
   --radius-modal: var(--radius-modal);
@@ -344,6 +350,8 @@
   --color-gray-fill-light: var(--gray-fill-light);
   --color-gray-fill-panel: var(--gray-fill-panel);
   --color-page-bg: var(--page-bg);
+  --color-card-bg-glass: var(--card-bg-glass);
+  --blur-card: 2px;
   --color-accent-orange: var(--accent-orange);
   --color-accent-orange-bg: var(--accent-orange-bg);
   --color-danger-dot: var(--danger-dot);
@@ -405,6 +413,17 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+
+  /**
+   * AppShell 依赖视口锁高：禁止 document 滚动与 main 内滚动抢事件。
+   * （详情页 portal-page-main--detail 分区 scroll 时尤其关键）
+   */
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
   }
 
   body {
@@ -484,13 +503,18 @@ html {
 @layer components {
   /* ── 页面壳 ── */
   .portal-page-main {
-    @apply flex-1 min-h-0 overflow-y-auto;
+    @apply flex-1 min-h-0 overflow-y-auto overscroll-contain;
     background: var(--page-bg);
   }
 
   .portal-page-main--detail {
     @apply flex min-h-0 flex-1 flex-col overflow-hidden;
     background: var(--page-bg);
+  }
+
+  /** 详情页正文滚动区（顶栏下；与 sticky header 搭配） */
+  .portal-page-detail-scroll {
+    @apply min-h-0 flex-1 overflow-y-auto overscroll-contain;
   }
 
   .portal-page-content {
@@ -519,6 +543,11 @@ html {
     border-bottom-color: var(--gray-border-normal);
   }
 
+  .portal-tab-bar__divider {
+    @apply h-5 w-px shrink-0;
+    background: var(--gray-border-strong);
+  }
+
   .portal-tab-item {
     @apply border-0 border-b-2 border-transparent bg-transparent px-1 py-2 text-16 font-medium text-muted-foreground transition-colors;
   }
@@ -533,6 +562,37 @@ html {
   .portal-list-card {
     @apply rounded-card bg-card p-4;
     box-shadow: var(--elevation-sm);
+  }
+
+  /* ── 细滚动条（表格横向溢出等） ── */
+  .portal-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-border-strong) transparent;
+  }
+
+  .portal-scrollbar::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  .portal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .portal-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--gray-border-strong);
+    border-radius: var(--radius-full);
+  }
+
+  .portal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-text-7);
+  }
+
+  /** 半透明卡片底：白 40% + blur 2px，叠在 page-bg 上 */
+  .portal-card-bg-glass {
+    background: var(--card-bg-glass);
+    backdrop-filter: blur(var(--blur-card));
+    -webkit-backdrop-filter: blur(var(--blur-card));
   }
 
   /* ── 筛选器 ── */
@@ -642,9 +702,19 @@ html {
     background: var(--brand-disabled);
   }
 
+  /** 黑色实心按钮 — 次级强调 CTA（底色 gray-text-1） */
+  .portal-black-btn {
+    @apply inline-flex h-9 shrink-0 items-center gap-1.5 rounded-btn px-4 text-14 font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:text-white disabled:opacity-100 disabled:pointer-events-none;
+    background: var(--gray-text-1);
+  }
+
+  .portal-black-btn:disabled {
+    background: var(--gray-text-7);
+  }
+
   /* ── Badge（状态标签 · soft 四档） ── */
   .portal-badge {
-    @apply inline-flex w-fit max-w-full items-center gap-1 rounded-badge px-2 py-0.5 text-12 font-medium;
+    @apply inline-flex w-fit max-w-full items-center gap-1 whitespace-nowrap rounded-badge px-2 py-0.5 text-12 font-medium;
     line-height: var(--leading-16);
   }
 
@@ -679,10 +749,11 @@ html {
   }
 
   .portal-dropdown-item {
-    @apply cursor-pointer rounded-md px-3 py-2 text-14 outline-none;
+    @apply cursor-pointer rounded-md px-3 py-2 text-14 outline-none transition-colors;
     color: var(--gray-text-2);
   }
 
+  .portal-dropdown-item:hover,
   .portal-dropdown-item[data-highlighted] {
     background: var(--gray-fill-normal);
   }
@@ -692,6 +763,7 @@ html {
     color: var(--semantic-warning-text);
   }
 
+  .portal-dropdown-item--cancel:hover,
   .portal-dropdown-item--cancel[data-highlighted] {
     background: var(--semantic-warning-bg);
     color: var(--semantic-warning-text);
@@ -865,13 +937,14 @@ html {
     background: var(--danger-dot);
   }
 
-  /* ── 文本链接 ── */
+  /* ── 文本链接（对齐 DOCUMENT_LABEL_CLASS：默认灰字截断，hover/focus 下划线 + portal-text-link） ── */
   .portal-document-link {
-    @apply min-w-0 truncate border-0 bg-transparent p-0 text-left text-13-reading font-medium text-gray-text-2 no-underline transition-colors;
+    @apply min-w-0 max-w-full truncate border-0 bg-transparent p-0 text-left text-13 text-gray-text-2 outline-none no-underline transition;
     cursor: pointer;
   }
 
-  .portal-document-link:hover {
+  .portal-document-link:hover,
+  .portal-document-link:focus-visible {
     color: var(--portal-text-link);
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -879,11 +952,12 @@ html {
   }
 
   .portal-document-action-link {
-    @apply border-0 bg-transparent p-0 text-13-reading font-medium text-gray-text-2 no-underline transition-colors;
+    @apply border-0 bg-transparent p-0 text-13 text-gray-text-2 outline-none no-underline transition;
     cursor: pointer;
   }
 
-  .portal-document-action-link:hover {
+  .portal-document-action-link:hover,
+  .portal-document-action-link:focus-visible {
     color: var(--portal-text-link);
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -914,6 +988,21 @@ html {
     background: var(--gray-border-light);
   }
 
+  /** 卡内小标题（14px · 对齐 TradeDetail Proposal「服务信息 / 供应商信息」） */
+  .portal-detail-block-title {
+    @apply mb-3 text-14 font-semibold text-gray-text-2;
+  }
+
+  /** 卡内分块：非首块顶部分割线（strong）+ 留白 */
+  .portal-detail-divided-stack > *:not(:first-child) {
+    @apply mt-6 border-t border-gray-border-strong pt-6;
+  }
+
+  /** 白卡底部操作区（顶部分割线 + 右对齐按钮） */
+  .portal-detail-card-footer {
+    @apply mt-6 flex flex-wrap items-center justify-end gap-2 border-t border-gray-border-normal pt-4;
+  }
+
   .portal-detail-panel-surface {
     @apply rounded-card border border-solid border-gray-border-normal bg-gray-fill-panel px-5 py-4;
     border-width: 0.5px;
@@ -924,19 +1013,49 @@ html {
   }
 
   .portal-detail-form-legend {
-    @apply mb-2.5 block text-14 font-medium text-gray-text-4;
+    @apply mb-1.5 block text-13 font-medium text-gray-text-4;
   }
 
+  /** 表单提示：表单项下方一行（图标 + 小标题 + 正文）；warning/error 仅改字色/图标，无底色 */
   .portal-detail-form-hint {
-    @apply text-13 font-normal leading-relaxed text-gray-text-5;
+    @apply m-0 flex items-center gap-1.5 text-13 font-normal leading-5 text-gray-text-7;
+  }
+
+  .portal-detail-form-hint-icon {
+    @apply size-3.5 shrink-0;
+  }
+
+  .portal-detail-form-hint-title {
+    @apply m-0 shrink-0 text-12 font-medium text-gray-text-5;
+  }
+
+  .portal-detail-form-hint-desc {
+    @apply m-0 min-w-0;
+  }
+
+  .portal-detail-form-hint--warning {
+    @apply text-semantic-warning-text;
+  }
+
+  .portal-detail-form-hint--warning .portal-detail-form-hint-title {
+    @apply text-semantic-warning-text;
+  }
+
+  .portal-detail-form-hint--error {
+    @apply text-semantic-error-text;
+  }
+
+  .portal-detail-form-hint--error .portal-detail-form-hint-title {
+    @apply text-semantic-error-text;
   }
 
   .portal-detail-subsection-heading {
     @apply flex items-center gap-2.5 text-16 font-semibold tracking-[-0.03em] text-gray-text-1;
   }
 
+  /** 详情页可编辑输入：42px 高 · strong 边线 · hover emphasis · focus normal ring（对齐 SSLTLDemo DETAIL_FORM_INPUT） */
   .portal-detail-form-input {
-    @apply h-[42px] w-full rounded-lg border border-solid border-gray-border-strong bg-background px-3 text-14 text-gray-text-2 outline-none transition;
+    @apply h-[42px] w-full rounded-input border border-solid border-gray-border-strong bg-background px-3 text-14 text-gray-text-2 outline-none transition placeholder:font-medium placeholder:text-gray-text-7;
   }
 
   .portal-detail-form-input:hover {
@@ -944,12 +1063,28 @@ html {
   }
 
   .portal-detail-form-input:focus {
-    border-color: color-mix(in srgb, var(--brand) 50%, var(--gray-border-strong));
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 12%, transparent);
+    border-color: var(--focus-border-normal);
+    box-shadow: var(--focus-ring-normal);
+  }
+
+  .portal-detail-form-input--error,
+  .portal-detail-form-input[aria-invalid="true"] {
+    border-color: var(--semantic-error-default);
+  }
+
+  .portal-detail-form-input--error:hover,
+  .portal-detail-form-input[aria-invalid="true"]:hover {
+    border-color: var(--semantic-error-default);
+  }
+
+  .portal-detail-form-input--error:focus,
+  .portal-detail-form-input[aria-invalid="true"]:focus {
+    border-color: var(--semantic-error-default);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--semantic-error-default) 18%, transparent);
   }
 
   .portal-detail-form-textarea {
-    @apply min-h-[88px] w-full resize-y rounded-lg border border-solid border-gray-border-strong bg-background px-3 py-2.5 text-14 leading-relaxed text-gray-text-2 outline-none transition;
+    @apply min-h-[88px] w-full resize-y rounded-input border border-solid border-gray-border-strong bg-background px-3 py-2.5 text-14 leading-relaxed text-gray-text-2 outline-none transition placeholder:font-medium placeholder:text-gray-text-7;
   }
 
   .portal-detail-form-textarea:hover {
@@ -957,7 +1092,33 @@ html {
   }
 
   .portal-detail-form-textarea:focus {
-    border-color: color-mix(in srgb, var(--brand) 50%, var(--gray-border-strong));
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 12%, transparent);
+    border-color: var(--focus-border-normal);
+    box-shadow: var(--focus-ring-normal);
+  }
+
+  .portal-detail-form-textarea--error,
+  .portal-detail-form-textarea[aria-invalid="true"] {
+    border-color: var(--semantic-error-default);
+  }
+
+  .portal-detail-form-textarea--error:hover,
+  .portal-detail-form-textarea[aria-invalid="true"]:hover {
+    border-color: var(--semantic-error-default);
+  }
+
+  .portal-detail-form-textarea--error:focus,
+  .portal-detail-form-textarea[aria-invalid="true"]:focus {
+    border-color: var(--semantic-error-default);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--semantic-error-default) 18%, transparent);
+  }
+
+  /** 只读多行展示（需求备注等锁定态） */
+  .portal-detail-form-readonly {
+    @apply min-h-[88px] whitespace-pre-wrap rounded-input border border-solid border-gray-border-light bg-gray-fill-light px-3 py-2.5 text-14 leading-relaxed text-gray-text-2;
+  }
+
+  /** 只读单行展示（无边框） */
+  .portal-detail-form-value {
+    @apply m-0 text-14 font-medium text-gray-text-2;
   }
 }

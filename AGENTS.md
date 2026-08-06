@@ -6,15 +6,20 @@
 
 本地 `pnpm dev` 后访问：
 
+- `/guide` — 如何使用（新项目接入与规范）
 - `/tokens` — 色板，对照 `theme.css` 变量
+- `/icons` — 图标规范（统一 Lucide）
+- `/radius` — 圆角规范
 - `/typography` — 字号阶梯
-- `/components` — `portal-*` 组合类
+- `/blank` — 组件预览（卡片入口；详情 `/blank/:id`；表单 `/blank/form`）
+- `/orders` — 典型列表页（详情 `/orders/:id`）
+- `/blank/detail-page` — 详情页框架（单栏 / 双栏 / 三栏；去内容）
 
 定稿 token 后维护 `docs/design-system.md`（与 `theme.css`、shell-demo 画廊同步）。
-2. [`docs/frameworks/app-shell.md`](frameworks/app-shell.md)
-3. [`docs/frameworks/list-page.md`](frameworks/list-page.md)
-4. [`docs/frameworks/detail-page.md`](frameworks/detail-page.md)
-5. [`docs/migration-checklist.md`](migration-checklist.md)
+2. [`docs/frameworks/app-shell.md`](docs/frameworks/app-shell.md)
+3. [`docs/frameworks/list-page.md`](docs/frameworks/list-page.md)
+4. [`docs/frameworks/detail-page.md`](docs/frameworks/detail-page.md)
+5. [`docs/migration-checklist.md`](docs/migration-checklist.md)
 
 ## 改 UI 约束
 

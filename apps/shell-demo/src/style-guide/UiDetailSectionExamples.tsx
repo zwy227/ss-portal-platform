@@ -1,12 +1,14 @@
 import { useState, type ReactNode } from "react";
-import { Anchor, Info, Warehouse } from "lucide-react";
+import { Anchor, Warehouse } from "lucide-react";
 import {
   PortalCheckboxCard,
   PortalDetailCard,
+  PortalDetailFormHint,
   PortalDetailFormLabel,
   PortalDetailPanelSurface,
   PortalDetailSection,
   PortalDetailSectionStack,
+  PortalDetailServicePriceLabel,
   PortalDetailSubsectionHeading,
   PortalRadioCard,
   PortalSelectionFieldset,
@@ -90,10 +92,9 @@ export function UiDetailSectionExamples() {
               <input type="text" className="portal-detail-form-input" defaultValue="40HQ" readOnly />
             </div>
           </div>
-          <p className="flex items-start gap-1.5 portal-detail-form-hint">
-            <Info className="mt-0.5 size-3.5 shrink-0 text-gray-text-7" aria-hidden />
-            温馨提示：若多个货柜派送地址不同，请按地址拆分下单。
-          </p>
+          <PortalDetailFormHint title="温馨提示">
+            若多个货柜派送地址不同，请按地址拆分下单。
+          </PortalDetailFormHint>
         </PortalDetailSection>
       </PortalDetailCard>
 
@@ -107,9 +108,7 @@ export function UiDetailSectionExamples() {
                 checked={prePull}
                 onCheckedChange={setPrePull}
                 meta={
-                  prePull ? (
-                    <span className="text-12 font-bold text-accent-orange">按实际发生结算</span>
-                  ) : null
+                  prePull ? <PortalDetailServicePriceLabel text="按实际发生结算" /> : null
                 }
               />
             </PortalSelectionFieldset>
@@ -123,7 +122,9 @@ export function UiDetailSectionExamples() {
                   value="liveUnload"
                   title="现场等待卸货 (Live Unload)"
                   meta={
-                    <span className="text-12 font-bold text-brand">1小时免费</span>
+                    deliveryMethod === "liveUnload" ? (
+                      <PortalDetailServicePriceLabel text="1小时免费" />
+                    ) : null
                   }
                   description="司机在目的地等待卸货，完成后直接带走空柜。"
                   checked={deliveryMethod === "liveUnload"}

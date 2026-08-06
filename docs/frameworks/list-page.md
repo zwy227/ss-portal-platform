@@ -16,7 +16,7 @@ AppShell
 
 ## 最小模板
 
-见 `apps/shell-demo/src/DemoListPage.tsx`。
+见 `apps/shell-demo/src/DemoListPage.tsx`（路由 `/orders`；侧栏「典型页面」）。
 
 ## 规则
 

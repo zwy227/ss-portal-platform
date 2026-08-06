@@ -54,11 +54,6 @@ export function BadgeStyleExamples() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="mb-3 text-13 text-gray-text-5">
-          基础类 <code className="text-13">portal-badge</code> · 圆角{" "}
-          <code className="text-13">rounded-badge</code>（2px / radius-xs）· 修饰符：{" "}
-          <code className="text-13">portal-badge--neutral | --success | --warning | --info</code>
-        </p>
         <div className="portal-list-card overflow-x-auto">
           <table className="w-full min-w-[36rem] border-collapse text-left text-13">
             <thead>

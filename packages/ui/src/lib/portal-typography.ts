@@ -3,6 +3,9 @@
 /** portal-brand-btn、portal-filter-input、portal-dropdown-item — 14px / 20px */
 export const portalUiText14 = "text-14";
 
+/** 紧凑小号 — 12px / 16px（Button xs） */
+export const portalUiText12 = "text-12";
+
 /** 表格、紧凑 UI — 13px / 16px（同 text-13-compact；text-13 为别名） */
 export const portalUiText13Compact = "text-13";
 

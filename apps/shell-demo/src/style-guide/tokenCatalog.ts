@@ -6,7 +6,7 @@ export type TokenSwatch = {
   tailwind?: string;
   usage?: string;
   /** Badge 区：用 portal-badge 组件预览，而非单色块 */
-  preview?: "badge";
+  preview?: "badge" | "glass";
   badgeVariant?: "neutral" | "success" | "warning" | "info";
   badgeLabel?: string;
 };
@@ -17,6 +17,28 @@ export const BRAND_TOKENS: TokenSwatch[] = [
   { name: "brand-disabled", cssVar: "--brand-disabled", tailwind: "bg-brand-disabled", usage: "禁用主按钮" },
   { name: "brand-light", cssVar: "--brand-light", tailwind: "bg-brand-light", usage: "标签浅底" },
   { name: "brand-xlight", cssVar: "--brand-xlight", tailwind: "bg-brand-xlight", usage: "极浅品牌底" },
+];
+
+/** 告警色 — warning（待办橙） */
+export const ALERT_TOKENS: TokenSwatch[] = [
+  {
+    name: "semantic-warning-default",
+    cssVar: "--semantic-warning-default",
+    tailwind: "bg-semantic-warning-default",
+    usage: "告警实心 · 待办态强调",
+  },
+  {
+    name: "semantic-warning-bg",
+    cssVar: "--semantic-warning-bg",
+    tailwind: "bg-semantic-warning-bg",
+    usage: "告警浅底 · Badge warning 底",
+  },
+  {
+    name: "semantic-warning-light",
+    cssVar: "--semantic-warning-light",
+    tailwind: "bg-semantic-warning-light",
+    usage: "告警次浅底",
+  },
 ];
 
 export const FOCUS_TOKENS: TokenSwatch[] = [
@@ -64,7 +86,14 @@ export const GRAY_FILL_TOKENS: TokenSwatch[] = [
 ];
 
 export const PAGE_BG_TOKENS: TokenSwatch[] = [
-  { name: "page-bg", cssVar: "--page-bg", tailwind: "bg-page-bg", usage: "主内容背景" },
+  { name: "page-bg", cssVar: "--page-bg", tailwind: "bg-page-bg", usage: "主容器背景色" },
+  {
+    name: "card-bg-glass",
+    cssVar: "--card-bg-glass",
+    tailwind: "bg-card-bg-glass backdrop-blur-card",
+    usage: "页面内导航及辅助卡片背景色",
+    preview: "glass",
+  },
 ];
 
 /** Badge 四档：灰 · 成功 · 待办(warning) · 普通(info) */
@@ -119,28 +148,28 @@ export const ACCENT_TOKENS: TokenSwatch[] = [
 ];
 
 export const TYPOGRAPHY_SAMPLES = [
-  { token: "text-11", size: "11px", leading: "16px", sample: "副标题 meta", className: "text-11" },
-  { token: "text-12", size: "12px", leading: "16px", sample: "表单说明", className: "text-12" },
+  { token: "text-11", size: "11px", leading: "16px", sample: "角标、极紧凑 meta", className: "text-11" },
+  { token: "text-12", size: "12px", leading: "16px", sample: "Badge、顶栏用户、集装箱 meta、时间戳", className: "text-12" },
   {
     token: "text-13-compact",
     size: "13px",
     leading: "16px",
-    sample: "表格、紧凑 UI（text-13 为别名）",
+    sample: "表格、按钮、文件名、右侧卡标题、Tooltip",
     className: "text-13-compact",
   },
   {
     token: "text-13-reading",
     size: "13px",
     leading: "20px",
-    sample: "可读正文（与 text-14 同行高）",
+    sample: "详情默认正文 · 字段、待办、进展、侧栏二级",
     className: "text-13-reading",
   },
-  { token: "text-14", size: "14px", leading: "20px", sample: "筛选、分页、下拉菜单", className: "text-14" },
-  { token: "text-15", size: "15px", leading: "20px", sample: "侧栏菜单", className: "text-15" },
-  { token: "text-16", size: "16px", leading: "24px", sample: "列表 Tab", className: "text-16" },
-  { token: "text-18", size: "18px", leading: "28px", sample: "页面标题", className: "text-18" },
-  { token: "text-22", size: "22px", leading: "28px", sample: "详情大标题", className: "text-22" },
-  { token: "text-32", size: "32px", leading: "40px", sample: "询价 Hero", className: "text-32" },
+  { token: "text-14", size: "14px", leading: "20px", sample: "里程碑节点、模块标题 · 筛选 / 分页 / 下拉", className: "text-14" },
+  { token: "text-15", size: "15px", leading: "20px", sample: "侧栏一级导航", className: "text-15" },
+  { token: "text-16", size: "16px", leading: "24px", sample: "列表 Tab、详情 Section 标题", className: "text-16" },
+  { token: "text-18", size: "18px", leading: "28px", sample: "页面标题（列表 / 详情）", className: "text-18" },
+  { token: "text-22", size: "22px", leading: "28px", sample: "详情页强调大标题", className: "text-22" },
+  { token: "text-32", size: "32px", leading: "40px", sample: "询价 Hero 级标题", className: "text-32" },
 ] as const;
 
 export type RadiusToken = {
