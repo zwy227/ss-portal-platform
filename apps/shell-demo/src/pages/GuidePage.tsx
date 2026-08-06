@@ -3,6 +3,9 @@ import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-gui
 
 type SetupBlock = { label?: string; code: string };
 
+/** Public 仓库：https://github.com/zwy227/ss-portal-platform */
+const REPO = "zwy227/ss-portal-platform";
+
 const SETUP_STEPS: {
   title: string;
   why: string;
@@ -10,29 +13,30 @@ const SETUP_STEPS: {
   note: string | null;
 }[] = [
   {
-    title: "① 安装三个包（独立业务仓）",
-    why: "业务 App 一般不在本 monorepo 里。先 clone / 拉下 ss-portal-platform，再在自己的 App 里用 pnpm link 链上三个包；不要复制 theme.css。",
+    title: "① 从 GitHub 接到业务 App",
+    why: `仓库已公开：https://github.com/${REPO}。按下面「推荐」clone 后 link 即可。不要复制 theme.css。`,
     blocks: [
       {
-        label: "方式 A：pnpm link（本地联调）",
-        code: `# 假设设计系统在 ~/ss-portal-platform，业务 App 在 ~/my-app
+        label: "推荐：clone 仓库 + pnpm link（当前最稳）",
+        code: `# 1）拿到设计系统源码（任意目录）
+git clone https://github.com/${REPO}.git
+cd ss-portal-platform
+pnpm install
 
-# 1）在设计系统各包目录注册到本机
-cd ~/ss-portal-platform/packages/tokens && pnpm link --global
-cd ~/ss-portal-platform/packages/shell  && pnpm link --global
-cd ~/ss-portal-platform/packages/ui     && pnpm link --global
+# 2）把三个包注册到本机
+cd packages/tokens && pnpm link --global
+cd ../shell && pnpm link --global
+cd ../ui && pnpm link --global
 
-# 2）在业务 App 根目录链上这三个包
+# 3）在业务 App 根目录链上
 cd ~/my-app
 pnpm link --global @ss/portal-tokens
 pnpm link --global @ss/portal-shell
 pnpm link --global @ss/portal-ui
-
-# 图标库仍从 registry 安装
 pnpm add lucide-react`,
       },
       {
-        label: "方式 B：package.json 写 file: 路径（可提交进仓库）",
+        label: "可选：package.json 写 file:（两仓放同级目录时）",
         code: `{
   "dependencies": {
     "@ss/portal-tokens": "file:../ss-portal-platform/packages/tokens",
@@ -42,11 +46,11 @@ pnpm add lucide-react`,
   }
 }
 
-# 改完后在业务 App 根目录执行
+# 业务 App 根目录
 pnpm install`,
       },
     ],
-    note: "仅当业务 App 与设计系统同属一个 pnpm workspace 时，才用 \"workspace:*\"。路径按你本机实际目录改。",
+    note: "你只要把 GitHub 链接发给对方即可。Git 子路径依赖（github:…&path:packages/…）目前因包内仍是 workspace:*，容易装不全，等正式发包后再用。同属一个 pnpm workspace 时才写 workspace:*。",
   },
   {
     title: "② 引入全局样式",
@@ -56,7 +60,7 @@ pnpm install`,
         code: `@import "tailwindcss" source(none);
 @config "../tailwind.config.js";
 @source "./**/*.{js,ts,jsx,tsx}";
-/* 路径指到本机 ss-portal-platform 里的包源码（按实际位置改） */
+/* 路径指到本机 clone 下来的 ss-portal-platform（按实际位置改） */
 @source "../../ss-portal-platform/packages/shell/src/**/*.{js,ts,jsx,tsx}";
 @source "../../ss-portal-platform/packages/ui/src/**/*.{js,ts,jsx,tsx}";
 @import "@ss/portal-tokens/globals.css";`,
@@ -188,7 +192,7 @@ export function GuidePage() {
 
         <StyleGuideSection
           title="新项目怎么接（四步）"
-          description="默认按独立业务仓（非 monorepo）写。做完这四步，页面就能套上统一壳和主题。"
+          description="仓库已公开在 GitHub。默认按独立业务仓接入：clone 后 link，再配样式与 AppShell。"
         >
           <div className="portal-list-card flex flex-col divide-y divide-gray-border-light">
             {SETUP_STEPS.map((step) => (
@@ -288,7 +292,8 @@ export function GuidePage() {
                 </li>
                 <li>
                   <code className="text-13">docs/frameworks/list-page.md</code> /
-                  <code className="text-13"> detail-page.md</code> — 列表与详情结构
+                  <code className="text-13"> detail-page.md</code> /
+                  <code className="text-13"> form-page.md</code> — 列表、详情与表单结构
                 </li>
                 <li>
                   <code className="text-13">docs/migration-checklist.md</code> — 接入检查清单

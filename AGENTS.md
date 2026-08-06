@@ -14,12 +14,14 @@
 - `/blank` — 组件预览（卡片入口；详情 `/blank/:id`；表单 `/blank/form`）
 - `/orders` — 典型列表页（详情 `/orders/:id`）
 - `/blank/detail-page` — 详情页框架（单栏 / 双栏 / 三栏；去内容）
+- `/blank/form-page` — 表单页框架（白卡 Section 堆叠 + 页级 / 卡底操作；去内容）
 
 定稿 token 后维护 `docs/design-system.md`（与 `theme.css`、shell-demo 画廊同步）。
 2. [`docs/frameworks/app-shell.md`](docs/frameworks/app-shell.md)
 3. [`docs/frameworks/list-page.md`](docs/frameworks/list-page.md)
 4. [`docs/frameworks/detail-page.md`](docs/frameworks/detail-page.md)
-5. [`docs/migration-checklist.md`](docs/migration-checklist.md)
+5. [`docs/frameworks/form-page.md`](docs/frameworks/form-page.md)
+6. [`docs/migration-checklist.md`](docs/migration-checklist.md)
 
 ## 改 UI 约束
 

@@ -50,6 +50,10 @@ function filesToDemoUploads(files: readonly File[], withUploadedAt = true): Demo
   }));
 }
 
+function filesFromFileList(list: FileList | null | undefined): File[] {
+  return list?.length ? Array.from(list) : [];
+}
+
 /**
  * 样式一：拖拽 + 批量上传
  * 对齐 SSLTLDemo `ContainerVesselDocumentsUploadField`
@@ -248,24 +252,29 @@ function AttachmentEmptyRow({ ariaLabel }: { ariaLabel: string }) {
  * 对齐 Drayage-SS-APP `MultiAttachmentUploadField`
  *（TransportExecutionSection.tsx）
  */
-export function FileUploadClickExample() {
+export function ClickAttachmentUploadField({
+  label = "附件",
+  className,
+}: {
+  label?: string;
+  className?: string;
+}) {
   const labelId = useId();
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<DemoUploadFile[]>([]);
-  const label = "Buck Slip 承运商版本";
   const hasFiles = files.length > 0;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const picked = e.target.files;
-    if (picked?.length) {
+    const picked = filesFromFileList(e.target.files);
+    if (picked.length) {
       setFiles((prev) => [...prev, ...filesToDemoUploads(picked, false)]);
     }
     e.target.value = "";
   };
 
   return (
-    <div className="min-w-0 max-w-xl">
+    <div className={["min-w-0", className].filter(Boolean).join(" ")}>
       <span id={labelId} className="mb-2 block text-13 font-medium text-gray-text-4">
         {label}
       </span>
@@ -302,4 +311,9 @@ export function FileUploadClickExample() {
       </div>
     </div>
   );
+}
+
+/** 组件预览「文件上传 · 样式二」入口 */
+export function FileUploadClickExample() {
+  return <ClickAttachmentUploadField label="Buck Slip 承运商版本" className="max-w-xl" />;
 }

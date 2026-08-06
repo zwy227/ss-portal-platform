@@ -25,7 +25,7 @@ export function BlankPage() {
       >
         <StyleGuideCategory
           title="页面框架"
-          description="列表页与详情页的布局骨架（去业务内容）；对齐 docs/frameworks。"
+          description="列表页、详情页与表单页的布局骨架（去业务内容）；对齐 docs/frameworks。"
         >
           <EntryGrid entries={PAGE_FRAMEWORK_ENTRIES} />
         </StyleGuideCategory>

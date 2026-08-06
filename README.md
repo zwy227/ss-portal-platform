@@ -35,18 +35,19 @@ pnpm dev          # 启动 shell-demo → http://localhost:5174
 
 ## 消费方接入
 
-```json
-{
-  "dependencies": {
-    "@ss/portal-tokens": "workspace:*",
-    "@ss/portal-shell": "workspace:*"
-  }
-}
+仓库公开：[https://github.com/zwy227/ss-portal-platform](https://github.com/zwy227/ss-portal-platform)
+
+对方 **clone → `pnpm install` → `pnpm link`** 接到业务 App（详见画廊 `/guide`）。
+
+```bash
+git clone https://github.com/zwy227/ss-portal-platform.git
+cd ss-portal-platform && pnpm install
+# 再按 /guide「①」把 tokens / shell / ui link 到业务仓
 ```
 
 ```tsx
-import "@ss/portal-tokens";
 import { AppShell } from "@ss/portal-shell";
+import { Button } from "@ss/portal-ui";
 ```
 
-详见 [`docs/migration-checklist.md`](docs/migration-checklist.md)。
+同属本 monorepo 时仍可用 `"workspace:*"`。细则见 [`docs/migration-checklist.md`](docs/migration-checklist.md)。

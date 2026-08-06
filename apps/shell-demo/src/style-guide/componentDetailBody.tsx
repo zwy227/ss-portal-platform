@@ -20,6 +20,12 @@ import {
   DetailPageTwoColumnExample,
 } from "./DetailPageFrameworkExamples";
 import {
+  FormPageSlotSpecExample,
+  FormPageStackedCardExample,
+  FormPageStandardExample,
+  FormPageWidthExample,
+} from "./FormPageFrameworkExamples";
+import {
   ListPageCardGridExample,
   ListPageSlotSpecExample,
   ListPageWithoutTabsExample,
@@ -333,8 +339,8 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
         title="5 · 白卡 Section 组合"
         description={
           <>
-            四种白卡模式：标准 Section、带小标题及分组、带底部操作、履约只读信息卡（仓库预约）。白卡叠在{" "}
-            <code className="text-13">page-bg</code> 上以体现层级；各模式说明见下方标签。仓库预约含{" "}
+            两种白卡模式：标准 Section、带大标题 / 子标题及底部操作按钮。白卡叠在{" "}
+            <code className="text-13">page-bg</code> 上以体现层级；各模式说明见下方标签。后者含{" "}
             <code className="text-13">@container</code> 信息字段自适应规则。
           </>
         }
@@ -590,6 +596,70 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
         description="三栏左导航：类型一扁平小标题；类型二多对象折叠。"
       >
         <DetailPageSessionTaskNavExample />
+      </DetailBlock>
+    </div>
+  ),
+
+  "form-page": (
+    <div className="flex flex-col gap-4">
+      <DetailBlock
+        title="1 · 标准（多白卡 + 页级底栏）"
+        description={
+          <>
+            顶栏（返回 / 标题 /{" "}
+            <SpecLink to={componentDetailPath("badge")}>状态</SpecLink>
+            ）+{" "}
+            <SpecLink to={componentDetailPath("form")}>PortalDetailCard</SpecLink>
+            {" "}纵向堆叠（gap-3）+ 页级底栏{" "}
+            <SpecLink to={componentDetailPath("button")}>操作</SpecLink>
+            。对齐完善需求 / 确认页。
+          </>
+        }
+      >
+        <FormPageStandardExample />
+      </DetailBlock>
+      <DetailBlock
+        title="2 · 同卡多 Section + 卡底操作"
+        description={
+          <>
+            单卡内{" "}
+            <SpecLink to={componentDetailPath("form")}>PortalDetailSectionStack</SpecLink>
+            {" "}+{" "}
+            <SpecLink to={componentDetailPath("form")}>PortalDetailCardFooter</SpecLink>
+            （局部保存场景，如仓库预约）。
+          </>
+        }
+      >
+        <FormPageStackedCardExample />
+      </DetailBlock>
+      <DetailBlock
+        title="3 · 宽度"
+        description={
+          <>
+            客户端表单常 <code className="text-13">max-w-3xl</code>{" "}
+            居中；亦可全宽对齐{" "}
+            <SpecLink to={componentDetailPath("detail-page")}>详情页单栏</SpecLink>
+            。字段原子见{" "}
+            <SpecLink to={componentDetailPath("form")}>表单组件</SpecLink>。
+          </>
+        }
+      >
+        <FormPageWidthExample />
+      </DetailBlock>
+      <DetailBlock
+        title="4 · DOM 槽位"
+        description={
+          <>
+            对齐 <code className="text-13">docs/frameworks/form-page.md</code>
+            ；控件细则见{" "}
+            <SpecLink to={componentDetailPath("form")}>
+              <code className="text-13">/blank/form</code>
+            </SpecLink>
+            。
+          </>
+        }
+      >
+        <FormPageSlotSpecExample />
       </DetailBlock>
     </div>
   ),

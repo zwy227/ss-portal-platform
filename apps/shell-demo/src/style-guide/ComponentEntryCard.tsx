@@ -39,7 +39,7 @@ export function getComponentEntry(id: string | undefined): ComponentEntry | unde
   return COMPONENT_ENTRIES.find((e) => e.id === resolved);
 }
 
-/** 页面框架入口 — 列表 / 详情布局 */
+/** 页面框架入口 — 列表 / 详情 / 表单布局 */
 export const PAGE_FRAMEWORK_ENTRIES: ComponentEntry[] = [
   {
     id: "list-page",
@@ -85,6 +85,42 @@ export const PAGE_FRAMEWORK_ENTRIES: ComponentEntry[] = [
           <div className="rounded-sm bg-white/40 py-3 ring-1 ring-gray-border-light" aria-hidden />
           <div className="rounded-sm bg-background py-3 shadow-sm" aria-hidden />
           <div className="rounded-sm bg-background py-3 shadow-sm" aria-hidden />
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "form-page",
+    title: "表单页框架",
+    description: "顶栏 + 白卡 Section 堆叠 + 页级 / 卡底操作（去内容）。",
+    source: "portal-*",
+    icon: FileText,
+    preview: (
+      <div className="pointer-events-none flex w-full max-w-[220px] flex-col gap-1">
+        <div className="flex items-center gap-1" aria-hidden>
+          <span className="h-2 w-6 rounded-sm bg-gray-fill-normal" />
+          <span className="h-2.5 w-1/3 rounded-sm bg-gray-fill-strong" />
+          <span className="h-2 w-8 rounded-full bg-gray-fill-normal" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="rounded-sm bg-background p-2 shadow-sm" aria-hidden>
+            <span className="mb-1.5 block h-2 w-1/3 rounded-sm bg-gray-fill-strong" />
+            <div className="grid grid-cols-2 gap-1">
+              <span className="h-3 rounded-sm bg-page-bg ring-1 ring-gray-border-light" />
+              <span className="h-3 rounded-sm bg-page-bg ring-1 ring-gray-border-light" />
+            </div>
+          </div>
+          <div className="rounded-sm bg-background p-2 shadow-sm" aria-hidden>
+            <span className="mb-1.5 block h-2 w-1/4 rounded-sm bg-gray-fill-strong" />
+            <span className="block h-3 w-full rounded-sm bg-page-bg ring-1 ring-gray-border-light" />
+          </div>
+        </div>
+        <div
+          className="flex justify-end gap-1 rounded-sm border-t border-gray-border-light bg-background px-1.5 py-1"
+          aria-hidden
+        >
+          <span className="h-2 w-8 rounded-sm bg-gray-fill-normal" />
+          <span className="h-2 w-10 rounded-sm bg-gray-fill-strong" />
         </div>
       </div>
     ),

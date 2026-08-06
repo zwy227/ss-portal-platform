@@ -4,11 +4,10 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { toast } from "sonner";
 import {
   Button,
+  PortalAntDateRangePicker,
   PortalCheckboxCard,
-  PortalDetailBlockTitle,
   PortalDetailCard,
   PortalDetailCardFooter,
-  PortalDetailDividedStack,
   PortalDetailFormHint,
   PortalDetailFormLabel,
   PortalDetailSection,
@@ -25,7 +24,9 @@ import {
   portalSelectionCardInteractionClass,
   portalSelectionCardRadiusClass,
   portalSelectionCardSelectedClass,
+  type PortalAntDateRangePickerProps,
 } from "@ss/portal-ui";
+import { ClickAttachmentUploadField } from "./FileUploadStyleExamples";
 
 const CUSTOMER_OPTIONS = [
   { value: "CUST-1001", label: "CUST-1001" },
@@ -498,6 +499,8 @@ const WAREHOUSE_APPOINTMENT_DEMO_ETA_DAYS = 10;
 /** 履约「仓库预约」：对齐 Drayage TradeDetailBlankSectionCard + DrayDetailWhiteCard */
 function WarehouseAppointmentCompositionExample() {
   const [editing, setEditing] = useState(false);
+  const [appointmentRange, setAppointmentRange] =
+    useState<PortalAntDateRangePickerProps["value"]>(null);
   const [confirmationNumber, setConfirmationNumber] = useState("");
   const [remarks, setRemarks] = useState("");
 
@@ -590,37 +593,48 @@ function WarehouseAppointmentCompositionExample() {
 
             {editing ? (
               <div className="flex flex-col gap-6">
-                <div className="min-w-0 w-[200px] min-[1440px]:w-[260px]">
-                  <PortalDetailFormLabel required>预约时间</PortalDetailFormLabel>
-                  <input
-                    type="text"
-                    className="portal-detail-form-input"
-                    defaultValue=""
-                    placeholder="YYYY-MM-DD  HH:mm – HH:mm"
-                    readOnly
-                    aria-label="预约时间（示例占位）"
+                <div className="min-w-0 max-w-md">
+                  <PortalDetailFormLabel id="demo-wh-appt-time-label" required>
+                    预约时间
+                  </PortalDetailFormLabel>
+                  <PortalAntDateRangePicker
+                    portalVariant="form"
+                    showTime={{ format: "HH:mm" }}
+                    format="YYYY-MM-DD HH:mm"
+                    value={appointmentRange}
+                    onChange={(next) => setAppointmentRange(next)}
+                    className="w-full"
+                    placeholder={["开始时间", "结束时间"]}
+                    aria-labelledby="demo-wh-appt-time-label"
                   />
                 </div>
                 <div className="min-w-0 w-[200px] min-[1440px]:w-[260px]">
-                  <PortalDetailFormLabel>预约确认码/ISA</PortalDetailFormLabel>
+                  <PortalDetailFormLabel id="demo-wh-isa-label">预约确认码/ISA</PortalDetailFormLabel>
                   <input
+                    id="demo-wh-isa"
                     type="text"
                     className="portal-detail-form-input"
                     value={confirmationNumber}
                     onChange={(event) => setConfirmationNumber(event.target.value)}
                     placeholder="请输入预约确认码/ISA"
                     autoComplete="off"
+                    aria-labelledby="demo-wh-isa-label"
                   />
                 </div>
-                <div className="min-w-0">
-                  <PortalDetailFormLabel>凭证说明</PortalDetailFormLabel>
-                  <textarea
-                    className="portal-detail-form-textarea"
-                    rows={3}
-                    value={remarks}
-                    onChange={(event) => setRemarks(event.target.value)}
-                    placeholder="请补充凭证来源、确认内容或其他必要说明"
-                  />
+                <div className="flex min-w-0 max-w-xl flex-col gap-4">
+                  <div className="min-w-0">
+                    <PortalDetailFormLabel id="demo-wh-remark-label">备注</PortalDetailFormLabel>
+                    <textarea
+                      id="demo-wh-remark"
+                      className="portal-detail-form-textarea"
+                      rows={3}
+                      value={remarks}
+                      onChange={(event) => setRemarks(event.target.value)}
+                      placeholder="请补充凭证来源、确认内容或其他必要说明"
+                      aria-labelledby="demo-wh-remark-label"
+                    />
+                  </div>
+                  <ClickAttachmentUploadField label="上传附件" />
                 </div>
               </div>
             ) : (
@@ -721,13 +735,11 @@ function WarehouseAppointmentCompositionExample() {
   );
 }
 
-/** 白卡 + Section：货柜及运输服务 / 附加服务 / 分块小标题 / 底部操作 / 仓库预约（对齐 TradeDetail） */
+/** 白卡 + Section：标准表单卡 / 大标题·子标题·底部操作（仓库预约） */
 export function FormSectionCompositionExample() {
   const [cargoAttrs, setCargoAttrs] = useState<Set<string>>(() => new Set());
   const [prePull, setPrePull] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState("liveUnload");
-  const [slaEditing, setSlaEditing] = useState(false);
-  const [slaNote, setSlaNote] = useState("提柜后 48 小时内完成派送；节假日顺延至下一工作日。");
 
   const toggleAttr = (id: string) => {
     setCargoAttrs((prev) => {
@@ -741,223 +753,106 @@ export function FormSectionCompositionExample() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex max-w-2xl flex-col gap-5">
-      {/* 标准 Section 白卡 */}
-      <div className="flex flex-col gap-2">
-        <CompositionPatternLabel
-          title="标准 Section 白卡"
-          hint={
-            <>
-              <code className="text-12">PortalDetailCard</code> +{" "}
-              <code className="text-12">PortalDetailSection</code>
-              ；同卡多 Section 用 <code className="text-12">PortalDetailSectionStack</code>
-            </>
-          }
-        />
-        <div className="flex flex-col gap-3">
-          <PortalDetailCard>
-            <PortalDetailSection title="货柜及运输服务" titleId="demo-form-cargo-heading">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <PortalDetailFormLabel required>货柜数量</PortalDetailFormLabel>
-                  <input type="text" className="portal-detail-form-input" defaultValue="1" />
-                </div>
-                <div>
-                  <PortalDetailFormLabel required>货柜尺寸</PortalDetailFormLabel>
-                  <input type="text" className="portal-detail-form-input" defaultValue="40'ST" />
-                </div>
-              </div>
-              <div>
-                <PortalDetailFormLabel>货品及货柜属性</PortalDetailFormLabel>
-                <CompactCargoAttrCheckboxes selected={cargoAttrs} onToggle={toggleAttr} />
-              </div>
-            </PortalDetailSection>
-          </PortalDetailCard>
-
-          <PortalDetailCard>
-            <PortalDetailSectionStack>
-              <PortalDetailSection title="附加服务" titleId="demo-form-addon-heading">
-                <PortalSelectionFieldset legend="提柜服务">
-                  <PortalCheckboxCard
-                    title="货柜预提"
-                    description="送货日期晚于码头最后免仓期（LFD）时，可提前将货柜提出并转移至外堆场暂存。"
-                    checked={prePull}
-                    onCheckedChange={setPrePull}
-                    meta={
-                      prePull ? <PortalDetailServicePriceLabel text="按实际发生结算" /> : null
-                    }
-                  />
-                </PortalSelectionFieldset>
-
-                <PortalSelectionFieldset legend="交货方式">
-                  <div role="radiogroup" aria-label="交货方式" className="flex flex-col gap-2">
-                    <PortalRadioCard
-                      name="demo-form-compose-delivery"
-                      value="liveUnload"
-                      title="现场等卸"
-                      meta={
-                        deliveryMethod === "liveUnload" ? (
-                          <PortalDetailServicePriceLabel text="1小时免费，超期+$80/小时（按实结算）" />
-                        ) : null
-                      }
-                      description="司机在目的地等待卸货，完成后直接带走空柜。收货地需具备即时卸货能力。"
-                      checked={deliveryMethod === "liveUnload"}
-                      onChange={() => setDeliveryMethod("liveUnload")}
-                    />
-                    <PortalRadioCard
-                      name="demo-form-compose-delivery"
-                      value="dropOff"
-                      title="甩柜还空"
-                      description="司机将重柜卸下即离开，后续另排车提取空柜。"
-                      checked={deliveryMethod === "dropOff"}
-                      onChange={() => setDeliveryMethod("dropOff")}
-                    />
+        {/* 标准 Section 白卡 */}
+        <div className="flex flex-col gap-2">
+          <CompositionPatternLabel
+            title="标准 Section 白卡"
+            hint={
+              <>
+                <code className="text-12">PortalDetailCard</code> +{" "}
+                <code className="text-12">PortalDetailSection</code>
+                ；同卡多 Section 用 <code className="text-12">PortalDetailSectionStack</code>
+              </>
+            }
+          />
+          <div className="flex flex-col gap-3">
+            <PortalDetailCard>
+              <PortalDetailSection title="货柜及运输服务" titleId="demo-form-cargo-heading">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <PortalDetailFormLabel required>货柜数量</PortalDetailFormLabel>
+                    <input type="text" className="portal-detail-form-input" defaultValue="1" />
                   </div>
-                </PortalSelectionFieldset>
-
-                <PortalSelectionFieldset legend="其他" contentClassName="flex flex-col gap-2.5">
-                  <PortalIncludedServiceItem
-                    title="码头预约"
-                    tip="已包含码头提柜预约协调。"
-                    price="+$55/柜"
-                  />
-                  <PortalIncludedServiceItem
-                    title="车架使用"
-                    tip="已包含标准车架使用时长，超期按天收取附加费。"
-                    price="3天免费，超期+$45/天 (按实结算)"
-                  />
-                  <PortalIncludedServiceItem
-                    title="派送预约"
-                    tip="已包含派送预约协调与收货方提前通知。"
-                    price="免费"
-                  />
-                </PortalSelectionFieldset>
+                  <div>
+                    <PortalDetailFormLabel required>货柜尺寸</PortalDetailFormLabel>
+                    <input type="text" className="portal-detail-form-input" defaultValue="40'ST" />
+                  </div>
+                </div>
+                <div>
+                  <PortalDetailFormLabel>货品及货柜属性</PortalDetailFormLabel>
+                  <CompactCargoAttrCheckboxes selected={cargoAttrs} onToggle={toggleAttr} />
+                </div>
               </PortalDetailSection>
-            </PortalDetailSectionStack>
-          </PortalDetailCard>
+            </PortalDetailCard>
+
+            <PortalDetailCard>
+              <PortalDetailSectionStack>
+                <PortalDetailSection title="附加服务" titleId="demo-form-addon-heading">
+                  <PortalSelectionFieldset legend="提柜服务">
+                    <PortalCheckboxCard
+                      title="货柜预提"
+                      description="送货日期晚于码头最后免仓期（LFD）时，可提前将货柜提出并转移至外堆场暂存。"
+                      checked={prePull}
+                      onCheckedChange={setPrePull}
+                      meta={
+                        prePull ? <PortalDetailServicePriceLabel text="按实际发生结算" /> : null
+                      }
+                    />
+                  </PortalSelectionFieldset>
+
+                  <PortalSelectionFieldset legend="交货方式">
+                    <div role="radiogroup" aria-label="交货方式" className="flex flex-col gap-2">
+                      <PortalRadioCard
+                        name="demo-form-compose-delivery"
+                        value="liveUnload"
+                        title="现场等卸"
+                        meta={
+                          deliveryMethod === "liveUnload" ? (
+                            <PortalDetailServicePriceLabel text="1小时免费，超期+$80/小时（按实结算）" />
+                          ) : null
+                        }
+                        description="司机在目的地等待卸货，完成后直接带走空柜。收货地需具备即时卸货能力。"
+                        checked={deliveryMethod === "liveUnload"}
+                        onChange={() => setDeliveryMethod("liveUnload")}
+                      />
+                      <PortalRadioCard
+                        name="demo-form-compose-delivery"
+                        value="dropOff"
+                        title="甩柜还空"
+                        description="司机将重柜卸下即离开，后续另排车提取空柜。"
+                        checked={deliveryMethod === "dropOff"}
+                        onChange={() => setDeliveryMethod("dropOff")}
+                      />
+                    </div>
+                  </PortalSelectionFieldset>
+
+                  <PortalSelectionFieldset legend="其他" contentClassName="flex flex-col gap-2.5">
+                    <PortalIncludedServiceItem
+                      title="码头预约"
+                      tip="已包含码头提柜预约协调。"
+                      price="+$55/柜"
+                    />
+                    <PortalIncludedServiceItem
+                      title="车架使用"
+                      tip="已包含标准车架使用时长，超期按天收取附加费。"
+                      price="3天免费，超期+$45/天 (按实结算)"
+                    />
+                    <PortalIncludedServiceItem
+                      title="派送预约"
+                      tip="已包含派送预约协调与收货方提前通知。"
+                      price="免费"
+                    />
+                  </PortalSelectionFieldset>
+                </PortalDetailSection>
+              </PortalDetailSectionStack>
+            </PortalDetailCard>
+          </div>
         </div>
       </div>
 
-      {/* 带小标题及分组卡片 */}
+      {/* 带大标题、子标题，及底部操作按钮（全宽以演示 @container 1/2/3 列） */}
       <div className="flex flex-col gap-2">
-        <CompositionPatternLabel
-          title="带小标题及分组卡片"
-          hint={
-            <>
-              <code className="text-12">PortalDetailBlockTitle</code> +{" "}
-              <code className="text-12">PortalDetailDividedStack</code>
-              （卡内分块 + 顶部分割线）
-            </>
-          }
-        />
-        <PortalDetailCard>
-          <PortalDetailSection title="卡片标题" titleId="demo-form-card-heading">
-            <PortalDetailDividedStack>
-              <div aria-labelledby="demo-form-group-title">
-                <PortalDetailBlockTitle titleId="demo-form-group-title">
-                  分组标题
-                </PortalDetailBlockTitle>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <PortalDetailFormLabel>运输模式</PortalDetailFormLabel>
-                    <p className="portal-detail-form-value">码头提柜 → 仓库派送</p>
-                  </div>
-                  <div>
-                    <PortalDetailFormLabel>预计时效</PortalDetailFormLabel>
-                    <p className="portal-detail-form-value">2–3 个工作日</p>
-                  </div>
-                </div>
-              </div>
-              <div aria-labelledby="demo-form-group-title-2">
-                <PortalDetailBlockTitle titleId="demo-form-group-title-2">
-                  供应商信息
-                </PortalDetailBlockTitle>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <PortalDetailFormLabel>承运商</PortalDetailFormLabel>
-                    <p className="portal-detail-form-value">Pacific Drayage Co.</p>
-                  </div>
-                  <div>
-                    <PortalDetailFormLabel>联系人</PortalDetailFormLabel>
-                    <p className="portal-detail-form-value">Alex Chen</p>
-                  </div>
-                </div>
-              </div>
-            </PortalDetailDividedStack>
-          </PortalDetailSection>
-        </PortalDetailCard>
-      </div>
-
-      {/* 带底部操作卡片 */}
-      <div className="flex flex-col gap-2">
-        <CompositionPatternLabel
-          title="带底部操作卡片"
-          hint={
-            <>
-              <code className="text-12">PortalDetailCardFooter</code>
-              （顶部分割线 + 右对齐取消 / 保存 / 修改）
-            </>
-          }
-        />
-        <PortalDetailCard>
-          <PortalDetailSection title="SLA" titleId="demo-form-sla-heading">
-            <div>
-              <PortalDetailFormLabel>履约说明</PortalDetailFormLabel>
-              {slaEditing ? (
-                <textarea
-                  className="portal-detail-form-textarea"
-                  rows={3}
-                  value={slaNote}
-                  onChange={(event) => setSlaNote(event.target.value)}
-                />
-              ) : (
-                <p className="portal-detail-form-readonly">{slaNote}</p>
-              )}
-            </div>
-          </PortalDetailSection>
-          <PortalDetailCardFooter>
-            {slaEditing ? (
-              <>
-                <Button type="button" variant="outline" onClick={() => setSlaEditing(false)}>
-                  取消
-                </Button>
-                <button
-                  type="button"
-                  className="portal-brand-btn"
-                  onClick={() => setSlaEditing(false)}
-                >
-                  保存
-                </button>
-              </>
-            ) : (
-              <Button type="button" variant="outline" onClick={() => setSlaEditing(true)}>
-                <Pencil className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
-                修改
-              </Button>
-            )}
-          </PortalDetailCardFooter>
-        </PortalDetailCard>
-      </div>
-    </div>
-
-      {/* 履约只读信息卡 · 仓库预约（全宽以演示 @container 1/2/3 列） */}
-      <div className="flex flex-col gap-2">
-        <CompositionPatternLabel
-          title="履约只读信息卡 · 仓库预约"
-          hint={
-            <>
-              对齐 Drayage{" "}
-              <code className="text-12">TradeDetailBlankSectionCard</code>（title=仓库预约）+{" "}
-              <code className="text-12">DrayDetailWhiteCard</code>
-              ；壳层用 <code className="text-12">PortalDetailCard</code> +{" "}
-              <code className="text-12">PortalDetailCardFooter</code>
-              。只读字段网格：
-              <code className="text-12">portalDetailInfoFieldsClass</code>（父级{" "}
-              <code className="text-12">@container</code>
-              ；规则见下方「自适应」与{" "}
-              <code className="text-12">docs/frameworks/detail-page.md</code>）。
-            </>
-          }
-        />
+        <CompositionPatternLabel title="带大标题、子标题，及底部操作按钮" />
         <WarehouseAppointmentCompositionExample />
         <div className="rounded-md border border-gray-border-light bg-background px-3 py-2.5 text-12 leading-relaxed text-gray-text-5">
           <p className="m-0 mb-1 font-medium text-gray-text-3">信息字段自适应规则</p>
@@ -1104,15 +999,14 @@ export function FormUsageGuide() {
             </>,
             <>
               卡内小标题 + 分割线：<code className="text-13">PortalDetailBlockTitle</code> +{" "}
-              <code className="text-13">PortalDetailDividedStack</code>（卡片标题 + 分组标题）
+              <code className="text-13">PortalDetailDividedStack</code>
             </>,
             <>
               底部操作：<code className="text-13">PortalDetailCardFooter</code>（取消 /
               保存 / 修改）
             </>,
             <>
-              组合示例四种模式 →「白卡 Section 组合」：标准 Section 白卡 / 带小标题及分组 /
-              带底部操作 / 履约只读信息卡（仓库预约）；原子对照也可看组件预览「卡片选择」
+              组合示例 →「白卡 Section 组合」：标准 Section 白卡 / 带大标题、子标题，及底部操作按钮；原子对照也可看组件预览「卡片选择」
             </>,
             <>
               履约只读字段网格：<code className="text-13">portalDetailInfoFieldsClass</code>
@@ -1120,7 +1014,7 @@ export function FormUsageGuide() {
               ）。&lt;1440：列宽 200 / gap-x-6，容器 ≥424→2 列、≥648→3 列；≥1440：列宽 260 /
               justify-between，容器 ≥520→2 列、≥780→3 列。通栏字段加{" "}
               <code className="text-13">col-span-full</code>
-              。详见 docs/frameworks/detail-page.md
+              。页级骨架见 docs/frameworks/form-page.md；字段网格细则见 detail-page.md
             </>,
           ]}
         />

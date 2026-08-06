@@ -372,6 +372,7 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 | App Shell | [`frameworks/app-shell.md`](frameworks/app-shell.md) | `apps/shell-demo/src/DemoListPage.tsx` |
 | 列表页 | [`frameworks/list-page.md`](frameworks/list-page.md) | 同上 |
 | 详情页 | [`frameworks/detail-page.md`](frameworks/detail-page.md) | — |
+| 表单页 | [`frameworks/form-page.md`](frameworks/form-page.md) | shell-demo `/blank/form-page` |
 
 ---
 
