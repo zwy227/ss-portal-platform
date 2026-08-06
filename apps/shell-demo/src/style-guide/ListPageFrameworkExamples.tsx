@@ -4,9 +4,9 @@ import { Link } from "react-router";
 
 /* ── 结构常量（去业务语义的框架占位） ── */
 
-const LIST_TABS = [
+const LIST_TODO_TAB = { id: "todo", label: "待办" } as const;
+const LIST_STATUS_TABS = [
   { id: "all", label: "全部" },
-  { id: "todo", label: "待处理" },
   { id: "done", label: "已完成" },
 ] as const;
 
@@ -32,7 +32,19 @@ function FrameworkListTitle({
 function FrameworkListTabs({ activeId = "todo" }: { activeId?: string }) {
   return (
     <div className="portal-tab-bar" role="tablist" aria-label="列表状态">
-      {LIST_TABS.map((tab) => {
+      <span
+        role="tab"
+        aria-selected={activeId === LIST_TODO_TAB.id}
+        className={
+          activeId === LIST_TODO_TAB.id
+            ? "portal-tab-item portal-tab-item--active pointer-events-none"
+            : "portal-tab-item pointer-events-none"
+        }
+      >
+        {LIST_TODO_TAB.label}
+      </span>
+      <span className="portal-tab-bar__divider" aria-hidden />
+      {LIST_STATUS_TABS.map((tab) => {
         const active = tab.id === activeId;
         return (
           <span
@@ -223,7 +235,7 @@ export function ListPageSlotSpecExample() {
     },
     {
       label: "portal-tab-bar（可选）",
-      detail: "状态 / 待办等切换",
+      detail: "待办在前 → 分隔 → 状态 Tab",
     },
     {
       label: "portal-list-card",

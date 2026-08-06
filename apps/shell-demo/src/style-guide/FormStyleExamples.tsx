@@ -6,8 +6,10 @@ import {
   Button,
   PortalAntDateRangePicker,
   PortalCheckboxCard,
+  PortalDetailBlockTitle,
   PortalDetailCard,
   PortalDetailCardFooter,
+  PortalDetailDividedStack,
   PortalDetailFormHint,
   PortalDetailFormLabel,
   PortalDetailSection,
@@ -496,6 +498,156 @@ const WAREHOUSE_APPOINTMENT_DEMO_CONTAINER = "COSU100007";
 const WAREHOUSE_APPOINTMENT_DEMO_ETA = "2026-08-16";
 const WAREHOUSE_APPOINTMENT_DEMO_ETA_DAYS = 10;
 
+/**
+ * 大标题 + 子标题分割线分组 + 卡底取消/保存（编辑态）。
+ * 对齐 PortalDetailSection + PortalDetailBlockTitle + PortalDetailDividedStack + PortalDetailCardFooter。
+ */
+function SubtitleDividedEditFormExample() {
+  const [appointmentRange, setAppointmentRange] =
+    useState<PortalAntDateRangePickerProps["value"]>(null);
+  const [confirmationNumber, setConfirmationNumber] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [remarks, setRemarks] = useState("");
+
+  const resetDraft = () => {
+    setAppointmentRange(null);
+    setConfirmationNumber("");
+    setContactName("");
+    setContactPhone("");
+    setRemarks("");
+  };
+
+  return (
+    <PortalDetailCard>
+      <PortalDetailSection title="预约信息录入" titleId="demo-form-appt-edit-heading">
+        <PortalDetailDividedStack>
+          <div>
+            <PortalDetailBlockTitle titleId="demo-form-appt-block-window">
+              预约窗口
+            </PortalDetailBlockTitle>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="min-w-0 sm:col-span-2">
+                <PortalDetailFormLabel id="demo-form-appt-time-label" required>
+                  预约时间
+                </PortalDetailFormLabel>
+                <PortalAntDateRangePicker
+                  portalVariant="form"
+                  showTime={{ format: "HH:mm" }}
+                  format="YYYY-MM-DD HH:mm"
+                  value={appointmentRange}
+                  onChange={(next) => setAppointmentRange(next)}
+                  className="w-full"
+                  placeholder={["开始时间", "结束时间"]}
+                  aria-labelledby="demo-form-appt-time-label"
+                />
+              </div>
+              <div className="min-w-0">
+                <PortalDetailFormLabel id="demo-form-appt-isa-label">
+                  预约确认码/ISA
+                </PortalDetailFormLabel>
+                <input
+                  id="demo-form-appt-isa"
+                  type="text"
+                  className="portal-detail-form-input"
+                  value={confirmationNumber}
+                  onChange={(event) => setConfirmationNumber(event.target.value)}
+                  placeholder="请输入预约确认码/ISA"
+                  autoComplete="off"
+                  aria-labelledby="demo-form-appt-isa-label"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <PortalDetailBlockTitle titleId="demo-form-appt-block-contact">
+              联系人
+            </PortalDetailBlockTitle>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="min-w-0">
+                <PortalDetailFormLabel id="demo-form-appt-contact-label">姓名</PortalDetailFormLabel>
+                <input
+                  id="demo-form-appt-contact"
+                  type="text"
+                  className="portal-detail-form-input"
+                  value={contactName}
+                  onChange={(event) => setContactName(event.target.value)}
+                  placeholder="请输入联系人姓名"
+                  autoComplete="off"
+                  aria-labelledby="demo-form-appt-contact-label"
+                />
+              </div>
+              <div className="min-w-0">
+                <PortalDetailFormLabel id="demo-form-appt-phone-label">电话</PortalDetailFormLabel>
+                <input
+                  id="demo-form-appt-phone"
+                  type="text"
+                  className="portal-detail-form-input"
+                  value={contactPhone}
+                  onChange={(event) => setContactPhone(event.target.value)}
+                  placeholder="请输入联系电话"
+                  autoComplete="off"
+                  aria-labelledby="demo-form-appt-phone-label"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <PortalDetailBlockTitle titleId="demo-form-appt-block-extra">
+              补充说明
+            </PortalDetailBlockTitle>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="min-w-0 sm:col-span-2">
+                <PortalDetailFormLabel id="demo-form-appt-remark-label">备注</PortalDetailFormLabel>
+                <textarea
+                  id="demo-form-appt-remark"
+                  className="portal-detail-form-textarea"
+                  rows={3}
+                  value={remarks}
+                  onChange={(event) => setRemarks(event.target.value)}
+                  placeholder="请补充凭证来源、确认内容或其他必要说明"
+                  aria-labelledby="demo-form-appt-remark-label"
+                  aria-describedby="demo-form-appt-remark-hint"
+                />
+                <div className="mt-2" id="demo-form-appt-remark-hint">
+                  <PortalDetailFormHint title="温馨提示">
+                    保存后将同步至仓库预约记录；示例无真实提交。
+                  </PortalDetailFormHint>
+                </div>
+              </div>
+              <div className="min-w-0 sm:col-span-2">
+                <ClickAttachmentUploadField label="上传附件" />
+              </div>
+            </div>
+          </div>
+        </PortalDetailDividedStack>
+      </PortalDetailSection>
+
+      <PortalDetailCardFooter>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            resetDraft();
+            toast.info("已取消（示例）");
+          }}
+        >
+          取消
+        </Button>
+        <button
+          type="button"
+          className="portal-brand-btn"
+          onClick={() => toast.success("预约信息已保存（示例）")}
+        >
+          保存
+        </button>
+      </PortalDetailCardFooter>
+    </PortalDetailCard>
+  );
+}
+
 /** 履约「仓库预约」：对齐 Drayage TradeDetailBlankSectionCard + DrayDetailWhiteCard */
 function WarehouseAppointmentCompositionExample() {
   const [editing, setEditing] = useState(false);
@@ -735,7 +887,49 @@ function WarehouseAppointmentCompositionExample() {
   );
 }
 
-/** 白卡 + Section：标准表单卡 / 大标题·子标题·底部操作（仓库预约） */
+/** 履约只读信息卡：仓库预约（含编辑态）+ 字段自适应规则说明 */
+export function DetailInfoCardExample() {
+  return (
+    <div className="flex flex-col gap-2">
+      <CompositionPatternLabel
+        title="履约只读信息卡 · 仓库预约（含编辑态切换）"
+        hint={
+          <>
+            <code className="text-12">PortalDetailCard</code> +{" "}
+            <code className="text-12">portalDetailInfoFieldsClass</code>
+            （父级须 <code className="text-12">@container</code>）+{" "}
+            <code className="text-12">PortalDetailCardFooter</code>
+          </>
+        }
+      />
+      <WarehouseAppointmentCompositionExample />
+      <div className="rounded-md border border-gray-border-light bg-background px-3 py-2.5 text-12 leading-relaxed text-gray-text-5">
+        <p className="m-0 mb-1 font-medium text-gray-text-3">信息字段自适应规则</p>
+        <ul className="m-0 list-disc space-y-0.5 pl-4">
+          <li>
+            父级加 <code className="text-12">@container</code>；网格类{" "}
+            <code className="text-12">portalDetailInfoFieldsClass</code>
+          </li>
+          <li>
+            视口 <code className="text-12">&lt;1440</code>：列宽 200px、列间距 24（
+            <code className="text-12">gap-x-6</code>
+            ）；容器宽 ≥424 → 2 列、≥648 → 3 列、≥872 → 4 列
+          </li>
+          <li>
+            视口 <code className="text-12">≥1440</code>：列宽 260px、
+            <code className="text-12">justify-between</code>
+            、列间距 0；容器宽 ≥520 → 2 列、≥780 → 3 列、≥1040 → 4 列
+          </li>
+          <li>
+            通栏字段（备注等）子项加 <code className="text-12">col-span-full</code>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/** 白卡 + Section：标准表单卡 / 大标题·子标题·卡底操作 */
 export function FormSectionCompositionExample() {
   const [cargoAttrs, setCargoAttrs] = useState<Set<string>>(() => new Set());
   const [prePull, setPrePull] = useState(false);
@@ -850,32 +1044,19 @@ export function FormSectionCompositionExample() {
         </div>
       </div>
 
-      {/* 带大标题、子标题，及底部操作按钮（全宽以演示 @container 1/2/3 列） */}
       <div className="flex flex-col gap-2">
-        <CompositionPatternLabel title="带大标题、子标题，及底部操作按钮" />
-        <WarehouseAppointmentCompositionExample />
-        <div className="rounded-md border border-gray-border-light bg-background px-3 py-2.5 text-12 leading-relaxed text-gray-text-5">
-          <p className="m-0 mb-1 font-medium text-gray-text-3">信息字段自适应规则</p>
-          <ul className="m-0 list-disc space-y-0.5 pl-4">
-            <li>
-              父级加 <code className="text-12">@container</code>；网格类{" "}
-              <code className="text-12">portalDetailInfoFieldsClass</code>
-            </li>
-            <li>
-              视口 <code className="text-12">&lt;1440</code>：列宽 200px、列间距 24（
-              <code className="text-12">gap-x-6</code>
-              ）；容器宽 ≥424 → 2 列、≥648 → 3 列
-            </li>
-            <li>
-              视口 <code className="text-12">≥1440</code>：列宽 260px、
-              <code className="text-12">justify-between</code>
-              、列间距 0；容器宽 ≥520 → 2 列、≥780 → 3 列
-            </li>
-            <li>
-              通栏字段（备注等）子项加 <code className="text-12">col-span-full</code>
-            </li>
-          </ul>
-        </div>
+        <CompositionPatternLabel
+          title="大标题 + 子标题分割线 + 卡底取消/保存（编辑态）"
+          hint={
+            <>
+              <code className="text-12">PortalDetailSection</code> +{" "}
+              <code className="text-12">PortalDetailBlockTitle</code> +{" "}
+              <code className="text-12">PortalDetailDividedStack</code> +{" "}
+              <code className="text-12">PortalDetailCardFooter</code>
+            </>
+          }
+        />
+        <SubtitleDividedEditFormExample />
       </div>
     </div>
   );
@@ -1006,15 +1187,22 @@ export function FormUsageGuide() {
               保存 / 修改）
             </>,
             <>
-              组合示例 →「白卡 Section 组合」：标准 Section 白卡 / 带大标题、子标题，及底部操作按钮；原子对照也可看组件预览「卡片选择」
+              组合示例 →「白卡 Section 组合」：标准 Section 白卡 / 大标题 + 子标题分割线 +
+              卡底取消保存（编辑态）；原子对照也可看组件预览「卡片选择」
             </>,
             <>
-              履约只读字段网格：<code className="text-13">portalDetailInfoFieldsClass</code>
+              履约只读信息卡 → 组件预览「详情信息卡片」（
+              <code className="text-13">/blank/detail-info-card</code>
+              ）：
+              <code className="text-13">PortalDetailCard</code> +{" "}
+              <code className="text-13">portalDetailInfoFieldsClass</code>
               （父级 <code className="text-13">@container</code>
-              ）。&lt;1440：列宽 200 / gap-x-6，容器 ≥424→2 列、≥648→3 列；≥1440：列宽 260 /
-              justify-between，容器 ≥520→2 列、≥780→3 列。通栏字段加{" "}
+              ）。&lt;1440：列宽 200 / gap-x-6，容器 ≥424→2 列、≥648→3 列、≥872→4 列；≥1440：列宽 260 /
+              justify-between，容器 ≥520→2 列、≥780→3 列、≥1040→4 列。通栏字段加{" "}
               <code className="text-13">col-span-full</code>
-              。页级骨架见 docs/frameworks/form-page.md；字段网格细则见 detail-page.md
+              。去内容栅格预览见 docs/frameworks/detail-page.md（shell-demo{" "}
+              <code className="text-13">/blank/detail-page</code>
+              →「自适应布局」）
             </>,
           ]}
         />

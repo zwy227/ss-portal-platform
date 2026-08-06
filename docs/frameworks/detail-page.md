@@ -1,6 +1,8 @@
 # 详情页框架
 
-详情页骨架（**不含**业务表单内容）。交互画廊见 shell-demo `/blank/detail-page`。
+详情页骨架（**不含**业务表单内容）。交互画廊见 shell-demo `/blank/detail-page`。以表单分区为主的页级骨架见 [`form-page.md`](form-page.md)（`/blank/form-page`）。
+
+带数据的**履约跟踪典型详情**（对齐 SS `TradeDetailThreeColumnBodyContent`：顶栏 + Top Tab + 货柜左导航 + 待办条 + 主栏仓库预约 + 右栏订单摘要）见 shell-demo `/orders/:id`（`DemoDetailPage`）。
 
 共三种布局类型：
 
@@ -90,14 +92,14 @@ AppShell
 
 常量：`portalDetailInfoFieldsClass`（`@ss/portal-ui`）。**父级区块必须加 `@container`**，列数按**容器宽度**切换，列宽按**视口**切换。
 
-| 视口 | 列宽 | 列间距 | 2 列容器阈值 | 3 列容器阈值 |
-|------|------|--------|--------------|--------------|
-| `<1440` | 200px | `gap-x-6`（24） | `@[424px]` | `@[648px]` |
-| `≥1440` | 260px | `gap-x-0` + `justify-between` | `@[520px]` | `@[780px]` |
+| 视口 | 列宽 | 列间距 | 2 列容器阈值 | 3 列容器阈值 | 4 列容器阈值 |
+|------|------|--------|--------------|--------------|--------------|
+| `<1440` | 200px | `gap-x-6`（24） | `@[424px]` | `@[648px]` | `@[872px]` |
+| `≥1440` | 260px | `gap-x-0` + `justify-between` | `@[520px]` | `@[780px]` | `@[1040px]` |
 
 - 通栏字段（备注、附件等）：子项加 `col-span-full`
 - 分组小标题（送货信息 / 系统记录）：`portalDetailGroupHeadingClass`（`text-13 font-medium`）
-- 可交互画廊：shell-demo `/blank/form` →「白卡 Section 组合」→「履约只读信息卡 · 仓库预约」
+- 可交互画廊：shell-demo `/blank/detail-info-card`（带数据原子）；去内容栅格预览见 `/blank/detail-page` →「6 · 自适应布局」
 
 ```tsx
 <section className="@container" aria-label="预约状态概览">

@@ -53,10 +53,12 @@ AppShell
 | 入口 | 职责 |
 |------|------|
 | `/blank/form-page` | 页级骨架：顶栏、白卡堆叠、操作区位置、宽度 |
-| `/blank/detail-page` | 单栏 / 双栏 / 三栏布局类型 |
+| `/blank/detail-page` | 单栏 / 双栏 / 三栏布局类型；履约只读字段自适应网格（去内容） |
+| `/blank/detail-info-card` | 履约只读信息卡原子（仓库预约等，含编辑态） |
 | `/blank/form` | 字段控件、提示、只读态、白卡 Section 组合原子 |
 
 ## 参考实现
 
 - 画廊：`apps/shell-demo` → `/blank/form-page`
-- 带数据的详情内嵌表单：`apps/shell-demo/src/DemoDetailPage.tsx`（`/orders/:id`）
+- 表单控件与 Section 组合：`/blank/form`；履约只读信息卡：`/blank/detail-info-card`
+- 带数据的履约跟踪典型详情（三栏）：`apps/shell-demo/src/DemoDetailPage.tsx`（`/orders/:id`），见 [`detail-page.md`](detail-page.md)

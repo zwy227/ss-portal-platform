@@ -18,6 +18,10 @@ export type DemoOrder = {
   noteCount: number;
   containerSize: string;
   containerCount: string;
+  /** 履约跟踪左导航货柜号 */
+  containerNo: string;
+  customerId: string;
+  billOfLadingNo: string;
 };
 
 /** 典型列表 / 详情共用 mock — 对齐拖柜订单场景 */
@@ -38,6 +42,9 @@ export const DEMO_ORDERS: DemoOrder[] = [
     noteCount: 0,
     containerSize: "40HQ",
     containerCount: "1",
+    containerNo: "TCLU100004",
+    customerId: "CUS-000072",
+    billOfLadingNo: "MOLU180012345",
   },
   {
     id: "2",
@@ -55,6 +62,9 @@ export const DEMO_ORDERS: DemoOrder[] = [
     noteCount: 3,
     containerSize: "40GP",
     containerCount: "2",
+    containerNo: "MSKU100003",
+    customerId: "CUS-000015",
+    billOfLadingNo: "COSU690045678",
   },
   {
     id: "3",
@@ -72,6 +82,9 @@ export const DEMO_ORDERS: DemoOrder[] = [
     noteCount: 1,
     containerSize: "20GP",
     containerCount: "1",
+    containerNo: "GLCU100001",
+    customerId: "CUS-000004",
+    billOfLadingNo: "OOLU210098765",
   },
   {
     id: "4",
@@ -89,6 +102,9 @@ export const DEMO_ORDERS: DemoOrder[] = [
     noteCount: 0,
     containerSize: "40HQ",
     containerCount: "1",
+    containerNo: "COSU100007",
+    customerId: "CUS-000011",
+    billOfLadingNo: "EGLV123456789",
   },
 ];
 

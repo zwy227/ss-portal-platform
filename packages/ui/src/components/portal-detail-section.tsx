@@ -56,16 +56,17 @@ export const portalDetailFormValueClass = "portal-detail-form-value";
 
 /**
  * 履约只读信息字段网格（label 上 / value 下）。
- * 父级区块须加 `@container`，以便按容器宽度切 1/2/3 列。
+ * 父级区块须加 `@container`，以便按容器宽度切 1/2/3/4 列。
  *
  * 自适应规则：
  * - `<1440` 视口：列宽 200px、列间距 `gap-x-6`（24）
  * - `≥1440` 视口：列宽 260px、`justify-between`、列间距 0（由两端对齐吃掉剩余空间）
- * - 容器宽：`<1440` 时 `@[424px]`→2 列、`@[648px]`→3 列；`≥1440` 时 `@[520px]`→2 列、`@[780px]`→3 列
+ * - 容器宽：`<1440` 时 `@[424px]`→2 列、`@[648px]`→3 列、`@[872px]`→4 列；
+ *   `≥1440` 时 `@[520px]`→2 列、`@[780px]`→3 列、`@[1040px]`→4 列
  * - 通栏字段（备注等）给子项加 `col-span-full`
  */
 export const portalDetailInfoFieldsClass =
-  "m-0 grid grid-cols-[200px] gap-x-6 gap-y-4 @[424px]:grid-cols-[repeat(2,200px)] @[648px]:grid-cols-[repeat(3,200px)] min-[1440px]:grid-cols-[260px] min-[1440px]:justify-between min-[1440px]:gap-x-0 min-[1440px]:@[520px]:grid-cols-[repeat(2,260px)] min-[1440px]:@[780px]:grid-cols-[repeat(3,260px)]";
+  "m-0 grid grid-cols-[200px] gap-x-6 gap-y-4 @[424px]:grid-cols-[repeat(2,200px)] @[648px]:grid-cols-[repeat(3,200px)] @[872px]:grid-cols-[repeat(4,200px)] min-[1440px]:grid-cols-[260px] min-[1440px]:justify-between min-[1440px]:gap-x-0 min-[1440px]:@[520px]:grid-cols-[repeat(2,260px)] min-[1440px]:@[780px]:grid-cols-[repeat(3,260px)] min-[1440px]:@[1040px]:grid-cols-[repeat(4,260px)]";
 
 /** 信息字段单项：label + value 纵向 */
 export const portalDetailInfoFieldItemClass = "flex min-w-0 flex-col gap-0.5";

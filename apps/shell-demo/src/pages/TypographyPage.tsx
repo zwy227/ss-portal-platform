@@ -10,7 +10,7 @@ export function TypographyPage() {
       >
         <StyleGuideSection
           title="字体族"
-          description="默认用系统无衬线。订单号等标识用 mono；表格金额/数量仍用 sans，加 tabular-nums 做列对齐。"
+          description="默认用系统无衬线。订单号等标识、表格金额/时间用 mono；表格数字挂 portal-text-numeric（font-mono + tabular-nums）。"
         >
           <div className="portal-list-card flex flex-col divide-y divide-gray-border-light">
             <div className="flex flex-col gap-2 p-4">
@@ -38,10 +38,10 @@ export function TypographyPage() {
             <div className="flex flex-col gap-2 p-4">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <code className="text-13 text-gray-text-4">portal-text-numeric</code>
-                <span className="text-13 text-gray-text-5">表格数字 · 仍用 sans</span>
+                <span className="text-13 text-gray-text-5">表格数字 · font-mono</span>
               </div>
               <p className="text-14 text-gray-text-4">
-                金额、数量等需纵向对齐时使用（tabular-nums）。字体仍是 sans，只是数字等宽。
+                金额、时间等需纵向对齐时使用（font-mono + tabular-nums）。
               </p>
               <div className="flex gap-8 text-14 text-gray-text-2">
                 <span className="portal-text-numeric">1,234.56</span>

@@ -17,7 +17,7 @@ export function TokensPage() {
     <StyleGuideShell>
       <StyleGuidePage
         title="Token 色板"
-        description="色值权威源为 packages/tokens/theme.css，经 @theme 映射为 Tailwind 类。文字用 text-gray-text-*，背景用 bg-brand / bg-page-bg / bg-gray-fill-*，边框用 border-gray-border-*；业务 className 只写本页 token，禁止 hex 与 slate-* 等默认色。点击色卡复制 Tailwind 类（无则复制 CSS 变量）。改色改 theme.css，刷新本页验收。"
+        description="色值权威源为 packages/tokens/theme.css，经 @theme 映射为 Tailwind 类。文字用 text-gray-text-*，背景用 bg-brand / bg-page-bg / bg-gray-fill-*，边框用 border-gray-border-*；业务 className 只写本页 token，禁止 hex 与 slate-* 等默认色。点击色卡复制「Tailwind 类 + 色值」（无 Tailwind 类则复制 token 名 + 色值）。改色改 theme.css，刷新本页验收。"
       >
         <StyleGuideSection title="品牌色 Brand">
           <TokenGrid tokens={BRAND_TOKENS} />

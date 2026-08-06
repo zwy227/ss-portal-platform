@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import {
   PortalTable,
   PortalTableBody,
@@ -53,7 +54,12 @@ export function UiTableExamples() {
             <PortalTableRow key={row.id}>
               <PortalTableCell columnAlign="first" className={portalTableListCellTextClass}>
                 <div className="flex flex-col gap-0.5">
-                  <span className="font-semibold text-gray-text-2">{row.orderNo}</span>
+                  <Link
+                    to={`/orders/${row.id}`}
+                    className="portal-table-id-link w-fit max-w-full"
+                  >
+                    {row.orderNo}
+                  </Link>
                   <span className="text-12 text-gray-text-7">{row.subLabel}</span>
                 </div>
               </PortalTableCell>
@@ -79,9 +85,13 @@ export function UiTableExamples() {
                   </p>
                 </div>
               </PortalTableCell>
-              <PortalTableCell className={portalTableListCellTextClass}>{row.orderTime}</PortalTableCell>
               <PortalTableCell
-                className={`${portalTableListCellTextClass} whitespace-nowrap tabular-nums`}
+                className={`${portalTableListCellTextClass} portal-text-numeric`}
+              >
+                {row.orderTime}
+              </PortalTableCell>
+              <PortalTableCell
+                className={`${portalTableListCellTextClass} portal-text-numeric whitespace-nowrap`}
               >
                 {row.quoteAmount ?? <PortalTableEmptyCell />}
               </PortalTableCell>

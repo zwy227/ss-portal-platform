@@ -8,12 +8,13 @@
 
 - `/guide` — 如何使用（新项目接入与规范）
 - `/tokens` — 色板，对照 `theme.css` 变量
+- `/layout` — 布局说明（App Shell / 内容区栅格 / 列表 / 详情 / 表单）
 - `/icons` — 图标规范（统一 Lucide）
 - `/radius` — 圆角规范
 - `/typography` — 字号阶梯
-- `/blank` — 组件预览（卡片入口；详情 `/blank/:id`；表单 `/blank/form`）
-- `/orders` — 典型列表页（详情 `/orders/:id`）
-- `/blank/detail-page` — 详情页框架（单栏 / 双栏 / 三栏；去内容）
+- `/blank` — 组件预览（卡片入口；详情 `/blank/:id`；表单 `/blank/form`；详情信息卡 `/blank/detail-info-card`；提示 Message `/blank/todo-message`）
+- `/orders` — 典型列表页（详情 `/orders/:id` 为履约跟踪三栏，对齐 SS TradeDetail）
+- `/blank/detail-page` — 详情页框架（单栏 / 双栏 / 三栏；履约只读字段自适应；去内容）
 - `/blank/form-page` — 表单页框架（白卡 Section 堆叠 + 页级 / 卡底操作；去内容）
 
 定稿 token 后维护 `docs/design-system.md`（与 `theme.css`、shell-demo 画廊同步）。

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Link } from "react-router";
 import { PortalDetailBackButton } from "@ss/portal-shell";
 import { Button } from "@ss/portal-ui";
@@ -37,11 +37,18 @@ function FieldRowPlaceholder({ cols = 2 }: { cols?: 1 | 2 }) {
       aria-hidden
     >
       {Array.from({ length: cols === 2 ? 2 : 1 }).map((_, i) => (
-        <div key={i} className="flex flex-col gap-1.5">
-          <span className="h-2 w-12 rounded-sm bg-gray-fill-strong" />
-          <span className="h-8 rounded-input bg-page-bg ring-1 ring-gray-border-strong" />
-        </div>
+        <FieldSlot key={i} />
       ))}
+    </div>
+  );
+}
+
+/** 字段骨架槽：label 条 + 输入框占位 */
+function FieldSlot() {
+  return (
+    <div className="flex flex-col gap-1.5" aria-hidden>
+      <span className="h-2 w-12 rounded-sm bg-gray-fill-strong" />
+      <span className="h-8 w-full rounded-input bg-page-bg ring-1 ring-gray-border-strong" />
     </div>
   );
 }
@@ -49,11 +56,9 @@ function FieldRowPlaceholder({ cols = 2 }: { cols?: 1 | 2 }) {
 function FormWhiteCard({
   title,
   children,
-  footer,
 }: {
   title?: string;
   children?: ReactNode;
-  footer?: ReactNode;
 }) {
   return (
     <div
@@ -68,23 +73,7 @@ function FormWhiteCard({
       <div className={title ? "mt-3 flex min-h-0 flex-1 flex-col gap-4" : "flex min-h-0 flex-1 flex-col gap-4"}>
         {children}
       </div>
-      {footer ? (
-        <div className="mt-auto flex flex-wrap items-center justify-end gap-2 border-t border-gray-border-light pt-4">
-          {footer}
-        </div>
-      ) : null}
     </div>
-  );
-}
-
-function StackedSection({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="flex flex-col gap-3 border-t border-gray-border-light pt-5 first:border-t-0 first:pt-0">
-      <h2 className="m-0 text-16 font-semibold leading-snug tracking-[-0.01em] text-gray-text-1">
-        {title}
-      </h2>
-      {children}
-    </section>
   );
 }
 
@@ -153,50 +142,35 @@ function SpecLink({ to, children }: { to: string; children: ReactNode }) {
 export function FormPageStandardExample() {
   return (
     <FrameworkPreviewShell constrain footer={<PageBottomActionBar />}>
-      <FrameworkHeader title="完善需求" />
+      <FrameworkHeader title="表单标题" />
       <div className="mt-4 flex flex-col gap-3">
-        <FormWhiteCard title="基本信息">
+        <FormWhiteCard title="分区一">
           <SlotHint>PortalDetailCard + PortalDetailSection；字段用 portal-detail-form-*。</SlotHint>
           <FieldRowPlaceholder cols={2} />
           <FieldRowPlaceholder cols={1} />
         </FormWhiteCard>
-        <FormWhiteCard title="货物与服务">
+        <FormWhiteCard title="分区二">
           <SlotHint>白卡纵向间距 gap-3；操作在页级底栏，不在卡内。</SlotHint>
           <FieldRowPlaceholder cols={2} />
         </FormWhiteCard>
-      </div>
-    </FrameworkPreviewShell>
-  );
-}
-
-/** 同卡多 Section + 卡底操作（局部保存场景） */
-export function FormPageStackedCardExample() {
-  return (
-    <FrameworkPreviewShell constrain>
-      <FrameworkHeader title="仓库预约" status="待确认" />
-      <div className="mt-4">
-        <FormWhiteCard
-          footer={
-            <>
-              <Button type="button" variant="outline">
-                取消
-              </Button>
-              <button type="button" className="portal-brand-btn">
-                保存
-              </button>
-            </>
-          }
-        >
-          <StackedSection title="预约状态">
-            <SlotHint>
-              同卡多块用 PortalDetailSectionStack；卡底用 PortalDetailCardFooter。
-            </SlotHint>
-            <FieldRowPlaceholder cols={2} />
-          </StackedSection>
-          <StackedSection title="送货信息">
-            <FieldRowPlaceholder cols={2} />
-            <FieldRowPlaceholder cols={1} />
-          </StackedSection>
+        <FormWhiteCard title="分区三">
+          <SlotHint>
+            大标题用 PortalDetailSection（text-16）；卡内多子块用 PortalDetailBlockTitle +
+            PortalDetailDividedStack。
+          </SlotHint>
+          <div className="portal-detail-divided-stack">
+            <div>
+              <h4 className="portal-detail-block-title">子标题一</h4>
+              <FieldRowPlaceholder cols={2} />
+            </div>
+            <div>
+              <h4 className="portal-detail-block-title">子标题二</h4>
+              <FieldRowPlaceholder cols={2} />
+              <div className="mt-3">
+                <FieldRowPlaceholder cols={1} />
+              </div>
+            </div>
+          </div>
         </FormWhiteCard>
       </div>
     </FrameworkPreviewShell>
@@ -211,7 +185,7 @@ export function FormPageWidthExample() {
         <FrameworkHeader title="窄幅表单（max-w-3xl）" />
         <div className="mt-4 flex flex-col gap-3">
           <FormWhiteCard title="分区">
-            <SlotHint>完善需求 / 确认等客户端表单：主内容居中限宽。</SlotHint>
+            <SlotHint>限宽客户端表单：主内容居中 max-w-3xl。</SlotHint>
             <FieldRowPlaceholder cols={2} />
           </FormWhiteCard>
         </div>

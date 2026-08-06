@@ -6,6 +6,7 @@ import {
   type ChangeEvent,
   type ReactNode,
 } from "react";
+import { Link } from "react-router";
 import { ChevronRight, Paperclip, X } from "lucide-react";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import {
@@ -275,7 +276,12 @@ export function MessagesListActionExample() {
               <PortalTableRow key={row.id}>
                 <PortalTableCell columnAlign="first" className={portalTableListCellTextClass}>
                   <div className="flex flex-col gap-0.5">
-                    <span className="font-semibold text-gray-text-2">{row.orderNo}</span>
+                    <Link
+                      to={`/orders/${row.id}`}
+                      className="portal-table-id-link w-fit max-w-full"
+                    >
+                      {row.orderNo}
+                    </Link>
                     <span className="text-12 text-gray-text-7">{row.subLabel}</span>
                   </div>
                 </PortalTableCell>

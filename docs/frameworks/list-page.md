@@ -23,3 +23,4 @@ AppShell
 - 标题格式：`{模块名}:` + 页面名
 - 列表背景：`portal-page-main` + `--page-bg`
 - 白卡：`portal-list-card`
+- Tab（可选）：**待办在前** — `待办`（可带图标）→ `portal-tab-bar__divider` → 状态 Tab（全部 / …）；右侧可挂「状态说明」。完整交互见 `/blank/tab`

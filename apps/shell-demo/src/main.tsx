@@ -9,6 +9,7 @@ import { BlankPage } from "./pages/BlankPage";
 import { ComponentDetailPage } from "./pages/ComponentDetailPage";
 import { GuidePage } from "./pages/GuidePage";
 import { IconsPage } from "./pages/IconsPage";
+import { LayoutPage } from "./pages/LayoutPage";
 import { RadiusPage } from "./pages/RadiusPage";
 import { TokensPage } from "./pages/TokensPage";
 import { TypographyPage } from "./pages/TypographyPage";
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/guide" replace /> },
   { path: "/guide", Component: GuidePage },
   { path: "/tokens", Component: TokensPage },
+  { path: "/layout", Component: LayoutPage },
   { path: "/icons", Component: IconsPage },
   { path: "/radius", Component: RadiusPage },
   { path: "/typography", Component: TypographyPage },

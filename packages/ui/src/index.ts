@@ -130,6 +130,31 @@ export {
   type PortalFormSelectOption,
 } from "./components/portal-form-search-select";
 export {
+  PortalAddressCompactSummary,
+  type PortalAddressCompactSummaryParts,
+  type PortalAddressCompactSummaryProps,
+  type PortalAddressCompactSummarySegment,
+} from "./components/portal-address-compact-summary";
+export {
+  PortalAddressSearchField,
+  type PortalAddressSearchFieldProps,
+  type PortalAddressSearchResult,
+  type PortalAddressSearchSelected,
+} from "./components/portal-address-search-field";
+export {
+  PortalTodoMessage,
+  portalTodoMessageActionClass,
+  portalTodoMessageClass,
+  portalTodoMessageDescriptionClass,
+  portalTodoMessageDotClass,
+  portalTodoMessageItemClass,
+  portalTodoMessageItemLabelClass,
+  portalTodoMessageListClass,
+  portalTodoMessageTitleClass,
+  type PortalTodoMessageItem,
+  type PortalTodoMessageProps,
+} from "./components/portal-todo-message";
+export {
   PortalTable,
   PortalTableBody,
   PortalTableCell,

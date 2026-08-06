@@ -534,6 +534,7 @@ html {
   }
 
   .portal-text-numeric {
+    @apply font-mono;
     font-variant-numeric: tabular-nums;
   }
 
@@ -935,6 +936,19 @@ html {
   .portal-topnav-notif-dot {
     @apply absolute top-1.5 right-1.5 size-2 rounded-full;
     background: var(--danger-dot);
+  }
+
+  /* ── 列表首列主键链接（订单号等）：12px mono medium，hover 仍灰黑 + 下划线 ── */
+  .portal-table-id-link {
+    @apply min-w-0 max-w-full truncate border-0 bg-transparent p-0 text-left text-12 font-medium font-mono text-gray-text-2 outline-none no-underline transition;
+    cursor: pointer;
+  }
+
+  .portal-table-id-link:hover,
+  .portal-table-id-link:focus-visible {
+    @apply text-gray-text-2 underline;
+    text-underline-offset: 2px;
+    text-decoration-color: currentColor;
   }
 
   /* ── 文本链接（对齐 DOCUMENT_LABEL_CLASS：默认灰字截断，hover/focus 下划线 + portal-text-link） ── */

@@ -66,7 +66,8 @@ ss-portal-platform/
 │   └── frameworks/
 │       ├── app-shell.md         # 新建
 │       ├── list-page.md         # 新建
-│       └── detail-page.md       # 新建
+│       ├── detail-page.md       # 新建
+│       └── form-page.md         # 新建
 ├── .cursor/rules/
 │   └── ss-portal-design-tokens.mdc
 └── AGENTS.md
@@ -135,6 +136,7 @@ ss-portal-platform/
 | `client-topnav-user-role` | `portal-topnav-user-role` |
 | `client-topnav-notif-dot` | `portal-topnav-notif-dot` |
 | `client-document-link` | `portal-document-link` |
+| （列表首列订单号等） | `portal-table-id-link`（非 document-link） |
 | `client-document-action-link` | `portal-document-action-link` |
 
 </details>
@@ -201,6 +203,7 @@ ss-portal-platform/
 | `docs/frameworks/app-shell.md` | `ClientDrayagePageShell` + `PortalSidebarNav` DOM 结构 |
 | `docs/frameworks/list-page.md` | `ClientDrayageQuoteOrderPage`、`ClientDrayageFulfillmentListPageMain` |
 | `docs/frameworks/detail-page.md` | `OrderDetailPageHeader`、`ClientDrayageOrderDetailPage` |
+| `docs/frameworks/form-page.md` | 完善需求 / 确认等客户端表单页骨架 |
 
 ---
 
@@ -234,8 +237,9 @@ ss-portal-platform/
 | 同上 → `DetailServiceCheckboxOption` | `PortalCheckboxCard` | 多选卡片 |
 | `stickyTableActionColumn.ts` | `useStickyActionColumn` + `buildStickyActionThClass/TdClass` | 粘性操作列 |
 | `demand/DrayageQuoteOrderTable.tsx`（结构部分） | `PortalTable*` 组合原语 | 业务列 cell 仍留 App 仓 |
+| `Fulfillment/FulfillmentRiskCollaborationCard.tsx`（`variant="banner"`） | `PortalTodoMessage` | 浅橙待办提示条；业务 VM / 白卡变体仍留 App 仓 |
 
-**shell-demo 验收**：组件预览 `/blank` — 筛选并排、卡片选择、Table mock。
+**shell-demo 验收**：组件预览 `/blank` — 筛选并排、卡片选择、Table mock、提示 Message（`/blank/todo-message`）。
 
 **Phase 2 迁移时**：删除源仓内 `quoteOrderStatusMultiSelect.css`、`quoteOrderLocationCascader.css`、`drayageQuoteContainerLengthSelect.css`，改 import `@ss/portal-ui` + `@ss/portal-tokens`。
 

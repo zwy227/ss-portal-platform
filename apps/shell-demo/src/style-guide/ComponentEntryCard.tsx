@@ -6,9 +6,11 @@ import {
   ChevronRight,
   CloudUpload,
   FileText,
+  IdCard,
   LayoutList,
   LayoutPanelLeft,
   ListFilter,
+  MapPinned,
   MessageSquare,
   MousePointerClick,
   PanelsTopLeft,
@@ -17,6 +19,7 @@ import {
   SquareStack,
   Table2,
   Tags,
+  TriangleAlert,
   type LucideIcon,
 } from "lucide-react";
 
@@ -72,7 +75,7 @@ export const PAGE_FRAMEWORK_ENTRIES: ComponentEntry[] = [
   {
     id: "detail-page",
     title: "详情页框架",
-    description: "单栏、左右双栏、三栏三种布局（去内容）。",
+    description: "单栏、左右双栏、三栏布局；履约只读字段自适应网格（去内容）。",
     source: "portal-*",
     icon: LayoutPanelLeft,
     preview: (
@@ -250,6 +253,65 @@ export const COMPONENT_GALLERY_ENTRIES: ComponentEntry[] = [
     ),
   },
   {
+    id: "detail-info-card",
+    title: "详情信息卡片",
+    description:
+      "履约只读信息卡：PortalDetailCard + portalDetailInfoFieldsClass；含编辑态与自适应列。",
+    source: "@ss/portal-ui",
+    icon: IdCard,
+    preview: (
+      <div
+        className="pointer-events-none w-full max-w-[220px] rounded-sm bg-background px-2.5 py-2 shadow-sm"
+        aria-hidden
+      >
+        <span className="mb-2 block h-2 w-1/3 rounded-sm bg-gray-fill-strong" />
+        <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+          <div className="flex flex-col gap-1">
+            <span className="h-1.5 w-8 rounded-sm bg-gray-fill-normal" />
+            <span className="h-2 w-12 rounded-full bg-semantic-warning-bg ring-1 ring-semantic-warning-light" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="h-1.5 w-10 rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 w-14 rounded-sm bg-gray-fill-strong" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="h-1.5 w-8 rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 w-16 rounded-sm bg-gray-fill-strong" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="h-1.5 w-9 rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 w-12 rounded-sm bg-gray-fill-strong" />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "address-search",
+    title: "地址搜索",
+    description: "地点搜索字段：字段壳 focus、已选摘要、下拉结果、地址簿与自定义录入。",
+    source: "@ss/portal-ui",
+    icon: MapPinned,
+    preview: (
+      <div className="pointer-events-none relative w-full max-w-[220px]" aria-hidden>
+        <div className="portal-field-shell relative flex h-9 items-center gap-2 px-2.5">
+          <Search className="size-3.5 shrink-0 text-gray-text-7" strokeWidth={1.75} />
+          <span className="truncate text-12 font-medium text-gray-text-7">搜索城市、邮编…</span>
+        </div>
+        <div className="mt-1.5 overflow-hidden rounded-md border border-gray-border-light bg-background shadow-sm">
+          <div className="flex items-center gap-1.5 border-b border-gray-border-light px-2 py-1.5">
+            <span className="h-3 w-7 shrink-0 rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 flex-1 rounded-sm bg-gray-fill-strong" />
+          </div>
+          <div className="flex items-center gap-1.5 px-2 py-1.5">
+            <span className="h-3 w-7 shrink-0 rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 w-[70%] rounded-sm bg-gray-fill-normal" />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
     id: "table",
     title: "Table",
     description: "PortalTable 原语、粘性操作列与状态/待办单元格。",
@@ -346,6 +408,36 @@ export const COMPONENT_GALLERY_ENTRIES: ComponentEntry[] = [
         >
           3
         </span>
+      </div>
+    ),
+  },
+  {
+    id: "todo-message",
+    title: "提示 Message",
+    description:
+      "浅橙待办提示条：标题 + 圆点列表 +「去处理」；对齐履约 RiskCollaboration banner。",
+    source: "@ss/portal-ui",
+    icon: TriangleAlert,
+    preview: (
+      <div
+        className="pointer-events-none w-full max-w-[220px] rounded-md border border-semantic-warning-light bg-semantic-warning-bg px-2.5 py-2"
+        aria-hidden
+      >
+        <p className="m-0 text-12 font-semibold leading-4 text-semantic-warning-text">
+          3项待办，请尽快处理
+        </p>
+        <div className="mt-1.5 flex flex-col gap-1">
+          <div className="flex items-center gap-1.5">
+            <span className="size-1 shrink-0 rounded-full bg-semantic-warning-text" />
+            <span className="h-1.5 flex-1 rounded-sm bg-gray-fill-strong" />
+            <span className="h-1.5 w-8 shrink-0 rounded-sm bg-semantic-warning-light" />
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="size-1 shrink-0 rounded-full bg-semantic-warning-text" />
+            <span className="h-1.5 w-[70%] rounded-sm bg-gray-fill-normal" />
+            <span className="h-1.5 w-8 shrink-0 rounded-sm bg-semantic-warning-light" />
+          </div>
+        </div>
       </div>
     ),
   },

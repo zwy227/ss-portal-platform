@@ -253,11 +253,11 @@
   color: var(--gray-text-7);
 }
 
-/* ── DatePicker / RangePicker 表单变体（h-12 / 48px） ── */
+/* ── DatePicker / RangePicker 表单变体（42px，对齐 portal-detail-form-input） ── */
 .portal-ant-picker--form.ant-picker {
   width: 100%;
-  min-height: 48px;
-  height: 48px;
+  min-height: 42px;
+  height: 42px;
   padding-inline: 11px;
   border-radius: var(--radius-input) !important;
   border-color: var(--gray-border-strong) !important;

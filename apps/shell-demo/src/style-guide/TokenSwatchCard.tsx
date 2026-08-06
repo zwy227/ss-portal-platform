@@ -22,9 +22,10 @@ function copyText(value: string): Promise<void> {
   return Promise.resolve();
 }
 
-/** 业务优先复制 Tailwind 类；无则复制 CSS 变量名 */
-function copyValueFor(token: TokenSwatch): string {
-  return token.tailwind ?? token.cssVar;
+/** 业务优先复制 Tailwind 类；无则复制 token 名。附带解析后的色值。 */
+function copyValueFor(token: TokenSwatch, resolved: string): string {
+  const label = token.tailwind ?? token.name;
+  return resolved ? `${label} ${resolved}` : label;
 }
 
 function swatchStyle(token: TokenSwatch): CSSProperties {
@@ -108,7 +109,7 @@ export function TokenSwatchCard({ token }: { token: TokenSwatch }) {
     token.name === "portal-text-link" ||
     token.name === "semantic-warning-text";
 
-  const value = copyValueFor(token);
+  const value = copyValueFor(token, resolved);
 
   async function handleCopy() {
     try {

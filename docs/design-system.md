@@ -138,7 +138,7 @@
 |-------|------|
 | `font-sans` | 全局 UI（system-ui / SF / Segoe UI） |
 | `font-mono` | 订单号、代码、token 名 |
-| `portal-text-numeric` | 表格数字等宽对齐（仍用 sans，`tabular-nums`） |
+| `portal-text-numeric` | 表格数字：`font-mono` + `tabular-nums`（金额、时间等） |
 
 ### 3.4 页面标题组合类
 
@@ -216,7 +216,7 @@
 |-------|------|
 | `portal-page-main` | 列表页主滚动区，`bg-page-bg` |
 | `portal-page-main--detail` | 详情页主区（flex 列、overflow hidden） |
-| `portal-page-content` | 内容区内边距 `px-5 py-7` |
+| `portal-page-content` | 内容区内边距 `px-5 py-7`；栅格：固定 24 列，列间距 `12px`（`gap-3`）；分栏等分；详情分栏见双栏 / 三栏（`/layout`、`detail-page`） |
 
 ### 6.2 列表与 Tab
 
@@ -251,7 +251,7 @@
 
 ### 6.3.1 客户端详情表单
 
-对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。完整示例与使用说明见 shell-demo `/blank/form`。
+对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。页级骨架见 shell-demo `/blank/form-page`；控件与 Section 组合见 `/blank/form`；履约只读信息卡见 `/blank/detail-info-card`。
 
 | Class / 组件 | 用途 |
 |--------------|------|
@@ -276,13 +276,18 @@
 | `portal-detail-form-value` | 只读单行（无边框 · medium） |
 | `portal-detail-form-readonly` | 只读多行（浅底 + light 边线） |
 | `PortalFormSearchSelect` | 可搜索下拉（客户账号等） |
+| `PortalAddressSearchField` | 地址/地点搜索：`portal-field-shell` + 已选摘要 + 下拉结果；可选地址簿按钮与自定义录入页脚（对齐 SSLTLDemo `DestinationPlaceSearchField`） |
+| `PortalAddressCompactSummary` | 选中/结果行单行摘要（主标题加粗 + 尾部分段） |
+| `PortalTodoMessage` | 详情待办提示条：浅橙壳 + 标题 + 圆点列表；支持「多项待办+去处理」「单提示+多项内容」与「单行提示+去处理」；见 `/blank/todo-message` |
 | `portal-detail-subsection-heading` / `PortalDetailSubsectionHeading` | 模块内带图标小标题 |
 | `PortalDetailServicePriceLabel` | 服务价签分色（免费 / 加价） |
 | `PortalIncludedServiceItem` | 已包含服务行（✓ 标题 ⓘ 价签，无边框） |
 
 **Focus**：详情表单 input / textarea / SearchSelect、`portal-field-shell`，以及选择卡（`PortalCheckboxCard` / `PortalRadioCard` 的 `focus-within`，类名 `portalSelectionCardInteractionClass`）一致，使用 `--focus-border-normal` + `--focus-ring-normal`（非品牌 ring）。列表筛选见 §6.3。
 
-表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§6.8）。选中态为 `bg-gray-fill-light`（非品牌 tint）；圆角 `rounded`（6px）；价格标签用 `PortalDetailServicePriceLabel`（免费 → `text-brand`，加价 → `text-accent-orange`）。已包含只读项用 `PortalIncludedServiceItem`（✓ + 标题 + ⓘ + 价签，无边框卡片）。紧凑属性多选（危险品等）复用同一 interaction class。演示：shell-demo 组件预览 →「表单组件」。
+表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§6.8）。选中态为 `bg-gray-fill-light`（非品牌 tint）；圆角 `rounded`（6px）；价格标签用 `PortalDetailServicePriceLabel`（免费 → `text-brand`，加价 → `text-accent-orange`）。已包含只读项用 `PortalIncludedServiceItem`（✓ + 标题 + ⓘ + 价签，无边框卡片）。紧凑属性多选（危险品等）复用同一 interaction class。演示：shell-demo 组件预览 →「表单组件」；履约只读信息卡见 →「详情信息卡片」；地址搜索见 →「地址搜索」；待办提示条见 →「提示 Message」。
+
+**待办提示条（`PortalTodoMessage`）**：`bg-semantic-warning-bg` + `border-semantic-warning-light`；标题 / 圆点 /「去处理」用 `text-semantic-warning-text`；单行变体冒号后说明可用 `font-normal text-gray-text-1`；列表正文 `text-gray-text-2` · `text-13`。三种常见用法：① 多项待办 + 行级「去处理」；② 单提示标题（整行橙字）+ 多项内容清单（`actionLabel=null`）；③ 单行提示（圆点 + 橙前缀 + 黑说明）+ `headerAction`「去处理」。与表单 hint（`PortalDetailFormHint`，无底色）不同，本组件用于详情页块级待办汇总。
 
 ### 6.4 Badge
 
@@ -341,12 +346,13 @@ flex items-center gap-2
 
 | Class | 用途 |
 |-------|------|
+| `portal-table-id-link` | 列表首列主键（订单号等）：`text-12` + `font-mono` + `font-medium`（500）+ `text-gray-text-2`；hover / focus-visible 下划线，颜色仍为灰黑 |
 | `portal-document-link` | 文档名链接：默认 `text-13` + `text-gray-text-2`、truncate；hover / focus-visible 下划线 + `--portal-text-link` |
 | `portal-document-action-link` | 操作链接（下载等）；hover / focus-visible 同上 |
 
 详情右侧「文件单证」摘要卡（见 shell-demo `/blank/document-link`）：白卡 + 标题 + `portal-document-link` 列表；点击 toast 演示打开文件（非真实下载）。
 
-hover 色为 `--portal-text-link`（→ semantic-info-text）。
+`portal-document-link` hover 色为 `--portal-text-link`（→ semantic-info-text）；列表主键请用 `portal-table-id-link`。
 
 ### 6.8 `@ss/portal-ui` 补充（非 `theme.css` 组合类）
 
@@ -371,7 +377,7 @@ hover 色为 `--portal-text-link`（→ semantic-info-text）。
 |------|------|----------|
 | App Shell | [`frameworks/app-shell.md`](frameworks/app-shell.md) | `apps/shell-demo/src/DemoListPage.tsx` |
 | 列表页 | [`frameworks/list-page.md`](frameworks/list-page.md) | 同上 |
-| 详情页 | [`frameworks/detail-page.md`](frameworks/detail-page.md) | — |
+| 详情页 | [`frameworks/detail-page.md`](frameworks/detail-page.md) | shell-demo `/blank/detail-page` |
 | 表单页 | [`frameworks/form-page.md`](frameworks/form-page.md) | shell-demo `/blank/form-page` |
 
 ---

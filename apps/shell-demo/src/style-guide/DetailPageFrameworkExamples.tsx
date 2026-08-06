@@ -1,7 +1,25 @@
-import { useState, type ReactNode } from "react";
-import { Check, ChevronDown, ChevronRight, CircleAlert, Layers } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from "react";
+import {
+  Check,
+  ChevronDown,
+  ChevronRight,
+  CircleAlert,
+  GripVertical,
+  Layers,
+} from "lucide-react";
 import { PortalDetailBackButton } from "@ss/portal-shell";
-import { Button, cn } from "@ss/portal-ui";
+import {
+  Button,
+  cn,
+  portalDetailInfoFieldItemClass,
+  portalDetailInfoFieldsClass,
+} from "@ss/portal-ui";
 
 /* ── 结构常量（去业务语义的框架占位） ── */
 
@@ -33,6 +51,8 @@ const TASK_STEPS = [
 const DEMO_OBJECTS = ["对象 A", "对象 B"] as const;
 
 const WHITE_CARD_STYLE = { boxShadow: "var(--elevation-sm)" } as const;
+const RESIZE_MIN_WIDTH = 280;
+const RESIZE_DEFAULT_WIDTH = 720;
 const NAV_FOCUS =
   "focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--brand)_35%,transparent)]";
 /** 左导航外壳：portal-card-bg-glass 叠 page-bg */
@@ -699,6 +719,208 @@ export function DetailPageGridSpecExample() {
           </li>
           <li>主操作在主栏白卡底部（分割线 + 右对齐），默认不用页级底栏</li>
         </ul>
+      </div>
+    </div>
+  );
+}
+
+/* ── 履约只读信息字段网格（自适应） ── */
+
+/** 字段骨架槽：label 条 + 值占位 */
+function AdaptiveFieldSlot() {
+  return (
+    <div className="flex flex-col gap-1.5" aria-hidden>
+      <span className="h-2 w-12 rounded-sm bg-gray-fill-strong" />
+      <span className="h-8 w-full rounded-input bg-page-bg ring-1 ring-gray-border-strong" />
+    </div>
+  );
+}
+
+/** 示意用固定列数骨架（非真实 container query）；宽度递增、仅 1 行字段 */
+function ColumnSchematic({
+  cols,
+  label,
+  widthClass,
+}: {
+  cols: 1 | 2 | 3 | 4;
+  label: string;
+  widthClass: string;
+}) {
+  return (
+    <div className={["flex flex-col gap-2", widthClass].join(" ")}>
+      <span className="text-13 font-medium text-gray-text-3">{label}</span>
+      <div
+        className="rounded-lg border border-gray-border-normal bg-page-bg p-3"
+        aria-hidden
+      >
+        <div className="rounded-lg bg-background px-4 py-4" style={WHITE_CARD_STYLE}>
+          <div
+            className={[
+              "grid gap-x-6 gap-y-4",
+              cols === 1
+                ? "grid-cols-1"
+                : cols === 2
+                  ? "grid-cols-2"
+                  : cols === 3
+                    ? "grid-cols-3"
+                    : "grid-cols-4",
+            ].join(" ")}
+          >
+            {Array.from({ length: cols }).map((_, i) => (
+              <AdaptiveFieldSlot key={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** @container 信息字段网格：槽位骨架 */
+function AdaptiveFieldSlots({ count = 6 }: { count?: number }) {
+  return (
+    <div className={portalDetailInfoFieldsClass} aria-hidden>
+      {Array.from({ length: count }).map((_, i) => {
+        const isFullSpan = i === count - 1;
+        return (
+          <div
+            key={i}
+            className={[portalDetailInfoFieldItemClass, isFullSpan ? "col-span-full" : ""]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <AdaptiveFieldSlot />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** 可拖宽预览：右侧手柄调整容器宽度，触发 @container 换列 */
+function ResizablePreviewShell({ children }: { children: ReactNode }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(RESIZE_DEFAULT_WIDTH);
+  const [maxWidth, setMaxWidth] = useState(RESIZE_DEFAULT_WIDTH);
+  const [dragging, setDragging] = useState(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const syncMax = () => {
+      const nextMax = Math.floor(track.clientWidth);
+      setMaxWidth(nextMax);
+      setWidth((prev) => Math.min(Math.max(prev, RESIZE_MIN_WIDTH), nextMax));
+    };
+
+    syncMax();
+    const observer = new ResizeObserver(syncMax);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, []);
+
+  const clampWidth = (next: number) =>
+    Math.min(Math.max(Math.round(next), RESIZE_MIN_WIDTH), maxWidth);
+
+  const onHandlePointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const handle = event.currentTarget;
+    const startX = event.clientX;
+    const startWidth = width;
+    handle.setPointerCapture(event.pointerId);
+    setDragging(true);
+
+    const onMove = (moveEvent: PointerEvent) => {
+      setWidth(clampWidth(startWidth + (moveEvent.clientX - startX)));
+    };
+    const onUp = (upEvent: PointerEvent) => {
+      handle.releasePointerCapture(upEvent.pointerId);
+      setDragging(false);
+      handle.removeEventListener("pointermove", onMove);
+      handle.removeEventListener("pointerup", onUp);
+      handle.removeEventListener("pointercancel", onUp);
+    };
+
+    handle.addEventListener("pointermove", onMove);
+    handle.addEventListener("pointerup", onUp);
+    handle.addEventListener("pointercancel", onUp);
+  };
+
+  return (
+    <div ref={trackRef} className="w-full pr-3">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <p className="m-0 text-13 text-gray-text-5">
+          拖动右侧手柄调整预览宽度（当前{" "}
+          <span className="tabular-nums text-gray-text-3">{width}px</span>
+          ），观察 1 / 2 / 3 / 4 列切换。
+        </p>
+        <button
+          type="button"
+          className="rounded-md border border-gray-border-normal bg-background px-2.5 py-1 text-12 text-gray-text-4 transition hover:border-gray-border-strong hover:text-gray-text-2"
+          onClick={() => setWidth(clampWidth(maxWidth))}
+        >
+          重置全宽
+        </button>
+      </div>
+      <div className="relative" style={{ width }}>
+        <div
+          className={`flex flex-col overflow-hidden rounded-lg border bg-page-bg ${
+            dragging ? "border-gray-border-strong" : "border-gray-border-normal"
+          }`}
+        >
+          <div className="w-full px-5 pb-4 pt-5">{children}</div>
+        </div>
+        <button
+          type="button"
+          aria-label="拖动调整预览宽度"
+          aria-valuemin={RESIZE_MIN_WIDTH}
+          aria-valuemax={maxWidth}
+          aria-valuenow={width}
+          role="slider"
+          className={`absolute -right-3 top-0 z-10 flex h-full w-6 cursor-col-resize items-center justify-center rounded-md border border-gray-border-normal bg-background text-gray-text-5 shadow-sm outline-none transition hover:border-gray-border-strong hover:text-gray-text-2 focus-visible:shadow-focus-normal ${
+            dragging ? "border-gray-border-strong text-gray-text-2" : ""
+          }`}
+          onPointerDown={onHandlePointerDown}
+        >
+          <GripVertical className="size-3.5" strokeWidth={2} aria-hidden />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** 信息字段网格自适应：列数示意 + 可拖宽真实预览 */
+export function DetailPageAdaptiveLayoutExample() {
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-3">
+        <p className="m-0 text-13 text-gray-text-5">
+          白卡内只读信息字段会随{" "}
+          <span className="font-medium text-gray-text-3">可用宽度</span>
+          自动换列：1 → 2 → 3 → 4 列；最后一行通栏（如备注）。
+        </p>
+        <div className="flex flex-col gap-4">
+          <ColumnSchematic cols={1} label="窄 → 1 列" widthClass="w-1/4" />
+          <ColumnSchematic cols={2} label="中 → 2 列" widthClass="w-1/2" />
+          <ColumnSchematic cols={3} label="宽 → 3 列" widthClass="w-3/4" />
+          <ColumnSchematic cols={4} label="更宽 → 4 列" widthClass="w-full" />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <span className="text-13 font-medium text-gray-text-3">可拖宽预览</span>
+        <ResizablePreviewShell>
+          <PlaceholderWhiteCard title="分区标题">
+            <p className="m-0 text-13 text-gray-text-5">
+              通栏槽位已加 <code className="text-13">col-span-full</code>
+              ；列数由容器宽度触发。
+            </p>
+            <section className="@container" aria-label="自适应字段网格">
+              <AdaptiveFieldSlots count={9} />
+            </section>
+          </PlaceholderWhiteCard>
+        </ResizablePreviewShell>
       </div>
     </div>
   );

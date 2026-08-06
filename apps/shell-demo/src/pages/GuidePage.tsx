@@ -149,6 +149,7 @@ const DAILY_RULES = [
 
 const GALLERY_LINKS = [
   { to: "/tokens", label: "Token 色板", when: "不知道该用哪个颜色类" },
+  { to: "/layout", label: "布局说明", when: "选列表 / 详情 / 表单骨架" },
   { to: "/icons", label: "Icon", when: "选图标、看尺寸约定" },
   { to: "/radius", label: "圆角规范", when: "按钮 / 弹窗圆角不确定" },
   { to: "/typography", label: "字体", when: "不确定标题 / 正文用几号字" },

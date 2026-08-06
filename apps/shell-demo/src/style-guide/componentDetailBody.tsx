@@ -9,10 +9,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@ss/portal-ui";
+import {
+  AddressSearchInteractiveExample,
+  AddressSearchReadonlyExample,
+  AddressSearchSelectedExample,
+} from "./AddressSearchStyleExamples";
 import { BadgeStyleExamples } from "./BadgeStyleExamples";
 import { ButtonDetailExamples } from "./ButtonDetailExamples";
 import { componentDetailPath } from "./ComponentEntryCard";
 import {
+  DetailPageAdaptiveLayoutExample,
   DetailPageGridSpecExample,
   DetailPageSessionTaskNavExample,
   DetailPageSingleColumnExample,
@@ -21,7 +27,6 @@ import {
 } from "./DetailPageFrameworkExamples";
 import {
   FormPageSlotSpecExample,
-  FormPageStackedCardExample,
   FormPageStandardExample,
   FormPageWidthExample,
 } from "./FormPageFrameworkExamples";
@@ -38,6 +43,7 @@ import {
   FormControlExamples,
   FormHintExamples,
   FormReadonlyExamples,
+  DetailInfoCardExample,
   FormSectionCompositionExample,
   FormUsageGuide,
 } from "./FormStyleExamples";
@@ -54,6 +60,11 @@ import {
   MessagesSingleSideScrollExample,
   MessagesSingleSideWithPanelExample,
 } from "./MessagesStyleExamples";
+import {
+  TodoMessageBannerExample,
+  TodoMessageMultiContentExample,
+  TodoMessageSingleLineExample,
+} from "./TodoMessageStyleExamples";
 import { PaginationStyleExamples } from "./PaginationStyleExamples";
 import { TabOverflowStyleExamples, TabStyleExamples } from "./TabStyleExamples";
 
@@ -266,6 +277,62 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
     </div>
   ),
 
+  "address-search": (
+    <div className="flex flex-col gap-4">
+      <DetailBlock
+        title="可交互"
+        description={
+          <>
+            <code className="text-13">PortalAddressSearchField</code>
+            ：对齐 SSLTLDemo <code className="text-13">DestinationPlaceSearchField</code>
+            （快速询价派送地）。字段壳{" "}
+            <code className="text-13">portal-field-shell</code> · 下拉结果 · 地址簿按钮 ·
+            自定义录入页脚。试搜：LAX、ONT8、90058。
+          </>
+        }
+      >
+        <AddressSearchInteractiveExample />
+      </DetailBlock>
+      <DetailBlock
+        title="已选中"
+        description={
+          <>
+            选中后展示类型图标 + badge +{" "}
+            <code className="text-13">PortalAddressCompactSummary</code>
+            ；壳挂 <code className="text-13">portal-field-shell--static</code>
+            ，不响应 focus-within。
+          </>
+        }
+      >
+        <AddressSearchSelectedExample />
+      </DetailBlock>
+      <DetailBlock
+        title="只读"
+        description="详情锁定态：浅底无边框，无清除 / 地址簿操作。"
+      >
+        <AddressSearchReadonlyExample />
+      </DetailBlock>
+    </div>
+  ),
+
+  "detail-info-card": (
+    <DetailBlock
+      title="履约只读信息卡"
+      description={
+        <>
+          <code className="text-13">PortalDetailCard</code> + label-上 value-下字段网格（
+          <code className="text-13">portalDetailInfoFieldsClass</code>
+          ）+ 卡底操作。对齐 Drayage 仓库预约；可切换只读 / 编辑态。白卡叠在{" "}
+          <code className="text-13">page-bg</code> 上；去内容栅格见{" "}
+          <SpecLink to={componentDetailPath("detail-page")}>详情页 · 自适应布局</SpecLink>。
+        </>
+      }
+      surface="page-bg"
+    >
+      <DetailInfoCardExample />
+    </DetailBlock>
+  ),
+
   form: (
     <div className="flex flex-col gap-4">
       <DetailBlock
@@ -339,9 +406,9 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
         title="5 · 白卡 Section 组合"
         description={
           <>
-            两种白卡模式：标准 Section、带大标题 / 子标题及底部操作按钮。白卡叠在{" "}
-            <code className="text-13">page-bg</code> 上以体现层级；各模式说明见下方标签。后者含{" "}
-            <code className="text-13">@container</code> 信息字段自适应规则。
+            标准 Section 白卡、大标题 + 子标题分割线 + 卡底操作。白卡叠在{" "}
+            <code className="text-13">page-bg</code> 上以体现层级；各模式说明见下方标签。履约只读信息卡见{" "}
+            <SpecLink to={componentDetailPath("detail-info-card")}>详情信息卡片</SpecLink>。
           </>
         }
         surface="page-bg"
@@ -354,7 +421,25 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
   table: (
     <DetailBlock
       title="Table 原语"
-      description="有待办 → warning Badge + 橙色待办链接；无待办 → info / success / neutral。"
+      description={
+        <>
+          <p className="m-0">
+            有待办 → warning Badge + 橙色待办链接；无待办 → info / success / neutral。
+          </p>
+          <p className="m-0 mt-1.5">
+            交互：首列订单号（
+            <code className="text-13">portal-table-id-link</code>：
+            <code className="text-13">text-12</code> · mono · semibold）可点击跳转详情页；hover /
+            focus-visible 下划线，颜色仍为 <code className="text-13">text-gray-text-2</code>
+            。金额 / 时间挂 <code className="text-13">portal-text-numeric</code>
+            。完整列表见{" "}
+            <SpecLink to="/orders">
+              <code className="text-13">/orders</code>
+            </SpecLink>
+            。
+          </p>
+        </>
+      }
     >
       <UiTableExamples />
     </DetailBlock>
@@ -469,6 +554,44 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
         }
       >
         <MessagesSidePanelTriggerExample />
+      </DetailBlock>
+    </div>
+  ),
+
+  "todo-message": (
+    <div className="flex flex-col gap-4">
+      <DetailBlock
+        title="多项待办 + 去处理"
+        description={
+          <>
+            对齐履约详情{" "}
+            <code className="text-13">FulfillmentRiskCollaborationCard</code> 的{" "}
+            <code className="text-13">variant=&quot;banner&quot;</code>
+            ：浅橙壳（
+            <code className="text-13">semantic-warning-bg</code> /{" "}
+            <code className="text-13">semantic-warning-light</code>
+            ）+ 橙标题 + 圆点列表 +「去处理」文案链接。导出{" "}
+            <code className="text-13">PortalTodoMessage</code>。
+          </>
+        }
+      >
+        <TodoMessageBannerExample />
+      </DetailBlock>
+      <DetailBlock
+        title="单提示 + 多项内容"
+        description={
+          <>
+            单条提示标题整行橙字 semibold + 圆点清单（无「去处理」）；对齐询价详情缺失清单横幅。条目传{" "}
+            <code className="text-13">actionLabel=null</code> 隐藏操作。另附单行变体：圆点 +
+            橙前缀 + 黑说明 +
+            <code className="text-13"> headerAction</code>「去处理」（无清单）。
+          </>
+        }
+      >
+        <div className="flex flex-col gap-3">
+          <TodoMessageMultiContentExample />
+          <TodoMessageSingleLineExample />
+        </div>
       </DetailBlock>
     </div>
   ),
@@ -597,6 +720,44 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
       >
         <DetailPageSessionTaskNavExample />
       </DetailBlock>
+      <DetailBlock
+        title="6 · 自适应布局"
+        description={
+          <>
+            <p className="m-0">
+              白卡内履约只读信息字段（label 上 / value 下）。实现：父级{" "}
+              <code className="text-13">@container</code> +{" "}
+              <code className="text-13">portalDetailInfoFieldsClass</code>
+              。列数按容器宽度，列宽按视口。带数据原子见{" "}
+              <SpecLink to={componentDetailPath("detail-info-card")}>详情信息卡片</SpecLink>。
+            </p>
+            <ul className="m-0 mt-1.5 list-disc space-y-0.5 pl-4">
+              <li>
+                视口 <code className="text-13">&lt;1440</code>：列宽 200px、间距{" "}
+                <code className="text-13">gap-x-6</code>（24）；容器 ≥424 → 2 列、≥648 → 3
+                列、≥872 → 4 列
+              </li>
+              <li>
+                视口 <code className="text-13">≥1440</code>：列宽 260px、
+                <code className="text-13">gap-x-0</code> +{" "}
+                <code className="text-13">justify-between</code>；容器 ≥520 → 2 列、≥780 → 3
+                列、≥1040 → 4 列
+              </li>
+              <li>
+                通栏字段（备注、附件等）子项加{" "}
+                <code className="text-13">col-span-full</code>
+              </li>
+              <li>
+                分组小标题用{" "}
+                <code className="text-13">portalDetailGroupHeadingClass</code>（
+                <code className="text-13">text-13 font-medium</code>）
+              </li>
+            </ul>
+          </>
+        }
+      >
+        <DetailPageAdaptiveLayoutExample />
+      </DetailBlock>
     </div>
   ),
 
@@ -612,42 +773,33 @@ export const COMPONENT_DETAIL_BODY: Record<string, ReactNode> = {
             <SpecLink to={componentDetailPath("form")}>PortalDetailCard</SpecLink>
             {" "}纵向堆叠（gap-3）+ 页级底栏{" "}
             <SpecLink to={componentDetailPath("button")}>操作</SpecLink>
-            。对齐完善需求 / 确认页。
+            。整页提交场景。
           </>
         }
       >
         <FormPageStandardExample />
       </DetailBlock>
       <DetailBlock
-        title="2 · 同卡多 Section + 卡底操作"
-        description={
-          <>
-            单卡内{" "}
-            <SpecLink to={componentDetailPath("form")}>PortalDetailSectionStack</SpecLink>
-            {" "}+{" "}
-            <SpecLink to={componentDetailPath("form")}>PortalDetailCardFooter</SpecLink>
-            （局部保存场景，如仓库预约）。
-          </>
-        }
-      >
-        <FormPageStackedCardExample />
-      </DetailBlock>
-      <DetailBlock
-        title="3 · 宽度"
+        title="2 · 宽度"
         description={
           <>
             客户端表单常 <code className="text-13">max-w-3xl</code>{" "}
             居中；亦可全宽对齐{" "}
             <SpecLink to={componentDetailPath("detail-page")}>详情页单栏</SpecLink>
             。字段原子见{" "}
-            <SpecLink to={componentDetailPath("form")}>表单组件</SpecLink>。
+            <SpecLink to={componentDetailPath("form")}>表单组件</SpecLink>
+            ；履约只读字段网格见{" "}
+            <SpecLink to={componentDetailPath("detail-info-card")}>详情信息卡片</SpecLink>
+            ；去内容栅格见{" "}
+            <SpecLink to={componentDetailPath("detail-page")}>详情页 · 自适应布局</SpecLink>
+            。
           </>
         }
       >
         <FormPageWidthExample />
       </DetailBlock>
       <DetailBlock
-        title="4 · DOM 槽位"
+        title="3 · DOM 槽位"
         description={
           <>
             对齐 <code className="text-13">docs/frameworks/form-page.md</code>

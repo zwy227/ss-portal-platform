@@ -2,6 +2,7 @@ import {
   BookOpen,
   Layers,
   LayoutList,
+  LayoutTemplate,
   Palette,
   Shapes,
   SquareRoundCorner,
@@ -25,6 +26,7 @@ export const DEMO_NAV: PortalNavNode[] = [
     children: [
       { id: "sg-guide", label: "如何使用", to: "/guide" },
       { id: "sg-tokens", label: "Token 色板", to: "/tokens" },
+      { id: "sg-layout", label: "布局说明", to: "/layout" },
       { id: "sg-icons", label: "Icon", to: "/icons" },
       { id: "sg-radius", label: "圆角规范", to: "/radius" },
       { id: "sg-typography", label: "字体", to: "/typography" },
@@ -38,6 +40,7 @@ export const DEMO_ICONS: Record<string, LucideIcon> = {
   "style-guide": Layers,
   "sg-guide": BookOpen,
   "sg-tokens": Palette,
+  "sg-layout": LayoutTemplate,
   "sg-icons": Shapes,
   "sg-radius": SquareRoundCorner,
   "sg-typography": Type,
