@@ -37,7 +37,7 @@ AppShell
 - 卡内小标题 + 分割线：`PortalDetailBlockTitle` + `PortalDetailDividedStack`
 - 白卡纵向间距统一 `gap-3`（12）
 
-字段 label / input / hint / 选择卡等见 [`design-system.md` §6.3.1](../design-system.md) 与 shell-demo「表单组件」。
+字段 label / input / hint / 选择卡等见 [`design-system.md` §7.3.1](../design-system.md) 与 shell-demo「表单组件」。
 
 ## 宽度
 

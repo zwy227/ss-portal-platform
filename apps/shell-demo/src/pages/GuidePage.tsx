@@ -286,7 +286,11 @@ export function GuidePage() {
               <p className="text-14 font-medium text-gray-text-2">仓库文档（本机打开）</p>
               <ul className="list-inside list-disc text-13 text-gray-text-4">
                 <li>
-                  <code className="text-13">docs/design-system.md</code> — 色 / 字 / 图标总表
+                  <code className="text-13">docs/design-system.md</code> — 色 / 字 / Spacing / 图标总表
+                </li>
+                <li>
+                  <code className="text-13">docs/agent-setup.md</code> — 新业务仓 AI 约束（拷{" "}
+                  <code className="text-13">templates/consumer-agents/</code>）
                 </li>
                 <li>
                   <code className="text-13">docs/frameworks/app-shell.md</code> — 壳怎么配

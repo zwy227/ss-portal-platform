@@ -69,8 +69,9 @@ export function ContentAreaGridExample() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
+        <WidthBadge label="基础 4px" />
         <WidthBadge label={`${GRID_COLUMNS} 列`} />
-        <WidthBadge label={`列间距 ${GRID_GAP_PX}px`} />
+        <WidthBadge label={`列间距 gap-3 · ${GRID_GAP_PX}px`} />
       </div>
 
       <MiniAppShellFrame
@@ -114,9 +115,12 @@ export function ContentAreaGridExample() {
           <code className="text-12">portal-page-content</code> 内；不含侧栏 / 顶栏。
         </li>
         <li>
+          尺寸换算见上方「Spacing 基础」：单位 <code className="text-12">1 = 4px</code>。
+        </li>
+        <li>
           内容区固定 <code className="text-12">{GRID_COLUMNS}</code> 列；列间距{" "}
           <code className="text-12">{GRID_GAP_PX}px</code>（
-          <code className="text-12">gap-3</code>）。
+          <code className="text-12">gap-3</code> = 3×4px）。
         </li>
         <li>分栏按内容区等分（1/6 … 1/1）。</li>
       </ul>

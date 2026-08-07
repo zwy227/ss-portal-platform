@@ -39,7 +39,7 @@ function MiniTopNav({
       </div>
       <div className="flex shrink-0 items-center gap-1" aria-hidden>
         <span className="hidden text-11 text-gray-text-7 sm:inline">
-          顶栏 · h-14
+          顶栏 · h-14 · 56px
           {collapsed ? " · 侧栏收起" : ""}
         </span>
         <span className="ml-2 size-6 rounded-full bg-gray-fill-normal" />
@@ -162,7 +162,7 @@ function ShellPreview({
       <div className="flex flex-wrap items-center gap-2">
         <p className="m-0 text-13 font-medium text-gray-text-2">{caption}</p>
         <WidthBadge label={`侧栏 ${width}px`} />
-        <WidthBadge label="顶栏 h-14" />
+        <WidthBadge label="顶栏 h-14 · 56px" />
         <span className="text-11 text-gray-text-6">点击顶栏折叠按钮切换</span>
       </div>
       <MiniAppShellFrame
@@ -191,7 +191,7 @@ export function AppShellNavShellExample() {
         <code className="text-12">PortalSidebarNav</code>（背景{" "}
         <code className="text-12">var(--brand)</code>，宽{" "}
         {PORTAL_SIDEBAR_EXPANDED_WIDTH} / 收起 {PORTAL_SIDEBAR_COLLAPSED_WIDTH}）+{" "}
-        <code className="text-12">PortalTopNav</code>（<code className="text-12">h-14</code>）+
+        <code className="text-12">PortalTopNav</code>（<code className="text-12">h-14</code> · 56px）+
         业务 children。细则见{" "}
         <code className="text-12">docs/frameworks/app-shell.md</code>。
       </p>

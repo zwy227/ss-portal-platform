@@ -6,6 +6,7 @@ import {
   PAGE_FRAMEWORK_ENTRIES,
   componentDetailPath,
 } from "../style-guide/ComponentEntryCard";
+import { SpacingScaleExample } from "../style-guide/SpacingScaleExamples";
 import { StyleGuidePage, StyleGuideSection, StyleGuideShell } from "../style-guide/StyleGuideShell";
 
 const LAYOUT_LAYERS = [
@@ -45,14 +46,21 @@ export function LayoutPage() {
       >
         <StyleGuideSection
           title="页面导航壳层"
-          description="App Shell 可视结构：侧栏品牌底 + 顶栏 + 业务 main；侧栏展开 220px / 收起 60px，顶栏 h-14。"
+          description="App Shell 可视结构：侧栏品牌底 + 顶栏 + 业务 main；侧栏展开 220px / 收起 60px，顶栏 h-14（56px）。"
         >
           <AppShellNavShellExample />
         </StyleGuideSection>
 
         <StyleGuideSection
+          title="Spacing 基础"
+          description="Tailwind 默认 spacing：1 = 4px（根字号 16px）。下列为 Portal 高频档；不另建 --space-* token。"
+        >
+          <SpacingScaleExample />
+        </StyleGuideSection>
+
+        <StyleGuideSection
           title="内容区栅格"
-          description="示意外层为 App Shell（侧栏 + 顶栏）；业务内容落在 portal-page-content 内。固定 24 列；列间距 12px（gap-3）。分栏按内容区等分。"
+          description="示意外层为 App Shell（侧栏 + 顶栏）；业务内容落在 portal-page-content 内。固定 24 列；列间距 12px（gap-3 = 3×4px）。分栏按内容区等分。"
         >
           <ContentAreaGridExample />
         </StyleGuideSection>
@@ -94,7 +102,7 @@ export function LayoutPage() {
           <pre className="m-0 overflow-x-auto rounded-md border border-gray-border-light bg-page-bg p-4 text-12 leading-relaxed text-gray-text-3">{`AppShell
 ├── PortalSidebarNav（220px / 收起 60px，背景 var(--brand)）
 └── 右侧列
-    ├── PortalTopNav（h-14）
+    ├── PortalTopNav（h-14 · 56px）
     └── children（业务 main）`}</pre>
         </StyleGuideSection>
 

@@ -2,7 +2,7 @@
 
 > **权威实现**：[`packages/tokens/theme.css`](../packages/tokens/theme.css)（CSS 变量 + `portal-*` 组合类）  
 > **Tailwind 映射**：[`packages/tokens/tailwind.preset.js`](../packages/tokens/tailwind.preset.js)  
-> **视觉验收**：`apps/shell-demo` 本地 `pnpm dev` 后访问 `/tokens`、`/icons`、`/radius`、`/typography`、`/blank`  
+> **视觉验收**：`apps/shell-demo` 本地 `pnpm dev` 后访问 `/tokens`、`/layout`、`/icons`、`/radius`、`/typography`、`/blank`  
 > **画廊元数据**：[`apps/shell-demo/src/style-guide/tokenCatalog.ts`](../apps/shell-demo/src/style-guide/tokenCatalog.ts)（须与 `theme.css` 同步）
 
 本文档是上述代码的**人类可读索引**，不单独发明色值或字号。改 token 的顺序：**`theme.css` → 画廊 → 本文档**。
@@ -18,7 +18,8 @@
    - `@ss/portal-tokens` — CSS 变量与 `portal-*` 类
    - `@ss/portal-shell` — AppShell、侧栏、顶栏、筛选重置按钮
    - `@ss/portal-ui` — Button、Input、Dialog、表格等基础组件
-5. **图标统一 Lucide**：全部 UI 图标来自 `lucide-react`，见 §4 与画廊 `/icons`。
+5. **图标统一 Lucide**：全部 UI 图标来自 `lucide-react`，见 §5 与画廊 `/icons`。
+6. **间距用 Tailwind 默认 scale**：基础单位 `1 = 4px`，见 §4 与画廊 `/layout` →「Spacing 基础」。
 
 ---
 
@@ -150,7 +151,45 @@
 
 ---
 
-## 4. Icon（Lucide）
+## 4. Spacing（间距）
+
+沿用 Tailwind 默认 spacing，**不另建** `--space-*` token。根字号 16px 时：
+
+| 档位 | rem | px | 公式 |
+|------|-----|-----|------|
+| `1` | `0.25rem` | **4px** | 基础单位 |
+| `n` | `n × 0.25rem` | **n × 4px** | 含半档（`1.5` → 6px） |
+
+### 4.1 Portal 常用 spacing
+
+| 类（示例） | px | 典型用法 |
+|------------|-----|----------|
+| `gap-0.5` | 2 | 侧栏 nav 行间距 |
+| `gap-1` / `p-1` | 4 | 紧凑图标隙 |
+| `gap-1.5` | 6 | 顶栏内控件 |
+| `gap-2` / `p-2` | 8 | 详情栏间距、卡内 |
+| `gap-3` / `p-3` | **12** | 内容区列间距、白卡纵向堆叠 |
+| `gap-4` / `p-4` | 16 | 区块间距 |
+| `px-5` | 20 | `portal-page-content` 水平内边距 |
+| `gap-6` | 24 | Tab 栏 `portal-tab-bar` |
+| `py-7` | 28 | `portal-page-content` 垂直内边距 |
+
+### 4.2 常用高度
+
+| Class | px | 典型用法 |
+|-------|-----|----------|
+| `h-6` | 24 | Button xs |
+| `h-8` | 32 | Button sm、顶栏 icon 钮 |
+| `h-9` | 36 | Button default |
+| `h-10` | 40 | Button lg |
+| `h-14` | **56** | `PortalTopNav`（**不是** 48px；48px = `h-12`） |
+| `h-screen` | 100vh | AppShell 根 |
+
+画廊验收：`/layout` →「Spacing 基础」。
+
+---
+
+## 5. Icon（Lucide）
 
 **唯一图标源**：[`lucide-react`](https://lucide.dev/icons)。壳层、`@ss/portal-ui`、业务 App 与 shell-demo 画廊（`/icons`）均按此约定。禁止 Font Awesome / Heroicons / Ant Icons / iconfont / 随意内联 SVG / emoji 充当 UI 图标。
 
@@ -166,11 +205,11 @@
 
 ---
 
-## 5. 圆角 Radius
+## 6. 圆角 Radius
 
 组件优先使用**标准阶梯**；语义别名指向某一档，便于语义化阅读。
 
-### 5.1 标准阶梯
+### 6.1 标准阶梯
 
 | Token | Tailwind | 像素 | 典型场景 |
 |-------|----------|------|----------|
@@ -184,7 +223,7 @@
 | `radius-3xl` | `rounded-3xl` | 24px | Hero 级大面板 |
 | `radius-full` | `rounded-full` | pill | 头像、圆点、胶囊 |
 
-### 5.2 语义别名
+### 6.2 语义别名
 
 | 别名 | 指向 | 绑定组件 |
 |------|------|----------|
@@ -195,7 +234,7 @@
 | `radius-modal` | `radius-xl` | `@ss/portal-ui` Dialog |
 | `radius-cta` | `radius-lg` | 大号主按钮语义名 |
 
-### 5.3 Button 尺寸 ↔ 圆角
+### 6.3 Button 尺寸 ↔ 圆角
 
 | Button size | 高度 | 字号 | Icon size | 圆角 |
 |-------------|------|------|-----------|------|
@@ -206,19 +245,19 @@
 
 ---
 
-## 6. `portal-*` 组合类索引
+## 7. `portal-*` 组合类索引
 
 定义于 `theme.css` `@layer components`。完整交互示例见 shell-demo `/blank`。
 
-### 6.1 页面壳
+### 7.1 页面壳
 
 | Class | 用途 |
 |-------|------|
 | `portal-page-main` | 列表页主滚动区，`bg-page-bg` |
 | `portal-page-main--detail` | 详情页主区（flex 列、overflow hidden） |
-| `portal-page-content` | 内容区内边距 `px-5 py-7`；栅格：固定 24 列，列间距 `12px`（`gap-3`）；分栏等分；详情分栏见双栏 / 三栏（`/layout`、`detail-page`） |
+| `portal-page-content` | 内容区内边距 `px-5 py-7`；栅格：固定 24 列，列间距 `12px`（`gap-3` = 3×4px）；分栏等分；详情分栏见双栏 / 三栏（`/layout`、`detail-page`） |
 
-### 6.2 列表与 Tab
+### 7.2 列表与 Tab
 
 | Class | 用途 |
 |-------|------|
@@ -231,7 +270,7 @@
 
 报价记录列表在栏宽不足时，用 `ResizeObserver` 按可用宽度将放不下的末尾状态 Tab 收入「更多」下拉（对齐 SSLTLDemo `QuoteOrderListTabBar`）；交互示例见 shell-demo `/blank/tab`。
 
-### 6.3 筛选与表单
+### 7.3 筛选与表单
 
 | Class | 用途 |
 |-------|------|
@@ -249,7 +288,7 @@
 
 **Ant Design 筛选**（`packages/tokens/portal-ant-filter.css`）：`portal-ant-select--filter`、`portal-ant-select--form`、`portal-ant-cascader--filter`、`portal-ant-picker--filter/form` 及对应 dropdown 类；由 `@ss/portal-ui` 的 `PortalAntSelect` / `PortalAntCascader` / `PortalAntDateRangePicker` 挂载。
 
-### 6.3.1 客户端详情表单
+### 7.3.1 客户端详情表单
 
 对齐 SSLTLDemo 询价详情「完善需求 / 确认」页。页级骨架见 shell-demo `/blank/form-page`；控件与 Section 组合见 `/blank/form`；履约只读信息卡见 `/blank/detail-info-card`。
 
@@ -283,13 +322,13 @@
 | `PortalDetailServicePriceLabel` | 服务价签分色（免费 / 加价） |
 | `PortalIncludedServiceItem` | 已包含服务行（✓ 标题 ⓘ 价签，无边框） |
 
-**Focus**：详情表单 input / textarea / SearchSelect、`portal-field-shell`，以及选择卡（`PortalCheckboxCard` / `PortalRadioCard` 的 `focus-within`，类名 `portalSelectionCardInteractionClass`）一致，使用 `--focus-border-normal` + `--focus-ring-normal`（非品牌 ring）。列表筛选见 §6.3。
+**Focus**：详情表单 input / textarea / SearchSelect、`portal-field-shell`，以及选择卡（`PortalCheckboxCard` / `PortalRadioCard` 的 `focus-within`，类名 `portalSelectionCardInteractionClass`）一致，使用 `--focus-border-normal` + `--focus-ring-normal`（非品牌 ring）。列表筛选见 §7.3。
 
-表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§6.8）。选中态为 `bg-gray-fill-light`（非品牌 tint）；圆角 `rounded`（6px）；价格标签用 `PortalDetailServicePriceLabel`（免费 → `text-brand`，加价 → `text-accent-orange`）。已包含只读项用 `PortalIncludedServiceItem`（✓ + 标题 + ⓘ + 价签，无边框卡片）。紧凑属性多选（危险品等）复用同一 interaction class。演示：shell-demo 组件预览 →「表单组件」；履约只读信息卡见 →「详情信息卡片」；地址搜索见 →「地址搜索」；待办提示条见 →「提示 Message」。
+表单项 Checkbox/Radio 复用 `PortalCheckboxCard` / `PortalRadioCard` / `PortalSelectionFieldset`（§7.8）。选中态为 `bg-gray-fill-light`（非品牌 tint）；圆角 `rounded`（6px）；价格标签用 `PortalDetailServicePriceLabel`（免费 → `text-brand`，加价 → `text-accent-orange`）。已包含只读项用 `PortalIncludedServiceItem`（✓ + 标题 + ⓘ + 价签，无边框卡片）。紧凑属性多选（危险品等）复用同一 interaction class。演示：shell-demo 组件预览 →「表单组件」；履约只读信息卡见 →「详情信息卡片」；地址搜索见 →「地址搜索」；待办提示条见 →「提示 Message」。
 
 **待办提示条（`PortalTodoMessage`）**：`bg-semantic-warning-bg` + `border-semantic-warning-light`；标题 / 圆点 /「去处理」用 `text-semantic-warning-text`；单行变体冒号后说明可用 `font-normal text-gray-text-1`；列表正文 `text-gray-text-2` · `text-13`。三种常见用法：① 多项待办 + 行级「去处理」；② 单提示标题（整行橙字）+ 多项内容清单（`actionLabel=null`）；③ 单行提示（圆点 + 橙前缀 + 黑说明）+ `headerAction`「去处理」。与表单 hint（`PortalDetailFormHint`，无底色）不同，本组件用于详情页块级待办汇总。
 
-### 6.4 Badge
+### 7.4 Badge
 
 四档 soft 标签。**info / warning 分工**：有待办 → `--warning`；普通态 → `--info`（见 §2.6）。
 
@@ -311,7 +350,7 @@ flex items-center gap-2
 
 参考实现：`apps/shell-demo/src/style-guide/OrderListStatusTodoCell.tsx`、`UiTableExamples.tsx`（组件预览 `/blank/table`）。
 
-### 6.5 Dropdown 与分页
+### 7.5 Dropdown 与分页
 
 | Class | 用途 |
 |-------|------|
@@ -325,7 +364,7 @@ flex items-center gap-2
 | `portal-pagination-page` / `--active` | 页码 |
 | `portal-pagination-ellipsis` | 省略号 |
 
-### 6.6 侧栏与顶栏
+### 7.6 侧栏与顶栏
 
 | Class | 用途 |
 |-------|------|
@@ -342,7 +381,7 @@ flex items-center gap-2
 
 侧栏交互状态依赖 `--sidebar-nav-hover`、`--sidebar-nav-active`、`--sidebar-nav-sub-active`。
 
-### 6.7 链接
+### 7.7 链接
 
 | Class | 用途 |
 |-------|------|
@@ -354,14 +393,14 @@ flex items-center gap-2
 
 `portal-document-link` hover 色为 `--portal-text-link`（→ semantic-info-text）；列表主键请用 `portal-table-id-link`。
 
-### 6.8 `@ss/portal-ui` 补充（非 `theme.css` 组合类）
+### 7.8 `@ss/portal-ui` 补充（非 `theme.css` 组合类）
 
 以下由 `@ss/portal-ui` 导出，样式仍依赖 token，详见 shell-demo 组件预览 `/blank`：
 
 | 导出 | 说明 |
 |------|------|
 | `Button` / `ButtonGroup` / `Input` / `Dialog` / `DropdownMenu` | Radix + shadcn 命名；Button 含 `default` / `black` / `outline` / `ghost`；`ButtonGroup` 含 Separator / Text；focus-visible 用 `--focus-ring-brand` |
-| `PortalAntSelect` / `PortalAntCascader` | 挂载 `portal-ant-*` 类（见 §6.3） |
+| `PortalAntSelect` / `PortalAntCascader` | 挂载 `portal-ant-*` 类（见 §7.3） |
 | `PortalRadioCard` / `PortalCheckboxCard` / `PortalSelectionFieldset` | 单选/多选卡片（选中灰底、6px 圆角；可编辑 `focus-within` = normal ring） |
 | `PortalIncludedServiceItem` | 已包含服务行（✓ / 标题 / ⓘ / 价签） |
 | `PortalDetailServicePriceLabel` | 服务价签（免费 brand / 加价 orange，支持混合文案） |
@@ -371,7 +410,7 @@ flex items-center gap-2
 
 ---
 
-## 7. 页面框架（另见 frameworks）
+## 8. 页面框架（另见 frameworks）
 
 | 场景 | 文档 | 参考实现 |
 |------|------|----------|
@@ -382,7 +421,7 @@ flex items-center gap-2
 
 ---
 
-## 8. 禁止事项与豁免
+## 9. 禁止事项与豁免
 
 与 [`.cursor/rules/ss-portal-design-tokens.mdc`](../.cursor/rules/ss-portal-design-tokens.mdc) 一致。
 
@@ -402,7 +441,7 @@ flex items-center gap-2
 
 ---
 
-## 9. 正确性校验
+## 10. 正确性校验
 
 改 token 或本文档后建议执行：
 
@@ -420,10 +459,11 @@ rg --only-matching 'cssVar: "--[^"]+"' apps/shell-demo/src/style-guide/tokenCata
 
 ---
 
-## 10. 文档状态
+## 11. 文档状态
 
 | 章节 | 状态 |
 |------|------|
-| §2–§6 Token / Icon / 组合类 | 已与 `theme.css` + 画廊对齐（含 `/icons` Lucide 约定） |
-| §7 页面框架 | 见 `docs/frameworks/`，持续随业务页归纳 |
+| §2–§7 Token / Spacing / Icon / 组合类 | 已与 `theme.css` + 画廊对齐（含 `/layout` Spacing、`/icons` Lucide） |
+| §8 页面框架 | 见 `docs/frameworks/`，持续随业务页归纳 |
+| 业务仓 AI 约束 | 见 [`agent-setup.md`](agent-setup.md) + [`templates/consumer-agents/`](../templates/consumer-agents/) |
 | 源仓 `client-portal.md` 迁入 | 未完成；剩余业务细则按需 portal 化后补充 |

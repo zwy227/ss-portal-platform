@@ -9,7 +9,7 @@
 - `/` — OnePage 首页（壳层外，同登录页；Hero 演示 ActionButton；下方复用组件预览卡片）
 - `/guide` — 如何使用（新项目接入与规范）
 - `/tokens` — 色板，对照 `theme.css` 变量
-- `/layout` — 布局说明（App Shell / 内容区栅格 / 列表 / 详情 / 表单）
+- `/layout` — 布局说明（Spacing 基础 / App Shell / 内容区栅格 / 列表 / 详情 / 表单）
 - `/icons` — 图标规范（统一 Lucide）
 - `/radius` — 圆角规范
 - `/typography` — 字号阶梯
@@ -24,6 +24,7 @@
 4. [`docs/frameworks/detail-page.md`](docs/frameworks/detail-page.md)
 5. [`docs/frameworks/form-page.md`](docs/frameworks/form-page.md)
 6. [`docs/migration-checklist.md`](docs/migration-checklist.md)
+7. [`docs/agent-setup.md`](docs/agent-setup.md) — 业务仓如何接 AI 约束（模板见 `templates/consumer-agents/`）
 
 ## 改 UI 约束
 

@@ -1,0 +1,29 @@
+---
+description: SS Portal 列表 / 详情 / 表单页骨架；改页面结构前先读 frameworks
+globs: "**/*{Page,page,List,Detail,Form}*.{tsx,ts}"
+alwaysApply: false
+---
+
+# SS Portal 页面框架约束
+
+> 从设计系统仓 `templates/consumer-agents/.cursor/rules/` 复制。将 `{{SS_PORTAL_PLATFORM_PATH}}` 换成设计系统仓路径。
+
+## 改页面前先读
+
+1. `{{SS_PORTAL_PLATFORM_PATH}}/docs/frameworks/app-shell.md` — 侧栏 + 顶栏 + main；不重造壳
+2. 列表 → `list-page.md`
+3. 详情 → `detail-page.md`
+4. 表单 → `form-page.md`
+
+活文档：设计系统仓 `pnpm dev` → `/layout`、`/blank/detail-page`、`/blank/form-page`、`/orders`。
+
+## 硬约束
+
+- 使用 `@ss/portal-shell` 的 `AppShell`；业务只注入 `nav` / `topNav` 配置
+- 列表主滚动：`portal-page-main` + `portal-page-content`
+- 详情：滚动落在 `portal-page-main--detail` 约定内，白卡间距常用 `gap-3`（12px）
+- 不要在业务里复制侧栏 / 顶栏 DOM 或另起一套灰阶字号
+
+## 间距口径
+
+Tailwind `1 = 4px`；顶栏 `h-14` = **56px**（不是 48px）。详见设计系统仓 `design-system.md` §4。
