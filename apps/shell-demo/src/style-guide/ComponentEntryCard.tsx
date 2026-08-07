@@ -14,6 +14,7 @@ import {
   MessageSquare,
   MousePointerClick,
   PanelsTopLeft,
+  Plus,
   Rows3,
   Search,
   SquareStack,
@@ -160,11 +161,19 @@ export const COMPONENT_GALLERY_ENTRIES: ComponentEntry[] = [
         <button type="button" className="portal-black-btn">
           黑色
         </button>
+        <button
+          type="button"
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-btn border border-solid border-gray-border-strong bg-background text-gray-text-2 transition-colors hover:bg-gray-fill-light"
+          aria-label="添加"
+        >
+          <Plus className="size-4" strokeWidth={1.75} aria-hidden />
+        </button>
       </div>
     ),
   },
   {
     id: "filter",
+
     title: "筛选器",
     description: "搜索框、原生 select、重置按钮；Ant Select 见筛选器详情。",
     source: "portal-*",
@@ -196,10 +205,17 @@ export const COMPONENT_GALLERY_ENTRIES: ComponentEntry[] = [
       <div className="portal-tab-bar mb-0 w-full !flex-nowrap !gap-3 border-b-0">
         <span className="portal-tab-item portal-tab-item--active pointer-events-none inline-flex items-center gap-1 py-1 text-14">
           待办
+          <span className="ml-0.5 tabular-nums">(3)</span>
         </span>
         <span className="portal-tab-bar__divider self-center" aria-hidden />
-        <span className="portal-tab-item pointer-events-none py-1 text-14">全部</span>
-        <span className="portal-tab-item pointer-events-none py-1 text-14">执行中</span>
+        <span className="portal-tab-item pointer-events-none py-1 text-14">
+          全部
+          <span className="ml-0.5 tabular-nums">(12)</span>
+        </span>
+        <span className="portal-tab-item pointer-events-none py-1 text-14">
+          执行中
+          <span className="ml-0.5 tabular-nums">(4)</span>
+        </span>
       </div>
     ),
   },
@@ -413,7 +429,7 @@ export const COMPONENT_GALLERY_ENTRIES: ComponentEntry[] = [
   },
   {
     id: "todo-message",
-    title: "提示 Message",
+    title: "待办预警与任务指引",
     description:
       "浅橙待办提示条：标题 + 圆点列表 +「去处理」；对齐履约 RiskCollaboration banner。",
     source: "@ss/portal-ui",

@@ -4,3 +4,122 @@
 @source "../../../packages/shell/src/**/*.{js,ts,jsx,tsx}";
 @source "../../../packages/ui/src/**/*.{js,ts,jsx,tsx}";
 @import "@ss/portal-tokens/globals.css";
+@import "@fontsource/geist-sans/latin-600.css";
+
+.home-title-en {
+  font-family: "Geist Sans", var(--font-family-sans);
+}
+
+/**
+ * HomePage canvas: soft brand atmosphere + refined hairline grid.
+ * Grid is airy, low-contrast, and fades out before content mid-page.
+ */
+.home-page-canvas {
+  position: relative;
+  isolation: isolate;
+  min-height: 100%;
+  background-color: var(--background);
+  background-image: radial-gradient(
+    ellipse 90% 55% at 50% -8%,
+    color-mix(in srgb, var(--brand) 10%, transparent),
+    transparent 70%
+  );
+}
+
+.home-page-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--brand) 16%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--brand) 16%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 36px 36px;
+  background-position: center top;
+  mask-image:
+    radial-gradient(ellipse 85% 70% at 50% 0%, black 0%, transparent 72%),
+    linear-gradient(to bottom, black 0%, transparent 58%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(ellipse 85% 70% at 50% 0%, black 0%, transparent 72%),
+    linear-gradient(to bottom, black 0%, transparent 58%);
+  -webkit-mask-composite: source-in;
+}
+
+.home-page-canvas > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* HomePage entry reveals (MOTION 4) — honor reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .home-reveal {
+    animation: home-reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .home-reveal-delay-1 {
+    animation-delay: 60ms;
+  }
+
+  .home-reveal-delay-2 {
+    animation-delay: 120ms;
+  }
+
+  .home-reveal-delay-3 {
+    animation-delay: 180ms;
+  }
+}
+
+@keyframes home-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-title-tagline {
+    display: inline-block;
+    animation: home-title-tagline-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+  }
+}
+
+@keyframes home-title-tagline-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+    color: var(--gray-text-7);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--gray-text-4);
+  }
+}
+
+@keyframes framework-step-check-pop {
+  from {
+    opacity: 0.4;
+    transform: scale(0.55);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -6,6 +6,7 @@
 
 本地 `pnpm dev` 后访问：
 
+- `/` — OnePage 首页（壳层外，同登录页；Hero 演示 ActionButton；下方复用组件预览卡片）
 - `/guide` — 如何使用（新项目接入与规范）
 - `/tokens` — 色板，对照 `theme.css` 变量
 - `/layout` — 布局说明（App Shell / 内容区栅格 / 列表 / 详情 / 表单）

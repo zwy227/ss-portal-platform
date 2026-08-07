@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Theme } from "@radix-ui/themes";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 import { DemoDetailPage } from "./DemoDetailPage";
 import { DemoListPage } from "./DemoListPage";
 import { BlankPage } from "./pages/BlankPage";
 import { ComponentDetailPage } from "./pages/ComponentDetailPage";
 import { GuidePage } from "./pages/GuidePage";
+import { HomePage } from "./pages/HomePage";
 import { IconsPage } from "./pages/IconsPage";
 import { LayoutPage } from "./pages/LayoutPage";
 import { RadiusPage } from "./pages/RadiusPage";
@@ -16,7 +17,7 @@ import { TypographyPage } from "./pages/TypographyPage";
 import "./styles.css";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/guide" replace /> },
+  { path: "/", Component: HomePage },
   { path: "/guide", Component: GuidePage },
   { path: "/tokens", Component: TokensPage },
   { path: "/layout", Component: LayoutPage },

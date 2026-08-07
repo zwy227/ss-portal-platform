@@ -18,7 +18,7 @@ export const DEMO_LIST_NAV_ID = "sg-typical";
 /** 组件预览侧栏节点 id — 组件详情返回文案共用 */
 export const COMPONENT_PREVIEW_NAV_ID = "sg-blank";
 
-/** shell-demo 侧栏 — 设计系统画廊 */
+/** shell-demo 侧栏 — 设计系统画廊（不含 `/` 首页；首页同登录页，独立于壳层外） */
 export const DEMO_NAV: PortalNavNode[] = [
   {
     id: "style-guide",
