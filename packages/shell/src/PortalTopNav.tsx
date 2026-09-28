@@ -13,6 +13,8 @@ export interface PortalTopNavProps {
   userRole?: string;
   showNotificationDot?: boolean;
   rightSlot?: ReactNode;
+  /** 替换默认用户按钮（姓名、角色、下拉箭头） */
+  userSlot?: ReactNode;
 }
 
 export function PortalTopNav({
@@ -26,6 +28,7 @@ export function PortalTopNav({
   userRole = "管理员",
   showNotificationDot = true,
   rightSlot,
+  userSlot,
 }: PortalTopNavProps) {
   const [lang, setLang] = useState<"CN" | "EN">("CN");
 
@@ -82,23 +85,25 @@ export function PortalTopNav({
 
           <div className="portal-topnav-divider" />
 
-          <button
-            type="button"
-            className="ml-1 flex items-center gap-2 rounded-nav px-1 py-1 transition-colors hover:bg-gray-fill-normal"
-          >
-            {avatarSrc ? (
-              <img src={avatarSrc} alt="用户头像" className="size-8 rounded-full object-cover" />
-            ) : (
-              <span className="flex size-8 items-center justify-center rounded-full bg-gray-fill-normal text-13-compact font-medium text-gray-text-4">
-                {userName.slice(0, 1)}
-              </span>
-            )}
-            <div className="hidden flex-col items-start md:flex">
-              <span className="portal-topnav-user-name">{userName}</span>
-              <span className="portal-topnav-user-role">{userRole}</span>
-            </div>
-            <ChevronDown size={14} className="portal-topnav-user-role hidden md:block" />
-          </button>
+          {userSlot ?? (
+            <button
+              type="button"
+              className="ml-1 flex items-center gap-2 rounded-nav px-1 py-1 transition-colors hover:bg-gray-fill-normal"
+            >
+              {avatarSrc ? (
+                <img src={avatarSrc} alt="用户头像" className="size-8 rounded-full object-cover" />
+              ) : (
+                <span className="flex size-8 items-center justify-center rounded-full bg-gray-fill-normal text-13-compact font-medium text-gray-text-4">
+                  {userName.slice(0, 1)}
+                </span>
+              )}
+              <div className="hidden flex-col items-start md:flex">
+                <span className="portal-topnav-user-name">{userName}</span>
+                <span className="portal-topnav-user-role">{userRole}</span>
+              </div>
+              <ChevronDown size={14} className="portal-topnav-user-role hidden md:block" />
+            </button>
+          )}
         </div>
       )}
     </header>
