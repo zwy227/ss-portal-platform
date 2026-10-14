@@ -1,11 +1,13 @@
 type PortalListFilterResetButtonProps = {
   onReset: () => void;
   disabled?: boolean;
+  label?: string;
 };
 
 export function PortalListFilterResetButton({
   onReset,
   disabled = false,
+  label = "重置",
 }: PortalListFilterResetButtonProps) {
   return (
     <button
@@ -14,7 +16,7 @@ export function PortalListFilterResetButton({
       disabled={disabled}
       className="portal-filter-reset-btn"
     >
-      重置
+      {label}
     </button>
   );
 }

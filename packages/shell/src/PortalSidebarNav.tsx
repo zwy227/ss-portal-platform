@@ -178,6 +178,8 @@ export interface PortalSidebarNavProps {
   iconById?: Record<string, LucideIcon>;
   defaultOpenIds?: string[];
   headerSlot?: ReactNode;
+  /** 侧栏的无障碍标签；不传时为「Portal 导航」 */
+  ariaLabel?: string;
 }
 
 export function PortalSidebarNav({
@@ -190,6 +192,7 @@ export function PortalSidebarNav({
   iconById = {},
   defaultOpenIds = [],
   headerSlot,
+  ariaLabel = "Portal 导航",
 }: PortalSidebarNavProps) {
   const { pathname, search } = useLocation();
   const initialOpen = useMemo(() => {
@@ -228,7 +231,7 @@ export function PortalSidebarNav({
       <aside
         className="flex h-full flex-col overflow-hidden"
         style={{ width, background: "var(--brand)" }}
-        aria-label="Portal 导航"
+        aria-label={ariaLabel}
       >
         <div
           className={`portal-sidebar-header ${collapsed ? "portal-sidebar-header--collapsed" : ""}`}

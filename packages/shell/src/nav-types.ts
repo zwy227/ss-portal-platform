@@ -22,7 +22,18 @@ export function getPortalNavNodeLabel(nav: PortalNavNode[], id: string): string 
   return undefined;
 }
 
-export function formatPortalBackLabel(nav: PortalNavNode[], navNodeId: string, fallback?: string): string {
+export type PortalBackLabels = {
+  withTarget?: (label: string) => string;
+  bare?: string;
+};
+
+export function formatPortalBackLabel(
+  nav: PortalNavNode[],
+  navNodeId: string,
+  fallback?: string,
+  labels?: PortalBackLabels,
+): string {
   const label = getPortalNavNodeLabel(nav, navNodeId) ?? fallback;
-  return label ? `返回${label}` : "返回";
+  if (!label) return labels?.bare ?? "返回";
+  return labels?.withTarget ? labels.withTarget(label) : `返回${label}`;
 }

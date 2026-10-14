@@ -15,7 +15,32 @@ export interface PortalTopNavProps {
   rightSlot?: ReactNode;
   /** 替换默认用户按钮（姓名、角色、下拉箭头） */
   userSlot?: ReactNode;
+  /** 由业务侧控制语言按钮；不传时按钮只在 CN / EN 之间切换自身显示 */
+  languageToggle?: PortalTopNavLanguageToggle;
+  /** 无障碍标签与替代文本；不传时使用中文默认值 */
+  labels?: PortalTopNavLabels;
 }
+
+export interface PortalTopNavLanguageToggle {
+  /** 按钮上显示的文字，如 EN、中 */
+  label: string;
+  ariaLabel?: string;
+  onToggle: () => void;
+}
+
+export interface PortalTopNavLabels {
+  expandSidebar?: string;
+  collapseSidebar?: string;
+  home?: string;
+  avatarAlt?: string;
+}
+
+const DEFAULT_TOP_NAV_LABELS: Required<PortalTopNavLabels> = {
+  expandSidebar: "展开侧栏",
+  collapseSidebar: "收起侧栏",
+  home: "返回首页",
+  avatarAlt: "用户头像",
+};
 
 export function PortalTopNav({
   sidebarCollapsed,
@@ -29,8 +54,11 @@ export function PortalTopNav({
   showNotificationDot = true,
   rightSlot,
   userSlot,
+  languageToggle,
+  labels,
 }: PortalTopNavProps) {
   const [lang, setLang] = useState<"CN" | "EN">("CN");
+  const text = { ...DEFAULT_TOP_NAV_LABELS, ...labels };
 
   return (
     <header className="portal-topnav">
@@ -39,7 +67,7 @@ export function PortalTopNav({
           type="button"
           onClick={onToggleSidebar}
           className="portal-topnav-icon-btn"
-          aria-label={sidebarCollapsed ? "展开侧栏" : "收起侧栏"}
+          aria-label={sidebarCollapsed ? text.expandSidebar : text.collapseSidebar}
         >
           {sidebarCollapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
         </button>
@@ -47,7 +75,7 @@ export function PortalTopNav({
         <Link
           to={logoHref}
           className="inline-flex max-w-[min(200px,40vw)] shrink-0 rounded-nav outline-none transition-opacity hover:opacity-90 focus-visible:shadow-[var(--focus-ring-brand)]"
-          aria-label="返回首页"
+          aria-label={text.home}
         >
           {logoSrc ? (
             <img src={logoSrc} alt={logoAlt} className="h-8 w-auto max-w-[125px] object-contain object-left" />
@@ -66,11 +94,12 @@ export function PortalTopNav({
 
           <button
             type="button"
-            onClick={() => setLang((p) => (p === "CN" ? "EN" : "CN"))}
+            onClick={languageToggle?.onToggle ?? (() => setLang((p) => (p === "CN" ? "EN" : "CN")))}
             className="portal-topnav-icon-btn gap-1 px-2"
+            aria-label={languageToggle?.ariaLabel}
           >
             <Globe size={15} />
-            <span className="text-12 font-medium">{lang}</span>
+            <span className="text-12 font-medium">{languageToggle?.label ?? lang}</span>
           </button>
 
           <div className="portal-topnav-divider" />
@@ -91,7 +120,7 @@ export function PortalTopNav({
               className="ml-1 flex items-center gap-2 rounded-nav px-1 py-1 transition-colors hover:bg-gray-fill-normal"
             >
               {avatarSrc ? (
-                <img src={avatarSrc} alt="用户头像" className="size-8 rounded-full object-cover" />
+                <img src={avatarSrc} alt={text.avatarAlt} className="size-8 rounded-full object-cover" />
               ) : (
                 <span className="flex size-8 items-center justify-center rounded-full bg-gray-fill-normal text-13-compact font-medium text-gray-text-4">
                   {userName.slice(0, 1)}

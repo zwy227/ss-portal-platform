@@ -5,7 +5,12 @@ export {
   PORTAL_SIDEBAR_EXPANDED_WIDTH,
   type PortalSidebarNavProps,
 } from "./PortalSidebarNav";
-export { PortalTopNav, type PortalTopNavProps } from "./PortalTopNav";
+export {
+  PortalTopNav,
+  type PortalTopNavProps,
+  type PortalTopNavLanguageToggle,
+  type PortalTopNavLabels,
+} from "./PortalTopNav";
 export {
   PortalDetailBackLink,
   PortalDetailBackButton,
@@ -19,6 +24,7 @@ export {
 export {
   type PortalNavNode,
   type ResolveActiveChildId,
+  type PortalBackLabels,
   getPortalNavNodeLabel,
   formatPortalBackLabel,
 } from "./nav-types";

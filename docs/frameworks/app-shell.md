@@ -20,16 +20,29 @@ AppShell
     iconById?: Record<string, LucideIcon>,
     resolveActiveChildId?: (groupId, pathname, search, children) => string | null,
     defaultOpenIds?: string[],
+    ariaLabel?: string,
   }}
   topNav={{
     logoSrc?: string,
     userName?: string,
     userRole?: string,
+    userSlot?: ReactNode,
+    languageToggle?: { label: string, ariaLabel?: string, onToggle: () => void },
+    labels?: { expandSidebar?: string, collapseSidebar?: string, home?: string, avatarAlt?: string },
   }}
 >
   {children}
 </AppShell>
 ```
+
+## 界面语言
+
+壳层不持有语言状态，只接收业务侧传入的文案；不传时显示中文默认值。
+
+- `topNav.languageToggle`：顶栏地球按钮由业务控制，`label` 为按钮文字（如 `EN`、`中`），点击调用 `onToggle`；不传时按钮只在 CN / EN 之间切换自身显示。
+- `topNav.labels`、`sidebar.ariaLabel`：顶栏与侧栏的无障碍标签。
+- `PortalListFilterResetButton` 的 `label`：筛选重置按钮文字，默认「重置」。
+- `formatPortalBackLabel(nav, id, fallback, { withTarget, bare })`：返回文案，默认「返回{菜单名}」/「返回」。
 
 ## 侧栏 class
 
